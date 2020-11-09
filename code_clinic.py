@@ -1,8 +1,10 @@
 import argparse
 from configparser import ConfigParser
+import getpass
 
 
 def run_clinic():
+<<<<<<< HEAD
 
     parser = argparse.ArgumentParser(" Create and book slots for Code Clinics")
 
@@ -37,6 +39,15 @@ def run_clinic():
     elif args.config:
         make_config()
     
+=======
+    #par = optparse.OptionParser()
+    #par.add_option("-c", "--config", help="create a config file")
+    #par.add_option("-q", "--quit", help="bye bye")
+
+    #(options, args) = par.parse_args()
+    make_config()
+    pass
+>>>>>>> 9bcbe248e1ce55862ce1fded4131c7732c02d3af
 
 
 def make_config():
@@ -50,7 +61,7 @@ def make_config():
 
     # Get credentials from user
     email = input("Email address: ")
-    password = input("Password: ")
+    password = getpass.getpass()
 
     # Create a userinfo section in the config
     con_obj["USERINFO"] = {
@@ -59,7 +70,7 @@ def make_config():
     }
 
     # Write the section to config.ini file
-    with open("config.ini", "w") as con:
+    with open(".config.ini", "w") as con:
         con_obj.write(con)
 
 
