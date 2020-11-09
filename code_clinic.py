@@ -1,9 +1,42 @@
-import optparse
+import argparse
 from configparser import ConfigParser
 
 
 def run_clinic():
-    pass
+
+    parser = argparse.ArgumentParser(" Create and book slots for Code Clinics")
+
+    parser.add_argument("--config", help="User configuration", action="store_true")
+    parser.add_argument("-i","--version", help="Display program version", action="version", version=0.01)
+    parser.add_argument("-c","--clinician", help="Use the system as clinician", action="store_true")
+    parser.add_argument("-p","--patient", help="Use system as patient", action="store_true")
+    parser.add_argument("-a","--add_slot", help="Add slot to calender(Clinician)", action="store_true")
+    parser.add_argument("-b","--book", help="book avalable slot", action="store_true")
+    parser.add_argument("-d","--delete", help="Delete slot", action="store_true")
+    parser.add_argument("-r","--review", help="Review clinician", action="store_true")
+    parser.add_argument("-v","--view_booked", help="View booked slots", action="store_true")
+    parser.add_argument("-w","--view_available", help="View available slots", action="store_true")
+
+    args = parser.parse_args()
+    if args.clinician:
+        print("Welcome clinician")
+    elif args.patient:
+        print("Welcome patient")
+    elif args.add_slot:
+        print("Adding a slot")
+    elif args.book:
+        print("Booking slot")
+    elif args.delete:
+        print("Deleting slot")
+    elif args.review:
+        print("Reviewing clinician")
+    elif args.view_booked:
+        print("Viewing booked slots")
+    elif args.view_available:
+        print("Viewing available slots")
+    elif args.config:
+        make_config()
+    
 
 
 def make_config():
