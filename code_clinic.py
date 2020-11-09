@@ -3,6 +3,7 @@ from configparser import ConfigParser
 
 
 def run_clinic():
+    make_config()
     pass
 
 
