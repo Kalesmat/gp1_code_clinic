@@ -1,8 +1,14 @@
 import optparse
 from configparser import ConfigParser
+import getpass
 
 
 def run_clinic():
+    #par = optparse.OptionParser()
+    #par.add_option("-c", "--config", help="create a config file")
+    #par.add_option("-q", "--quit", help="bye bye")
+
+    #(options, args) = par.parse_args()
     make_config()
     pass
 
@@ -18,7 +24,7 @@ def make_config():
 
     # Get credentials from user
     email = input("Email address: ")
-    password = input("Password: ")
+    password = getpass.getpass()
 
     # Create a userinfo section in the config
     con_obj["USERINFO"] = {
