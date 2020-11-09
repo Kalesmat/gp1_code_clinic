@@ -27,7 +27,7 @@ def make_config():
     }
 
     # Write the section to config.ini file
-    with open("config.ini", "w") as con:
+    with open(".config.ini", "w") as con:
         con_obj.write(con)
 
 
