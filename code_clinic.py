@@ -1,14 +1,16 @@
+
 import argparse
 from configparser import ConfigParser
 import getpass
 from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking
 from clinician import create, delete,view_events
+import sys
 
 
 def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
 
-    parser = argparse.ArgumentParser(" Create and book slots for Code Clinics")
+    parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options")
 
     parser.add_argument("--config", help="User configuration", action="store_true")
     parser.add_argument("-i","--version", help="Display program version", action="version", version=0.01)
