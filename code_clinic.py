@@ -1,11 +1,13 @@
 import argparse
 from configparser import ConfigParser
 import getpass
+from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking
+from clinician import create, delete,view_events
 
 
 def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
-    
+
     parser = argparse.ArgumentParser(" Create and book slots for Code Clinics")
 
     parser.add_argument("--config", help="User configuration", action="store_true")
@@ -19,23 +21,34 @@ def run_clinic():
     parser.add_argument("-v","--view_booked", help="View booked slots", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots", action="store_true")
 
-    args = parser.parse_args()
-    if args.clinician:
+    args = parser.parse_args() #Parsing argument received from the commandline
+
+    '''Statements to handle args received from clinician'''
+
+    if args.clinician and args.add_slot:
         print("Welcome clinician")
-    elif args.patient:
+        create.create()
+    elif args.clinician and args.delete:
+        print("Welcome clinician")
+        delete.delete()
+    elif args.clinician and args.view_booked:
+        print("Welcome clinician")
+        view_events.view()
+
+    '''Statements to handle args received form the patient'''
+
+    if args.patient and args.view_available:
         print("Welcome patient")
-    elif args.add_slot:
-        print("Adding a slot")
-    elif args.book:
-        print("Booking slot")
-    elif args.delete:
-        print("Deleting slot")
-    elif args.review:
-        print("Reviewing clinician")
-    elif args.view_booked:
-        print("Viewing booked slots")
-    elif args.view_available:
-        print("Viewing available slots")
+        patient_view_open_booking.view_open_bookings()
+    elif args.patient and args.book:
+        print("Welcome patient")
+        patient_make_booking.booking()
+    elif args.patient and args.view_booked:
+        print("Welcome patient")
+        patient_view_booking.view_booking()
+    elif args.patient and args.delete:
+        print("Welcome patient")
+        patient_cancels_booking.cancel_booking()
     elif args.config:
         make_config()
     
@@ -44,8 +57,8 @@ def run_clinic():
     #par.add_option("-q", "--quit", help="bye bye")
 
     #(options, args) = par.parse_args()
-    make_config()
-    pass
+    # make_config()
+    # pass
 
 
 def make_config():
