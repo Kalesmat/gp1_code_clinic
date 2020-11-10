@@ -2,4 +2,7 @@ def delete():
     """
     Function to delete an event for a Clinician
     """
-    print("Event Deleted")
+    message = "Event Deleted"
+    print(message)
+
+    return message
