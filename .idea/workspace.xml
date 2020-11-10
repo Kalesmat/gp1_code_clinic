@@ -19,7 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="" />
+    <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test_patient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_cancels_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_cancels_booking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_make_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_make_booking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_view_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_view_booking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_view_open_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_view_open_booking.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +41,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
   </component>
   <component name="ProjectId" id="1k3Es2SueZOGq5o5OaQHick639K" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -43,13 +51,49 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../problems/submission_002-robot-4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../problems/submission_001-wtc-basics" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/patient" />
       <recent name="$PROJECT_DIR$/patient/patient_functions" />
     </key>
+  </component>
+  <component name="RunManager" selected="Python tests.Unittests for test_patient.PatientTest">
+    <configuration name="Unittests for test_patient.PatientTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="gp1_code_clinic" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_patient.PatientTest&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_patient.PatientTest.test_patient_make_booking" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="gp1_code_clinic" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_patient.PatientTest.test_patient_make_booking&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for test_patient.PatientTest" />
+        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_make_booking" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -72,11 +116,36 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="589" y="315" width="424" height="491" key="FileChooserDialogImpl" timestamp="1604922304173">
+    <state x="801" y="159" width="740" height="589" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1605002166038">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="589" y="315" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1604922304173" />
+    <state x="801" y="159" width="740" height="589" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1605002166038" />
+    <state x="589" y="315" width="424" height="491" key="FileChooserDialogImpl" timestamp="1605000853018">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="589" y="315" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1605000853018" />
+    <state width="1897" height="194" key="GridCell.Tab.0.bottom" timestamp="1605020991472">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="194" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1605020991472" />
+    <state width="1897" height="194" key="GridCell.Tab.0.center" timestamp="1605020991471">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="194" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1605020991471" />
+    <state width="1897" height="194" key="GridCell.Tab.0.left" timestamp="1605020991471">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="194" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1605020991471" />
+    <state width="1897" height="194" key="GridCell.Tab.0.right" timestamp="1605020991471">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="1897" height="194" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1605020991471" />
+    <state x="100" y="127" width="1720" height="853" key="ShowDiffWithBranchDialog" timestamp="1605020991682">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="100" y="127" width="1720" height="853" key="ShowDiffWithBranchDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1605020991682" />
   </component>
 </project>
