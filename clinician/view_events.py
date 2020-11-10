@@ -4,5 +4,3 @@ def view():
     print("Booked events:")
     print("Recursion -Luke")
     print("List comprehension -Issa")
-
-view()
