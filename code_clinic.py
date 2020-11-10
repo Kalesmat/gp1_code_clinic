@@ -4,8 +4,8 @@ import getpass
 
 
 def run_clinic():
-<<<<<<< HEAD
-
+    '''Function to run Code Clinic and parse through commands from user'''
+    
     parser = argparse.ArgumentParser(" Create and book slots for Code Clinics")
 
     parser.add_argument("--config", help="User configuration", action="store_true")
@@ -39,7 +39,6 @@ def run_clinic():
     elif args.config:
         make_config()
     
-=======
     #par = optparse.OptionParser()
     #par.add_option("-c", "--config", help="create a config file")
     #par.add_option("-q", "--quit", help="bye bye")
@@ -47,7 +46,6 @@ def run_clinic():
     #(options, args) = par.parse_args()
     make_config()
     pass
->>>>>>> 9bcbe248e1ce55862ce1fded4131c7732c02d3af
 
 
 def make_config():
