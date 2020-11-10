@@ -7,8 +7,10 @@ import code_clinic as cc
 
 class MyTestCase(unittest.TestCase):
 
-    @patch('sys.stdin', StringIO('Dick\nHarry\n'))
-    def test_make_config(self):
+    @patch('sys.stdin', StringIO('Dick\n'))
+    @patch('getpass.getpass')
+    def test_make_config(self, getpass):
+        getpass.return_value = 'Harry'
         cc.make_config()
         config_object = ConfigParser()
         config_object.read(".config.ini")
