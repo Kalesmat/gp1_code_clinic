@@ -29,7 +29,7 @@ def startup():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                'client_id.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
@@ -42,7 +42,7 @@ def startup():
 def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
 
-    # service = startup()
+    service = startup()
 
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options")
 
@@ -75,7 +75,7 @@ def run_clinic():
 
     if args.patient and args.view_available:
         print("Welcome patient")
-        patient_view_open_booking.view_open_bookings()
+        patient_view_open_booking.view_open_bookings(service)
     elif args.patient and args.book:
         print("Welcome patient")
         patient_make_booking.booking()
