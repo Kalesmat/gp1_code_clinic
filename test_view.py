@@ -1,5 +1,5 @@
 import unittest
-import view_events
+from clinician import view_events
 from io import StringIO
 
 class TestViewEvents(unittest.TestCase):
