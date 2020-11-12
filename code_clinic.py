@@ -6,7 +6,7 @@ import getpass
 from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking
 from clinician import create, delete,view_events
 import pickle
-import os.path
+import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -61,32 +61,37 @@ def run_clinic():
 
     '''Statements to handle args received from clinician'''
 
-    if args.clinician and args.add_slot:
+    if args.clinician and args.add_slot and os.path.exists('.config.ini'):
         print("Welcome clinician")
         create.create()
-    elif args.clinician and args.delete:
+    elif args.clinician and args.delete and os.path.exists('.config.ini'):
         print("Welcome clinician")
         delete.delete()
-    elif args.clinician and args.view_booked:
+    elif args.clinician and args.view_booked and os.path.exists('.config.ini'):
         print("Welcome clinician")
         view_events.view()
 
     '''Statements to handle args received form the patient'''
 
-    if args.patient and args.view_available:
+    if args.patient and args.view_available and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_view_open_booking.view_open_bookings(service)
-    elif args.patient and args.book:
+    elif args.patient and args.book and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_make_booking.booking()
-    elif args.patient and args.view_booked:
+    elif args.patient and args.view_booked and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_view_booking.view_booking()
-    elif args.patient and args.delete:
+    elif args.patient and args.delete and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_cancels_booking.cancel_booking()
     elif args.config:
         make_config()
+    elif args.review and os.path.exists('.config.ini'):
+        print('review naruto')
+    elif not os.path.exists('.config.ini'):
+        print('No config file please add a config file')
+        print('Please run:\n> python3 code_clinic.py config')
     
     #par = optparse.OptionParser()
     #par.add_option("-c", "--config", help="create a config file")
@@ -119,6 +124,8 @@ def make_config():
     # Write the section to config.ini file
     with open(".config.ini", "w") as con:
         con_obj.write(con)
+
+    print('Config file created successfully')
 
 
 if __name__ == '__main__':
