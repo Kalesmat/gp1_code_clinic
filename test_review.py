@@ -13,7 +13,7 @@ class TestCase(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         output = review.review()
-        self.assertEqual("Event Created", output)
+        self.assertEqual("Reviewing Clinician", output)
         sys.stdout = orig_stdout
 
 
