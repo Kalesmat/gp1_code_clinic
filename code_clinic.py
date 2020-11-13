@@ -59,6 +59,7 @@ def run_clinic():
     parser.add_argument("-r","--review", help="Review clinician", action="store_true")
     parser.add_argument("-v","--view_booked", help="View booked slots", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots", action="store_true")
+    parser.add_argument("-q","--cancel_booking", help="Cancel booking", action="store_true")
 
     if len(sys.argv) < 2:
         print("Welcome to Code Clinic")
@@ -90,7 +91,7 @@ def run_clinic():
     elif args.view_booked and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_view_booking.view_booking()
-    elif args.delete and os.path.exists('.config.ini'):
+    elif args.cancel_booking and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_cancels_booking.cancel_booking()
     elif args.config:
