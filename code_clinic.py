@@ -45,7 +45,7 @@ def startup():
 def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
 
-    service = startup()
+    # service = startup()
 
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options")
 
