@@ -47,7 +47,7 @@ def run_clinic():
 
     # service = startup()
 
-    parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options")
+    parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options\n")
 
     parser.add_argument("-c","--config", help="User configuration", action="store_true")
     parser.add_argument("-i","--version", help="Display program version", action="version", version='version 0.01')
@@ -55,11 +55,11 @@ def run_clinic():
     # parser.add_argument("-p","--patient", help="Use system as patient", action="store_true")
     parser.add_argument("-a","--add_slot", help="Add slot to calender(Clinician)", action="store_true")
     parser.add_argument("-b","--book", help="book avalable slot", action="store_true")
-    parser.add_argument("-d","--delete", help="Delete slot", action="store_true")
+    parser.add_argument("-d","--delete", help="Delete slot (Clinician)", action="store_true")
     parser.add_argument("-r","--review", help="Review clinician", action="store_true")
     parser.add_argument("-v","--view_booked", help="View booked slots", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots", action="store_true")
-    parser.add_argument("-q","--cancel_booking", help="Cancel booking", action="store_true")
+    parser.add_argument("-q","--cancel_booking", help="Cancel booking (Patient)", action="store_true")
 
     if len(sys.argv) < 2:
         print("Welcome to Code Clinic")
@@ -100,6 +100,7 @@ def run_clinic():
     elif args.review and os.path.exists('.config.ini'):
         review.review()
     elif not os.path.exists('.config.ini'):
+        print("\n")
         print('No config file please add a config file')
         print('Please run:\n> python3 code_clinic.py --config')
 
