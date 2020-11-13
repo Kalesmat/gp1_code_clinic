@@ -49,10 +49,10 @@ def run_clinic():
 
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options")
 
-    parser.add_argument("--config", help="User configuration", action="store_true")
-    parser.add_argument("-i","--version", help="Display program version", action="version", version=0.01)
-    parser.add_argument("-c","--clinician", help="Use the system as clinician", action="store_true")
-    parser.add_argument("-p","--patient", help="Use system as patient", action="store_true")
+    parser.add_argument("-c","--config", help="User configuration", action="store_true")
+    parser.add_argument("-i","--version", help="Display program version", action="version", version='version 0.01')
+    # parser.add_argument("-c","--clinician", help="Use the system as clinician", action="store_true")
+    # parser.add_argument("-p","--patient", help="Use system as patient", action="store_true")
     parser.add_argument("-a","--add_slot", help="Add slot to calender(Clinician)", action="store_true")
     parser.add_argument("-b","--book", help="book avalable slot", action="store_true")
     parser.add_argument("-d","--delete", help="Delete slot", action="store_true")
@@ -60,44 +60,48 @@ def run_clinic():
     parser.add_argument("-v","--view_booked", help="View booked slots", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots", action="store_true")
 
+    if len(sys.argv) < 2:
+        print("Welcome to Code Clinic")
+        parser.print_help()
+    
     args = parser.parse_args() #Parsing argument received from the commandline
 
     '''Statements to handle args received from clinician'''
 
-    if args.clinician and args.add_slot and os.path.exists('.config.ini'):
+
+    if args.add_slot and os.path.exists('.config.ini'):
         print("Welcome clinician")
         create.create()
-    elif args.clinician and args.delete and os.path.exists('.config.ini'):
+    elif args.delete and os.path.exists('.config.ini'):
         print("Welcome clinician")
         delete.delete()
-    elif args.clinician and args.view_booked and os.path.exists('.config.ini'):
+    elif args.view_booked and os.path.exists('.config.ini'):
         print("Welcome clinician")
         view_events.view()
 
-    '''Statements to handle args received form the patient'''
+    #Statements to handle args received form the patient
 
-    if args.patient and args.view_available and os.path.exists('.config.ini'):
+    elif args.view_available and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_view_open_booking.view_open_bookings()
-    elif args.patient and args.book and os.path.exists('.config.ini'):
+    elif args.book and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_make_booking.booking()
-    elif args.patient and args.view_booked and os.path.exists('.config.ini'):
+    elif args.view_booked and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_view_booking.view_booking()
-    elif args.patient and args.delete and os.path.exists('.config.ini'):
+    elif args.delete and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_cancels_booking.cancel_booking()
     elif args.config:
+        print("Welcome to Code Clinic")
         make_config()
-    elif args.patient and args.review and os.path.exists('.config.ini'):
+    elif args.review and os.path.exists('.config.ini'):
         review.review()
     elif not os.path.exists('.config.ini'):
         print('No config file please add a config file')
         print('Please run:\n> python3 code_clinic.py --config')
-    else:
-        print("Welcome to Code Clinic")
-        print('Please run:\n> python3 code_clinic.py -h')
+
 
 
 def make_config():
