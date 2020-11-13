@@ -51,15 +51,15 @@ def run_clinic():
 
     parser.add_argument("-c","--config", help="User configuration", action="store_true")
     parser.add_argument("-i","--version", help="Display program version", action="version", version='version 0.01')
+    parser.add_argument("-a","--add_slot", help="Add slot to calender.", action="store_true")
+    parser.add_argument("-b","--book", help="book avalable slot.", action="store_true")
+    parser.add_argument("-d","--delete", help="Delete slot.", action="store_true")
+    parser.add_argument("-r","--review", help="Review clinician.", action="store_true")
+    parser.add_argument("-v","--view_booked", help="View booked slots.", action="store_true")
+    parser.add_argument("-w","--view_available", help="View available slots.", action="store_true")
+    parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
     # parser.add_argument("-c","--clinician", help="Use the system as clinician", action="store_true")
     # parser.add_argument("-p","--patient", help="Use system as patient", action="store_true")
-    parser.add_argument("-a","--add_slot", help="Add slot to calender(Clinician)", action="store_true")
-    parser.add_argument("-b","--book", help="book avalable slot", action="store_true")
-    parser.add_argument("-d","--delete", help="Delete slot (Clinician)", action="store_true")
-    parser.add_argument("-r","--review", help="Review clinician", action="store_true")
-    parser.add_argument("-v","--view_booked", help="View booked slots", action="store_true")
-    parser.add_argument("-w","--view_available", help="View available slots", action="store_true")
-    parser.add_argument("-q","--cancel_booking", help="Cancel booking (Patient)", action="store_true")
 
     if len(sys.argv) < 2:
         print("Welcome to Code Clinic")
