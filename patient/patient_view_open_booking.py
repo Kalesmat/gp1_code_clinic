@@ -26,4 +26,4 @@ def view_open_bookings():
 #         print(start, event['summary'])
 
 
-#     return avail_slots
+    return avail_slots

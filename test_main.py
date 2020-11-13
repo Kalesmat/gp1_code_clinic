@@ -29,6 +29,11 @@ class MyTestCase(unittest.TestCase):
         test_result = run_unittests("test_view")
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 
+    def test_review_succeeds(self):
+        import test_review
+        test_result = run_unittests("test_review")
+        self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
+
 
 def run_unittests(test_file):
     """

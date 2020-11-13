@@ -3,18 +3,21 @@
 import argparse
 from configparser import ConfigParser
 import getpass
-from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking
+from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking,review
 from clinician import create, delete,view_events
 import pickle
 import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
+import sys
 
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 def startup():
-    """Shows basic usage of the Google Calendar API.
-    Prints the start and name of the next 10 events on the user's calendar.
+    """
+    Creates a service instance of the Google API and returns it
+    :return: a service instance of the Google API
     """
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
@@ -42,7 +45,7 @@ def startup():
 def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
 
-    service = startup()
+    # service = startup()
 
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options")
 
@@ -75,7 +78,7 @@ def run_clinic():
 
     if args.patient and args.view_available and os.path.exists('.config.ini'):
         print("Welcome patient")
-        patient_view_open_booking.view_open_bookings(service)
+        patient_view_open_booking.view_open_bookings()
     elif args.patient and args.book and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_make_booking.booking()
@@ -87,19 +90,14 @@ def run_clinic():
         patient_cancels_booking.cancel_booking()
     elif args.config:
         make_config()
-    elif args.review and os.path.exists('.config.ini'):
-        print('review naruto')
+    elif args.patient and args.review and os.path.exists('.config.ini'):
+        review.review()
     elif not os.path.exists('.config.ini'):
         print('No config file please add a config file')
-        print('Please run:\n> python3 code_clinic.py config')
-    
-    #par = optparse.OptionParser()
-    #par.add_option("-c", "--config", help="create a config file")
-    #par.add_option("-q", "--quit", help="bye bye")
-
-    #(options, args) = par.parse_args()
-    # make_config()
-    # pass
+        print('Please run:\n> python3 code_clinic.py --config')
+    else:
+        print("Welcome to Code Clinic")
+        print('Please run:\n> python3 code_clinic.py -h')
 
 
 def make_config():
