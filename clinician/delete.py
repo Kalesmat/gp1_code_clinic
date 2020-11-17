@@ -1,4 +1,4 @@
-def delete():
+def delete(service):
     """
     Function to delete an event for a Clinician
     """

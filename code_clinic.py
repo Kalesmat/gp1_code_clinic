@@ -45,21 +45,19 @@ def startup():
 def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
 
-    # service = startup()
+    service = startup()
 
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options\n")
 
     parser.add_argument("-c","--config", help="User configuration", action="store_true")
-    parser.add_argument("-i","--version", help="Display program version", action="version", version='version 0.01')
+    parser.add_argument("-v","--version", help="Display program version", action="version", version='version 0.01')
     parser.add_argument("-a","--add_slot", help="Add slot to calender.", action="store_true")
     parser.add_argument("-b","--book", help="book avalable slot.", action="store_true")
     parser.add_argument("-d","--delete", help="Delete slot.", action="store_true")
-    parser.add_argument("-r","--review", help="Review clinician.", action="store_true")
-    parser.add_argument("-v","--view_booked", help="View booked slots.", action="store_true")
+    # parser.add_argument("-r","--review", help="Review clinician.", action="store_true")
+    parser.add_argument("-i","--view_booked", help="View booked slots.", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots.", action="store_true")
     parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
-    # parser.add_argument("-c","--clinician", help="Use the system as clinician", action="store_true")
-    # parser.add_argument("-p","--patient", help="Use system as patient", action="store_true")
 
     if len(sys.argv) < 2:
         print("Welcome to Code Clinic")
@@ -72,37 +70,37 @@ def run_clinic():
 
     if args.add_slot and os.path.exists('.config.ini'):
         print("Welcome clinician")
-        create.create()
+        create.create(service)
     elif args.delete and os.path.exists('.config.ini'):
         print("Welcome clinician")
-        delete.delete()
+        delete.delete(service)
     elif args.view_booked and os.path.exists('.config.ini'):
         print("Welcome clinician")
-        view_events.view()
+        view_events.view(service)
 
     #Statements to handle args received form the patient
 
     elif args.view_available and os.path.exists('.config.ini'):
         print("Welcome patient")
-        patient_view_open_booking.view_open_bookings()
+        patient_view_open_booking.view_open_bookings(service)
     elif args.book and os.path.exists('.config.ini'):
         print("Welcome patient")
-        patient_make_booking.booking()
+        patient_make_booking.booking(service)
     elif args.view_booked and os.path.exists('.config.ini'):
         print("Welcome patient")
-        patient_view_booking.view_booking()
+        patient_view_booking.view_booking(service)
     elif args.cancel_booking and os.path.exists('.config.ini'):
         print("Welcome patient")
-        patient_cancels_booking.cancel_booking()
+        patient_cancels_booking.cancel_booking(service)
     elif args.config:
         print("Welcome to Code Clinic")
         make_config()
-    elif args.review and os.path.exists('.config.ini'):
-        review.review()
     elif not os.path.exists('.config.ini'):
         print("\n")
         print('No config file please add a config file')
         print('Please run:\n> python3 code_clinic.py --config')
+    # elif args.review and os.path.exists('.config.ini'):
+    #     review.review(service)
 
 
 
