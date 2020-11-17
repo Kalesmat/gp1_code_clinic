@@ -1,4 +1,4 @@
-def view_booking():
+def view_booking(service):
     """"
     Patient will be able to see a list of all their bookings.
     """

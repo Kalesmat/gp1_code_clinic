@@ -1,5 +1,5 @@
 
-def booking():
+def booking(service):
     """
     Adds a booking to the google calendar
     """
