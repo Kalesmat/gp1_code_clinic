@@ -1,4 +1,4 @@
-def create():
+def create(service):
     """
     Function to create an event for a Clinician
     """

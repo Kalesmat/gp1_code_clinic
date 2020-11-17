@@ -1,4 +1,4 @@
-def cancel_booking():
+def cancel_booking(service):
     """
     Patient cancels booking after giving a reason for cancellation.
     """
