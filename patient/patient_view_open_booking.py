@@ -1,29 +1,28 @@
-# import datetime
+import datetime
+from datetime import timedelta
 
 def view_open_bookings(service):
-    """
-    The patient will be able to see a list of all available slots
-    """
-    avail_slots = """
-    9:00 hangman 1 - Summer Smith
-    9:30 recursion - Morty Smith
-    10:00 TDD(unit testing) - Rick Sanchez
-    """
-    print(avail_slots)
-
+    '''Function to get the next 7 days events'''
     # Call the Calendar API
-    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
+    now = datetime.datetime.utcnow()
+    end_time = now + timedelta(days=7)
+    end_time = end_time.isoformat() + 'Z' # 'Z' indicates UTC time
+    now = now.isoformat() + 'Z' # 'Z' indicates UTC time
+    
+    print('Getting the upcoming events for the next 7 days')
     events_result = service.events().list(calendarId='codeclinic.team14@gmail.com', timeMin=now,
-                                        maxResults=10, singleEvents=True,
+                                        timeMax=end_time, singleEvents=True,
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
 
     if not events:
         print('No upcoming events found.')
     for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
+        if len(events['attendees']) > 2:
+            pass
+        else:
+            start = event['start'].get('dateTime', event['start'].get('date'))
+            print(start, event['summary'], event['eventID'])
 
 
-    return avail_slots
+    # return avail_slots
