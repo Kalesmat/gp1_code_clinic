@@ -54,7 +54,7 @@ def run_clinic():
     parser.add_argument("-a","--add_slot", help="Add slot to calender.", action="store_true")
     parser.add_argument("-b","--book", help="book avalable slot.", action="store_true")
     parser.add_argument("-d","--delete", help="Delete slot.", action="store_true")
-    # parser.add_argument("-r","--review", help="Review clinician.", action="store_true")
+    parser.add_argument("-r","--view_created", help="Review clinician.", action="store_true")
     parser.add_argument("-i","--view_booked", help="View booked slots.", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots.", action="store_true")
     parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
@@ -74,7 +74,7 @@ def run_clinic():
     elif args.delete and os.path.exists('.config.ini'):
         print("Welcome clinician")
         delete.delete(service)
-    elif args.view_booked and os.path.exists('.config.ini'):
+    elif args.view_created and os.path.exists('.config.ini'):
         print("Welcome clinician")
         view_events.view(service)
 
