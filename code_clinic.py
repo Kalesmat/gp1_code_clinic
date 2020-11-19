@@ -103,6 +103,16 @@ def run_clinic():
     #     review.review(service)
 
 
+def get_credentials():
+    """
+    Returns the user credentials from the config file
+    :return: username and email
+    """
+    con_obj = ConfigParser()
+    con_obj.read('.config.ini')
+    credentials = con_obj['USERINFO']
+    return credentials['username'], credentials['email']
+
 
 def make_config():
     """
@@ -114,11 +124,17 @@ def make_config():
     con_obj = ConfigParser()
 
     # Get credentials from user
-    email = input("Email address: ")
-    password = getpass.getpass()
+    status = input('Are you a student [y/n]?: ')
+    mail = '@wethinkcode.co.za'
+    if status.lower() == 'y':
+        mail = '@student.wethinkcode.co.za'
+    username = input("Username?: ")
+    email = username + mail
 
     # Create a userinfo section in the config
+    password = getpass.getpass()
     con_obj["USERINFO"] = {
+        "username": username,
         "email": email,
         "password": password
     }
@@ -126,8 +142,7 @@ def make_config():
     # Write the section to config.ini file
     with open(".config.ini", "w") as con:
         con_obj.write(con)
-
-    print('Config file created successfully')
+        print('Config file created successfully')
 
 
 if __name__ == '__main__':
