@@ -54,7 +54,7 @@ def run_clinic():
     parser.add_argument("-a","--add_slot", help="Add slot to calender.", action="store_true")
     parser.add_argument("-b","--book", help="book avalable slot.", action="store_true")
     parser.add_argument("-d","--delete", help="Delete slot.", action="store_true")
-    parser.add_argument("-r","--view_created", help="Review clinician.", action="store_true")
+    parser.add_argument("-s","--view_created", help="See slots created.", action="store_true")
     parser.add_argument("-i","--view_booked", help="View booked slots.", action="store_true")
     parser.add_argument("-w","--view_available", help="View available slots.", action="store_true")
     parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")

@@ -19,6 +19,6 @@ def view_open_bookings(service):
        print('No upcoming events found.')
     for event in events:
        start = event['start'].get('dateTime') #, event['start'].get('date')
-       print(start.strip(), event['summary'], event['id'], event['creator'])
+       print(start.strip("T12:00:00+02:00"), event['summary'], event['id'], event['creator'])
 
   
