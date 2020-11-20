@@ -18,7 +18,7 @@ def delete(service):
         creator = event['attendees']
         delete = False
         for i in creator:
-            if i['email'] == code_clinic.get_credentials()[1] and i['organizer']:
+            if i['email'] == code_clinic.get_credentials()[1]:
                 delete = True
         if delete:
             delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
