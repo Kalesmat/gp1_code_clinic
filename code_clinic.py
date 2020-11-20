@@ -47,7 +47,8 @@ def run_clinic():
 
     service = startup()
 
-    username, email = get_credentials()
+    if os.path.exists('.config.ini'):
+        username, email = get_credentials()
 
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options\n")
 
