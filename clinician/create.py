@@ -28,12 +28,12 @@ def create(service):
         Day = int(input("Enter Day: "))
 
     while hour < 7 or hour > 17:
-        hour = int(input("Enter Hour(From (7-17)): "))
+        hour = int(input("Enter Hour(From 7-17): "))
     hour2 = hour
-    minutes = int(input("Enter Minutes(From (00-60)): "))
+    minutes = int(input("Enter Minutes(From 00-59): "))
 
-    while minutes < 0 or minutes > 60 or (hour == 17 and minutes > 30):
-        minutes = int(input("Enter Minutes(From (00-60)): "))
+    while minutes < 0 or minutes > 59 or (hour == 17 and minutes > 30):
+        minutes = int(input("Enter Minutes(From 00-59): "))
     minutes2 = minutes+30
 
     if minutes >= 30:
@@ -55,11 +55,11 @@ def create(service):
         Creating the event
         """
         myusername,myemail = get_credentials()
-        
-        Description = input("Describe your event: ")
-        Summary = input("Summary of your event: ")
+
+        Summary = input("Name of your topic: ")
+        Description = input("Describe your topic: ")
         event = {
-            'summary': '{}'.format(Summary),
+            'summary': 'Code Clinic: {}'.format(Summary),
         #   'location': '800 Howard St., San Francisco, CA 94103',
             'description': '{}.'.format(Description),
             'start': {
@@ -78,7 +78,7 @@ def create(service):
                 'displayName': myusername,
                 'email': myemail,
                 'optional': True,
-                'organizer':True,
+                'comment': 'Creator',
                 'responseStatus': 'accepted',
             },            
           ],
@@ -94,6 +94,4 @@ def create(service):
         }
 
         event = service.events().insert(calendarId='primary', body=event).execute()
-        pprint('Event created: {}'.format (event.get('htmlLink')))
-
-    return message
+        pprint('{}: {}'.format (message, event.get('htmlLink')))
