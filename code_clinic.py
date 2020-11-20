@@ -47,6 +47,8 @@ def run_clinic():
 
     service = startup()
 
+    username, email = get_credentials()
+
     parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options\n")
 
     parser.add_argument("-c","--config", help="User configuration", action="store_true")
@@ -85,7 +87,7 @@ def run_clinic():
         patient_view_open_booking.view_open_bookings(service)
     elif args.book and os.path.exists('.config.ini'):
         print("Welcome patient")
-        patient_make_booking.booking(service)
+        patient_make_booking.booking(service, username, email)
     elif args.view_booked and os.path.exists('.config.ini'):
         print("Welcome patient")
         patient_view_booking.view_booking(service)

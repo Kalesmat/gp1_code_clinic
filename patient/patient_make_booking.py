@@ -3,7 +3,7 @@ from googleapiclient.errors import HttpError
 from patient import patient_view_open_booking
 
 
-def booking(service):
+def booking(service, username, email):
     """
      Adds a booking to the google calendar
     """
@@ -14,13 +14,16 @@ def booking(service):
 
         event['status'] = 'confirmed'
         admin = event['attendees'][0]['email']
-        event['attendees'] = [
-            {'email': admin},
-            {'email': 'patient.cc.team14@gmail.com'},
-        ]
+        if admin == email:
+            print('You can not book your own slot')
+        else:
+            event['attendees'] = [
+                {'email': admin},
+                {'email': email},
+            ]
 
-        updated_event = service.events().update(calendarId='primary', eventId=eventid,body=event, ).execute()
-        pprint(updated_event['updated'])
+            updated_event = service.events().update(calendarId='primary', eventId=eventid,body=event, ).execute()
+            pprint(updated_event['updated'])
 
     except HttpError:
         pprint("Invalid event ID..")

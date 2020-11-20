@@ -1,12 +1,14 @@
+import datetime
 
 def view(service):
    
     '''This function displays the events that have been booked.'''
 
     page_token = None
-
+    now = datetime.datetime.now().isoformat() + 'Z'
+    n = 0
     while True:
-        events = service.events().list(calendarId='primary', pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary', timeMin=now, pageToken=page_token).execute()
         for event in events['items']:
             try:
                 summary =event['summary']
@@ -15,20 +17,18 @@ def view(service):
                 end= event['end']
                 status= event['status']
                 id= event['id']
-                
+
+                n+=1
                 print(f'You have a {summary} session event Id {id} at {start} till {end} ')
                 print(f'Status: {status}')
-            
+
             except KeyError:
         
-                break    
+                break
+        if n < 1:
+            print('You have not volunteered')
         page_token = events.get('nextPageToken')
         if not page_token:
             break
-    #iteration 1
-    events_set=['Recursion ' ,' Luke','11/11/2020' ,'14:30']
-    for i in range(len(events_set)):
-        print(str(events_set[i]))
-    return str(events_set)
 
 
