@@ -1,5 +1,7 @@
 import datetime
 from pprint import pprint
+from code_clinic import get_credentials
+
 
 def create(service):
     """
@@ -52,6 +54,8 @@ def create(service):
         """
         Creating the event
         """
+        myusername,myemail = get_credentials()
+        
         Description = input("Describe your event: ")
         Summary = input("Summary of your event: ")
         event = {
@@ -69,10 +73,17 @@ def create(service):
             'recurrence': [
             'RRULE:FREQ=DAILY;COUNT=1'
             ],
-        #   'attendees': [
-        #     {'email': 'lpage@example.com'},
-        #     {'email': 'sbrin@example.com'},
-        #   ],
+          'attendees': [
+            {
+                'displayName': myusername,
+                'email': myemail,
+                'optional': True,
+                'organizer':True,
+                'responseStatus': 'accepted',
+            },            
+          ],
+            'anyoneCanAddSelf': True,
+            
             'reminders': {
             'useDefault': False,
             'overrides': [
