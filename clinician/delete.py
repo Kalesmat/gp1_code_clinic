@@ -1,5 +1,6 @@
 import code_clinic
-
+from clinician import view_events
+from googleapiclient.errors import HttpError
 
 def delete(service):
     """
@@ -8,19 +9,26 @@ def delete(service):
     :return: message of response
     """
 
-    id = input('Please give event ID: ')
+    try:
+        view_events.view(service)
 
-    event = service.events().get(calendarId='primary', eventId=id).execute()
-    creator = event['attendees']
-    delete = False
-    for i in creator:
-        if i['email'] == code_clinic.get_credentials()[1] and i['comment'] == 'creator':
-            delete = True
-    if delete:
-        delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
-        message = 'Event delete'
-    else:
-        message = 'Your are not allowed to delete this event'
-    print(message)
+        id = input('Please give event ID: ')
 
-    return message
+        event = service.events().get(calendarId='primary', eventId=id).execute()
+        creator = event['attendees']
+        delete = False
+        for i in creator:
+            if i['email'] == code_clinic.get_credentials()[1] and i['organizer']:
+                delete = True
+        if delete:
+            delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
+            message = 'Event delete'
+        else:
+            message = 'Your are not allowed to delete this event'
+        print(message)
+
+        return message
+    except KeyError:
+        print('Key does not exist')
+    except HttpError:
+        print('Wrong event ID')

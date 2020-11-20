@@ -108,10 +108,13 @@ def get_credentials():
     Returns the user credentials from the config file
     :return: username and email
     """
-    con_obj = ConfigParser()
-    con_obj.read('.config.ini')
-    credentials = con_obj['USERINFO']
-    return credentials['username'], credentials['email']
+    try:
+        con_obj = ConfigParser()
+        con_obj.read('.config.ini')
+        credentials = con_obj['USERINFO']
+        return credentials['username'], credentials['email']
+    except KeyError:
+        print('Redo config')
 
 
 def make_config():
