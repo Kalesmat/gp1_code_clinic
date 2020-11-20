@@ -9,15 +9,14 @@ def create(service):
     """
     message = "Event Created"
     # print(message)
+    myusername,myemail = get_credentials()
 
     """
     Get the Day and Time
-
     """
-    # today = date.today() 
-
     hour,Day,Year,Month = 0,0,0,0
-
+    #Date = input("Enter Date (Day/Month/Year)")
+    #Time = input("Enter Time (HH:MM")
     while Year < 1:
         Year = int(input("Enter Year: "))
 
@@ -34,30 +33,32 @@ def create(service):
 
     while minutes < 0 or minutes > 59 or (hour == 17 and minutes > 30):
         minutes = int(input("Enter Minutes(From 00-59): "))
-    minutes2 = minutes+30
+    min2 = minutes+30
 
     if minutes >= 30:
-        minutes2 = 0
+        min2 = 0
         hour2 += 1
         add = minutes - 30
-        minutes2 += add    
+        min2 += add    
 
-    my_date = datetime.datetime(Year, Month, Day, hour, minutes)#.isoformat()
+    my_date = datetime.datetime(Year, Month, Day, hour, minutes)
 
     # print(my_date)
     # print(datetime.datetime.now())
     if my_date < datetime.datetime.now():
-        print("Too Late, you can't create an event")
+        print("{} you can't create an event, Too late".format(myusername))
 
     else:
-    #Format the date
+    
         """
         Creating the event
         """
-        myusername,myemail = get_credentials()
-
-        Summary = input("Name of your topic: ")
-        Description = input("Describe your topic: ")
+        
+        Summary,Description = "",""
+        while Summary =="":
+            Summary = input("Name of your topic: ")
+        while Description == "":
+            Description = input("Describe your topic: ")
         event = {
             'summary': 'Code Clinic: {}'.format(Summary),
         #   'location': '800 Howard St., San Francisco, CA 94103',
@@ -67,7 +68,7 @@ def create(service):
             'timeZone': 'GMT+02',
             },
             'end': {
-            'dateTime': '{}-{}-{}T{}:{}:00'.format(Year,Month,Day,hour2,minutes2),
+            'dateTime': '{}-{}-{}T{}:{}:00'.format(Year,Month,Day,hour2,min2),
             'timeZone': 'GMT+02',
             },
             'recurrence': [
