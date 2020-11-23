@@ -76,7 +76,7 @@ def run_clinic():
         create.create(service)
     elif args.delete and os.path.exists('.config.ini'):
         print("Welcome clinician")
-        delete.delete(service)
+        delete.delete(service, email)
     elif args.view_created and os.path.exists('.config.ini'):
         print("Welcome clinician")
         view_events.view(service)
