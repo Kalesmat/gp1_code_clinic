@@ -1,8 +1,7 @@
-import code_clinic
 from clinician import view_events
 from googleapiclient.errors import HttpError
 
-def delete(service):
+def delete(service, email):
     """
     Gets the eventID from the user and deletes the event from the calendar
     :param service: service instance of the google api
@@ -18,7 +17,7 @@ def delete(service):
         creator = event['attendees']
         delete = False
         for i in creator:
-            if i['email'] == code_clinic.get_credentials()[1]:
+            if i['email'] == email:
                 delete = True
         if delete:
             delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
