@@ -1,6 +1,5 @@
 import datetime
 from pprint import pprint
-from code_clinic import get_credentials
 
 
 def create(service, myusername, myemail):

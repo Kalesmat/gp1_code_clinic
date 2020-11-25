@@ -75,7 +75,7 @@ def run_clinic():
 
     if args.add_slot and os.path.exists('.config.ini'):
         print(f"Welcome to {username}")
-        create.create(service)
+        create.create(service, username, email)
     elif args.delete and os.path.exists('.config.ini'):
         print(f"Welcome to {username}")
         delete.delete(service, email)

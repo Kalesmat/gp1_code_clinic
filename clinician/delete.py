@@ -20,7 +20,7 @@ def delete(service, email):
     do_delete(service, email, event_id)
 
 
-def do_delete(service, email, event_id):
+def do_delete(service, email, id):
     """
     Does the delete with an email and event ID with the google API
     :param service: service instance of the google api
@@ -29,7 +29,7 @@ def do_delete(service, email, event_id):
     :return:  message of response
     """
     try:
-        event = service.events().get(calendarId='primary', eventId=event_id).execute()
+        event = service.events().get(calendarId='primary', eventId=id).execute()
         creator = event['attendees']
         to_delete = False
         for i in creator:
@@ -37,12 +37,12 @@ def do_delete(service, email, event_id):
                 to_delete = True
         if to_delete:
             delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
-            message = 'Event delete'
+            message = 'Event Deleted'
         else:
             message = 'Your are not allowed to delete this event'
         print(message)
         return message
     except KeyError:
         print('Key does not exist')
-    except HttpError:
-        print('Wrong event ID')
+    #except HttpError:
+    #    print('Wrong event ID')
