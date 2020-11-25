@@ -72,8 +72,12 @@ def create(service, myusername, myemail):
     if my_date < datetime.datetime.now():
         message2 = "you can't create an event, Too late"
         print("{} {}".format(myusername,message2))
-
-        return message2
+        yes = input("Do you wanna create a new event(yes or no): ")
+        if yes.lower() == 'yes' or yes.lower() == 'y':
+            create(service)
+        else:
+            print(f'Bye {myusername}')
+            return message2
     else:
     
         """
