@@ -81,7 +81,7 @@ def create(service):
         """
         Creating the event
         """
-        
+
         Summary,Description = "",""
         while Summary =="":
             Summary = input("Name of your topic: ")
@@ -94,43 +94,53 @@ def create(service):
             Description = input("Describe your topic: ")
 
         startD = str(Year)+"-"+str(Month)+"-"+str(Day)
-        event = {
-            'summary': 'Code Clinic: {}'.format(Summary),
+
+        event = do_create(service, Summary, Description, startD, hour, Min, hour2, min2, myusername, myemail)
+
+        pprint('{}: {}'.format(message, event.get('htmlLink')))
+
+        # print(event['id'])
+        return event['id']
+
+
+def do_create(service, Summary, Description, startD, hour, Min, hour2, min2, myusername, myemail):
+
+    event = {
+        'summary': 'Code Clinic: {}'.format(Summary),
         #   'location': '800 Howard St., San Francisco, CA 94103',
-            'description': '{}.'.format(Description),
-            'start': {
-            'dateTime': '{}T{}:{}:00'.format(startD,hour,Min),
+        'description': '{}.'.format(Description),
+        'start': {
+            'dateTime': '{}T{}:{}:00'.format(startD, hour, Min),
             'timeZone': 'GMT+02',
-            },
-            'end': {
-            'dateTime': '{}T{}:{}:00'.format(startD,hour2,min2),
+        },
+        'end': {
+            'dateTime': '{}T{}:{}:00'.format(startD, hour2, min2),
             'timeZone': 'GMT+02',
-            },
-            'recurrence': [
+        },
+        'recurrence': [
             'RRULE:FREQ=DAILY;COUNT=1'
-            ],
-          'attendees': [
+        ],
+        'attendees': [
             {
                 'displayName': myusername,
                 'email': myemail,
                 'optional': True,
                 'comment': 'Creator',
                 'responseStatus': 'accepted',
-            },            
-          ],
-            'anyoneCanAddSelf': True,
-            
-            'reminders': {
+            },
+        ],
+        'anyoneCanAddSelf': True,
+
+        'reminders': {
             'useDefault': False,
             'overrides': [
                 {'method': 'email', 'minutes': 24 * 60},
                 {'method': 'popup', 'minutes': 10},
             ],
-            },
-        }
+        },
+    }
 
-        event = service.events().insert(calendarId='primary', body=event).execute()
-        pprint('{}: {}'.format (message, event.get('htmlLink')))
+    event = service.events().insert(calendarId='primary', body=event).execute()
 
-        # print(event['id'])
-        return event['id']
+    return event
+
