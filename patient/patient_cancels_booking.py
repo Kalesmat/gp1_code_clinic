@@ -9,7 +9,7 @@ def cancel_booking(service, email):
     """
 
     try:
-        my_events = patient_view_booking.view_booking(service)
+        my_events = patient_view_booking.view_booking(service,email)
         if my_events is None:
             pprint("There are no recent bookings made.")
             return 0
