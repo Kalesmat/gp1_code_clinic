@@ -9,19 +9,22 @@ from clinician import create
 
 class TestCase(unittest.TestCase):
 
-    @patch('sys.stdin', StringIO('2020\n12\n10\n13\n13\nKLM\nKLMKLM'))
-    def do_create(self):
-        service = code_clinic.startup()
-        id = create.create(service)
-        return id
-
-    @patch('sys.stdin', StringIO(f'{id}\n'))
-    def test_delete(self):
+    def test_delete_true(self):
         """
         Testing the return of delete.delete()
         """
         service = code_clinic.startup()
-        email = code_clinic.get_credentials()[1]
+        username, email = code_clinic.get_credentials()
+
+        Summary = 'KLM'
+        Description = 'klmno'
+        startD = '2020-11-30'
+        hour = 15
+        Min = 20
+        hour2 = hour
+        min2 = Min + 30
+        event = create.do_create(service, Summary, Description, startD, hour, Min, hour2, min2, username, email)
+        event_id = event['id']
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
