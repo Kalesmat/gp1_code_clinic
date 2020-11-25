@@ -96,3 +96,4 @@ def create(service):
 
         event = service.events().insert(calendarId='primary', body=event).execute()
         pprint('{}: {}'.format (message, event.get('htmlLink')))
+        return event.get('id')
