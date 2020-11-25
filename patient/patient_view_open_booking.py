@@ -21,4 +21,4 @@ def view_open_bookings(service):
        start = event['start'].get('dateTime') #, event['start'].get('date')
        print(start.strip("T12:00:00+02:00"), event['summary'], event['id'], event['creator'])
 
-  
+  return True
