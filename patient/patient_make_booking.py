@@ -6,10 +6,12 @@ from patient import patient_view_open_booking
 def booking(service, username, email):
     """
      Adds a booking to the google calendar
+     return: Error message if the ID is invalid.
     """
     try:
         events = patient_view_open_booking.view_open_bookings(service)
-        if events is None:
+        if not events:
+            pprint("Please try again later")
             return 0
         else:
             eventid = input("Please insert the event ID: ")
@@ -17,8 +19,11 @@ def booking(service, username, email):
 
             event['status'] = 'confirmed'
             admin = event['attendees'][0]['email']
+
             if admin == email:
-                print(f'{username}, Unfortunately that is an invalid action.')
+                pprint(f'{username}, Unfortunately you cannot book your own event..')
+            elif len(event['attendees']) >= 2:
+                print(f"{username}, number of attendees has been reached, please check for the next slot.")
             else:
                 event['attendees'] = [
                     {'email': admin},
@@ -26,10 +31,11 @@ def booking(service, username, email):
                 ]
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
                 pprint(updated_event['updated'])
-                pprint(f"{eventid} is successfully booked..")
+                pprint(f"{event['summary']} is successfully booked..")
 
     except HttpError:
-        pprint("Unfortunately that is an invalid event ID..")
+        return "Unfortunately that is an invalid event ID.."
+
 
 
 
