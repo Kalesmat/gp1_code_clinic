@@ -74,28 +74,28 @@ def run_clinic():
 
 
     if args.add_slot and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         create.create(service, username, email)
     elif args.delete and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         delete.delete(service, email)
     elif args.view_created and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         view_events.view(service,email)
 
     #Statements to handle args received form the patient
 
     elif args.view_available and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         patient_view_open_booking.view_open_bookings(service)
     elif args.book and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         patient_make_booking.booking(service, username, email)
     elif args.view_booked and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         patient_view_booking.view_booking(service,email)
     elif args.cancel_booking and os.path.exists('.config.ini'):
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         patient_cancels_booking.cancel_booking(service, email)
     elif args.config:
         print("Welcome to Code Clinic")
