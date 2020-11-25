@@ -83,11 +83,7 @@ def create(service, myusername, myemail):
         Summary,Description = "",""
         while Summary =="":
             Summary = input("Name of your topic: ")
-            if Summary != "":
-                AgreeM = "Press enter if you agree else type No: "
-                Agree = input(f"Summary is {Summary}. {AgreeM}")
-                if Agree != '':
-                    continue
+            
         while Description == "":
             Description = input("Describe your topic: ")
 
