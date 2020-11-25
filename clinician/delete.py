@@ -1,36 +1,46 @@
 from clinician import view_events
 from googleapiclient.errors import HttpError
 
+
 def delete(service, email):
     """
     Gets the eventID from the user and deletes the event from the calendar
     :param service: service instance of the google api
-    :return: message of response
+    :param email: email from config file
     """
+    view_events.view(service, email)
 
+    while True:
+        event_id = input('Please give event ID: ')
+        if event_id:
+            break
+        else:
+            print('No event ID was inputted please input an event ID')
+
+    do_delete(service, email, event_id)
+
+
+def do_delete(service, email, event_id):
+    """
+    Does the delete with an email and event ID with the google API
+    :param service: service instance of the google api
+    :param email: email from config file
+    :param event_id: event ID
+    :return:  message of response
+    """
     try:
-        view_events.view(service)
-
-        while True:
-            id = input('Please give event ID: ')
-            if id:
-                break
-            else:
-                print('No event ID was inputted please input an event ID')
-
-        event = service.events().get(calendarId='primary', eventId=id).execute()
+        event = service.events().get(calendarId='primary', eventId=event_id).execute()
         creator = event['attendees']
-        delete = False
+        to_delete = False
         for i in creator:
             if i['email'] == email:
-                delete = True
-        if delete:
+                to_delete = True
+        if to_delete:
             delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
             message = 'Event delete'
         else:
             message = 'Your are not allowed to delete this event'
         print(message)
-
         return message
     except KeyError:
         print('Key does not exist')

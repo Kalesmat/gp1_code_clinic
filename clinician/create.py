@@ -3,13 +3,12 @@ from pprint import pprint
 from code_clinic import get_credentials
 
 
-def create(service):
+def create(service, myusername, myemail):
     """
     Function to create an event for a Clinician
     """
     message = "Event Created"
     # print(message)
-    myusername,myemail = get_credentials()
     
     """
     Get the Day and Time
