@@ -47,6 +47,8 @@ def run_clinic():
 
     service = startup()
 
+    username, email = '', ''
+
     if os.path.exists('.config.ini'):
         username, email = get_credentials()
 
@@ -63,7 +65,7 @@ def run_clinic():
     parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
 
     if len(sys.argv) < 2:
-        print("Welcome to Code Clinic")
+        print(f"Welcome to {username}")
         parser.print_help()
     
     args = parser.parse_args() #Parsing argument received from the commandline
@@ -72,29 +74,29 @@ def run_clinic():
 
 
     if args.add_slot and os.path.exists('.config.ini'):
-        print("Welcome clinician")
+        print(f"Welcome to {username}")
         create.create(service)
     elif args.delete and os.path.exists('.config.ini'):
-        print("Welcome clinician")
+        print(f"Welcome to {username}")
         delete.delete(service, email)
     elif args.view_created and os.path.exists('.config.ini'):
-        print("Welcome clinician")
+        print(f"Welcome to {username}")
         view_events.view(service)
 
     #Statements to handle args received form the patient
 
     elif args.view_available and os.path.exists('.config.ini'):
-        print("Welcome patient")
+        print(f"Welcome to {username}")
         patient_view_open_booking.view_open_bookings(service)
     elif args.book and os.path.exists('.config.ini'):
-        print("Welcome patient")
+        print(f"Welcome to {username}")
         patient_make_booking.booking(service, username, email)
     elif args.view_booked and os.path.exists('.config.ini'):
-        print("Welcome patient")
+        print(f"Welcome to {username}")
         patient_view_booking.view_booking(service)
     elif args.cancel_booking and os.path.exists('.config.ini'):
-        print("Welcome patient")
-        patient_cancels_booking.cancel_booking(service)
+        print(f"Welcome to {username}")
+        patient_cancels_booking.cancel_booking(service, email)
     elif args.config:
         print("Welcome to Code Clinic")
         make_config()

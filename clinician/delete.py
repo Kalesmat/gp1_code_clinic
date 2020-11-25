@@ -11,7 +11,12 @@ def delete(service, email):
     try:
         view_events.view(service)
 
-        id = input('Please give event ID: ')
+        while True:
+            id = input('Please give event ID: ')
+            if id:
+                break
+            else:
+                print('No event ID was inputted please input an event ID')
 
         event = service.events().get(calendarId='primary', eventId=id).execute()
         creator = event['attendees']
