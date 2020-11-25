@@ -81,7 +81,7 @@ def run_clinic():
         delete.delete(service, email)
     elif args.view_created and os.path.exists('.config.ini'):
         print(f"Welcome to {username}")
-        view_events.view(service)
+        view_events.view(service,email)
 
     #Statements to handle args received form the patient
 
@@ -93,7 +93,7 @@ def run_clinic():
         patient_make_booking.booking(service, username, email)
     elif args.view_booked and os.path.exists('.config.ini'):
         print(f"Welcome to {username}")
-        patient_view_booking.view_booking(service)
+        patient_view_booking.view_booking(service,email)
     elif args.cancel_booking and os.path.exists('.config.ini'):
         print(f"Welcome to {username}")
         patient_cancels_booking.cancel_booking(service, email)
