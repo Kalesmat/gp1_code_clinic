@@ -10,44 +10,72 @@ def create(service):
     message = "Event Created"
     # print(message)
     myusername,myemail = get_credentials()
-
+    
     """
     Get the Day and Time
     """
-    hour,Day,Year,Month = 0,0,0,0
-    #Date = input("Enter Date (Day/Month/Year)")
-    #Time = input("Enter Time (HH:MM")
-    while Year < 1:
-        Year = int(input("Enter Year: "))
+    Day,Year,Month,hour,Min = 0,0,0,0,0
 
-    while Month < 1 or Month > 12:
-        Month = int(input("Enter Month: ")) 
+    while Day < 1 or Day > 31 or Month < 1 or Month > 12 or Year < 1:
+        Datei = input("Enter Date (Day/Month/Year): ") 
+        if "/" in Datei:
+            Date = Datei.split('/')  
+            if len(Date) != 3:
+                print("Date should be in this format Day/Month/Year")
+                continue
+        # elif "-" in Datei:
+        #     Date = Datei.split('-')
+        else:
+            print("Date should be in this format Day/Month/Year")
+            continue
+        Day = int(Date[0])
+        Month = int(Date[1])
+        Year = int(Date[2])
+        if Day < 1 or Day > 31:
+            print("Date is Wrong")
+        if Month < 1 or Month > 12:
+            print("Month is Wrong")
+        if Year < 1:
+            print("Year is Wrong")
 
-    while Day < 1 or Day > 31:
-        Day = int(input("Enter Day: "))
+    while hour<7 or hour>17 or Min<0 or Min>59 or (hour==17 and Min>30):
+        Timei = input("Enter Time (HH:MM): ")
+        if ":" in Timei:
+            Time = Timei.split(":")
+            if len(Time) != 2:
+                print("Time should be in this format HH:MM")
+                continue
+        else:
+            print("Time should be in this format HH:MM")
+            continue
+        hour = int(Time[0])
+        Min = int(Time[1])  
 
-    while hour < 7 or hour > 17:
-        hour = int(input("Enter Hour(From 7-17): "))
-    hour2 = hour
-    minutes = int(input("Enter Minutes(From 00-59): "))
+        if hour < 7 or hour > 17:
+            print("Hour should be between 7 and 17")
+        if Min < 0 or Min > 59:
+            print("Minutes should be between 0 and 59")
+        if hour == 17 and Min > 30:
+            print("Minutes shoul be between 00-30 since we close at 18:00")            
 
-    while minutes < 0 or minutes > 59 or (hour == 17 and minutes > 30):
-        minutes = int(input("Enter Minutes(From 00-59): "))
-    min2 = minutes+30
+    hour2 = hour      
+    min2 = Min+30
 
-    if minutes >= 30:
+    if Min >= 30:
         min2 = 0
         hour2 += 1
-        add = minutes - 30
+        add = Min - 30
         min2 += add    
 
-    my_date = datetime.datetime(Year, Month, Day, hour, minutes)
+    my_date = datetime.datetime(Year, Month, Day, hour, Min)
 
     # print(my_date)
     # print(datetime.datetime.now())
     if my_date < datetime.datetime.now():
-        print("{} you can't create an event, Too late".format(myusername))
+        message2 = "you can't create an event, Too late"
+        print("{} {}".format(myusername,message2))
 
+        return message2
     else:
     
         """
@@ -57,18 +85,25 @@ def create(service):
         Summary,Description = "",""
         while Summary =="":
             Summary = input("Name of your topic: ")
+            if Summary != "":
+                AgreeM = "Press enter if you agree else type No: "
+                Agree = input(f"Summary is {Summary}. {AgreeM}")
+                if Agree != '':
+                    continue
         while Description == "":
             Description = input("Describe your topic: ")
+
+        startD = str(Year)+"-"+str(Month)+"-"+str(Day)
         event = {
             'summary': 'Code Clinic: {}'.format(Summary),
         #   'location': '800 Howard St., San Francisco, CA 94103',
             'description': '{}.'.format(Description),
             'start': {
-            'dateTime': '{}-{}-{}T{}:{}:00'.format(Year,Month,Day,hour,minutes),
+            'dateTime': '{}T{}:{}:00'.format(startD,hour,Min),
             'timeZone': 'GMT+02',
             },
             'end': {
-            'dateTime': '{}-{}-{}T{}:{}:00'.format(Year,Month,Day,hour2,min2),
+            'dateTime': '{}T{}:{}:00'.format(startD,hour2,min2),
             'timeZone': 'GMT+02',
             },
             'recurrence': [
@@ -96,4 +131,6 @@ def create(service):
 
         event = service.events().insert(calendarId='primary', body=event).execute()
         pprint('{}: {}'.format (message, event.get('htmlLink')))
-        return event.get('id')
+
+        # print(event['id'])
+        return event['id']
