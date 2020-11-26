@@ -24,7 +24,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_run_clinic(self):
         '''Testing the run clinic function'''
-        cc.sys.argv.append("-cd")
+        cc.sys.argv.append("-cd") #appending the option to commandline
 
         std_output = sys.stdout
         output_value = StringIO()

@@ -3,7 +3,7 @@
 import argparse
 from configparser import ConfigParser
 import getpass
-from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking,review
+from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking
 from clinician import create, delete,view_events
 import pickle
 import os
@@ -104,8 +104,6 @@ def run_clinic():
         print("\n")
         print('No config file please add a config file')
         print('Please run:\n> python3 code_clinic.py --config')
-    # elif args.review and os.path.exists('.config.ini'):
-    #     review.review(service)
 
 
 def get_credentials():
@@ -154,4 +152,5 @@ def make_config():
 
 
 if __name__ == '__main__':
+    os.system('clear')
     run_clinic()
