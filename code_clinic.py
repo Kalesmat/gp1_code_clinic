@@ -134,7 +134,12 @@ def make_config():
     mail = '@wethinkcode.co.za'
     if status.lower() == 'y':
         mail = '@student.wethinkcode.co.za'
-    username = input("Username?: ")
+    while True:
+        username = input("Username?: ")
+        if '@' in username or '.' in username:
+            print('Not a valid username')
+        else:
+            break
     email = username + mail
 
     # Create a userinfo section in the config
