@@ -2,7 +2,7 @@ import datetime
 from pprint import pprint
 
 
-def create(service, myusername, myemail):
+def create(service, user, email):
     """
     Function to create an event for a Clinician
     """
@@ -71,12 +71,12 @@ def create(service, myusername, myemail):
     # print(datetime.datetime.now())
     if my_date < datetime.datetime.now():
         message2 = "you can't create an event, Too late"
-        print("{} {}".format(myusername,message2))
+        print("{} {}".format(user,message2))
         yes = input("Do you wanna create a new event(yes or no): ")
         if yes.lower() == 'yes' or yes.lower() == 'y':
-            create(service)
+            create(service,user,email)
         else:
-            print(f'Bye {myusername}')
+            print(f'Bye {user}')
             return message2
     else:
     
@@ -84,16 +84,18 @@ def create(service, myusername, myemail):
         Creating the event
         """
 
-        Summary,Description = "",""
+        Summary,Descript = "",""
         while Summary =="":
             Summary = input("Name of your topic: ")
             
-        while Description == "":
-            Description = input("Describe your topic: ")
+        while Descript == "":
+            Descript = input("Describe your topic: ")
 
         startD = str(Year)+"-"+str(Month)+"-"+str(Day)
+        startT = str(hour)+":"+str(Min)
+        endT = str(hour2)+":"+str(min2)
 
-        event = do_create(service, Summary, Description, startD, hour, Min, hour2, min2, myusername, myemail)
+        event=do_create(service,Summary,Descript,startD,startT,endT,user,email)
 
         pprint('{}: {}'.format(message, event.get('htmlLink')))
 
@@ -101,18 +103,18 @@ def create(service, myusername, myemail):
         return event['id']
 
 
-def do_create(service, Summary, Description, startD, hour, Min, hour2, min2, myusername, myemail):
+def do_create(service,Summary,Descript,startD,startT,endT,username,email):
 
     event = {
         'summary': 'Code Clinic: {}'.format(Summary),
         #   'location': '800 Howard St., San Francisco, CA 94103',
-        'description': '{}.'.format(Description),
+        'description': '{}.'.format(Descript),
         'start': {
-            'dateTime': '{}T{}:{}:00'.format(startD, hour, Min),
+            'dateTime': '{}T{}:00'.format(startD, startT),
             'timeZone': 'GMT+02',
         },
         'end': {
-            'dateTime': '{}T{}:{}:00'.format(startD, hour2, min2),
+            'dateTime': '{}T{}:00'.format(startD,endT),
             'timeZone': 'GMT+02',
         },
         'recurrence': [
@@ -120,8 +122,8 @@ def do_create(service, Summary, Description, startD, hour, Min, hour2, min2, myu
         ],
         'attendees': [
             {
-                'displayName': myusername,
-                'email': myemail,
+                'displayName': username,
+                'email': email,
                 'optional': True,
                 'comment': 'Creator',
                 'responseStatus': 'accepted',
@@ -141,4 +143,3 @@ def do_create(service, Summary, Description, startD, hour, Min, hour2, min2, myu
     event = service.events().insert(calendarId='primary', body=event).execute()
 
     return event
-
