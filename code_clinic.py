@@ -65,7 +65,7 @@ def run_clinic():
     parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
 
     if len(sys.argv) < 2:
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         parser.print_help()
     
     args = parser.parse_args() #Parsing argument received from the commandline
