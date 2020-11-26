@@ -11,7 +11,7 @@ def delete(service, email):
     view_events.view(service, email)
 
     while True:
-        event_id = input('Please give event ID: ')
+        event_id = input('\nPlease give event ID: ')
         if event_id:
             break
         else:
@@ -45,4 +45,4 @@ def do_delete(service, email, id):
     except KeyError:
         print('Key does not exist')
     except HttpError:
-        print('Wrong event ID')
+        print('Invalid ID')
