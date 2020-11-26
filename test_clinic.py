@@ -24,17 +24,30 @@ class MyTestCase(unittest.TestCase):
 
     def test_run_clinic(self):
         '''Testing the run clinic function'''
-        cc.sys.argv.append("-cd") #appending the option to commandline
+        cc.sys.argv.append("-h") #appending the option to commandline
 
         std_output = sys.stdout
         output_value = StringIO()
         sys.stdout = output_value
-        # output = os.system("python3 code_clinic.py -cd")
-        # cc.create.create()HA
+
         cc.run_clinic()
         output = sys.stdout.getvalue().strip()
 
-        self.assertEqual(output,"Welcome clinician\nEvent Deleted")
+        self.assertEqual(output,"""usage: Create and book slots for Code Clinics: -h or --help of list of options
+
+       [-h] [-c] [-v] [-a] [-b] [-d] [-s] [-i] [-w] [-q]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c, --config          User configuration
+  -v, --version         Display program version
+  -a, --add_slot        Add slot to calender.
+  -b, --book            book avalable slot.
+  -d, --delete          Delete slot.
+  -s, --view_created    See slots created.
+  -i, --view_booked     View booked slots.
+  -w, --view_available  View available slots.
+  -q, --cancel_booking  Cancel booking.""")
 
 
 
