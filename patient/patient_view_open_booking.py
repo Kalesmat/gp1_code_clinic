@@ -1,5 +1,6 @@
 import datetime
 from datetime import timedelta
+from datetime import datetime as dt
 
 def view_open_bookings(service):
    '''Function to get the next 7 days events'''
@@ -18,7 +19,25 @@ def view_open_bookings(service):
    if not events:
       print('No upcoming events found.')
       return False
+   i = 0   
    for event in events:
-      start = event['start'].get('dateTime') #, event['start'].get('date')
-      print(start.strip("T12:00:00+02:00"),"\n",event['summary'],'\n', event['id'],'\n', event['creator']['email'],'\n','-'*100)
+      start = event['start'].get('dateTime') #, event['start'].get('date') #.strip("T12:00:00+02:00")
+      start = start.split('T')
+      date = start[0]
+      time = start[1].split('+')
+      time = time[0]
+      time = dt.strptime(time, '%H:%M:%S')
+      end_t = time + timedelta(minutes=30)
+      time, end_t = str(time), str(end_t)
+      time, end_t = time.split(" "), end_t.split(" ")
+      time, end_t = time[1], end_t[1]
+      try:
+         id_ev = event['id'].split('_')
+         eventId = id_ev[0]
+         print(date, '', time,'-',end_t,"\n",event['summary'],'\n', eventId,'\n', event['attendees'][0]['email'],'\n','-'*100)
+         i += 1
+      except KeyError as keyerr:
+         print('no attendees on the event\n', '-'*20)
+   print("There are {} slots available".format(i))   
    return True
+

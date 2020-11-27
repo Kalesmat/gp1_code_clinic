@@ -32,7 +32,7 @@ def booking(service, username, email):
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
                 pprint(updated_event['updated'])
                 pprint(f"{event['summary']} is successfully booked..")
-
+            
     except HttpError:
         return "Unfortunately that is an invalid event ID.."
 

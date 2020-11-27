@@ -16,10 +16,7 @@ class TestPatientAvailableView(unittest.TestCase):
         service = startup()
         username, email = 'ikalonji', 'ikalonji@student.wethinkcode.co.za'
         create.create(service, username, email)
-
         events = patient_view_open_booking.view_open_bookings(service)
-
-        
         self.assertTrue(events==True, 'Not true')
 
 if __name__ == "__main__":
