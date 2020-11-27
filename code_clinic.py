@@ -130,16 +130,22 @@ def make_config():
     con_obj = ConfigParser()
 
     # Get credentials from user
-    status = input('Are you a student [y/n]?: ')
-    mail = '@wethinkcode.co.za'
-    if status.lower() == 'y':
-        mail = '@student.wethinkcode.co.za'
+    while True:
+        status = input('Are you a student [y/n]?: ')
+        if status.lower() == 'n':
+            mail = '@wethinkcode.co.za'
+            break
+        if status.lower() == 'y':
+            mail = '@student.wethinkcode.co.za'
+            break
+
     while True:
         username = input("Username?: ")
         if '@' in username or '.' in username:
             print('Not a valid username')
         else:
             break
+
     email = username + mail
 
     # Create a userinfo section in the config
