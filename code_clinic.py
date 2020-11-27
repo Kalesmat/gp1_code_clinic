@@ -65,7 +65,7 @@ def run_clinic():
     parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
 
     if len(sys.argv) < 2:
-        print(f"Welcome to {username}")
+        print(f"Welcome {username}")
         parser.print_help()
     
     args = parser.parse_args() #Parsing argument received from the commandline
@@ -134,7 +134,12 @@ def make_config():
     mail = '@wethinkcode.co.za'
     if status.lower() == 'y':
         mail = '@student.wethinkcode.co.za'
-    username = input("Username?: ")
+    while True:
+        username = input("Username?: ")
+        if '@' in username or '.' in username:
+            print('Not a valid username')
+        else:
+            break
     email = username + mail
 
     # Create a userinfo section in the config

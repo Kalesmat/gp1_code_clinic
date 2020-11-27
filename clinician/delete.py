@@ -11,7 +11,7 @@ def delete(service, email):
     view_events.view(service, email)
 
     while True:
-        event_id = input('Please give event ID: ')
+        event_id = input('\nPlease give event ID: ')
         if event_id:
             break
         else:
@@ -25,7 +25,7 @@ def do_delete(service, email, id):
     Does the delete with an email and event ID with the google API
     :param service: service instance of the google api
     :param email: email from config file
-    :param event_id: event ID
+    :param id: event ID
     :return:  message of response
     """
     try:
@@ -44,5 +44,5 @@ def do_delete(service, email, id):
         return message
     except KeyError:
         print('Key does not exist')
-    #except HttpError:
-    #    print('Wrong event ID')
+    except HttpError:
+        print('Invalid ID')
