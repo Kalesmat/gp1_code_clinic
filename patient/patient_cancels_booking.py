@@ -9,10 +9,10 @@ def cancel_booking(service, email):
     """
 
     try:
-        my_events = patient_view_booking.view_booking(service,email)
+        my_events = patient_view_booking.view_booking(service, email)
         if my_events is None:
             pprint("There are no recent bookings made.")
-            return 0
+            return False
         else:
             eventid = input("Please insert the event ID: ")
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
@@ -27,9 +27,11 @@ def cancel_booking(service, email):
                 ]
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event, ).execute()
                 pprint(updated_event['updated'])
-                pprint("You have successfully cancelled slot.")
+                pprint("You have successfully cancelled slot.") # will ask Lesedi to include username because I want to be uniform
+                return True
             else:
                 pprint("You are not the attendee on this event.")
+                return False
 
     except HttpError:
         print("Unfortunately that is an invalid event ID..")
