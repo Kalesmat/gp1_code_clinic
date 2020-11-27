@@ -35,7 +35,7 @@ class TestViewEvents(unittest.TestCase):
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
-        event=create.do_create(service,summary,Descript,Date,"12:00","12:30",user,email,'y')
+        event=create.do_create(service,summary,Descript,Date,"12:00","12:30",user,email)
         
         result = view_events.view(service, email)
 
