@@ -12,7 +12,8 @@ def booking(service, username, email):
         events = patient_view_open_booking.view_open_bookings(service)
         if not events:
             pprint("Please try again later")
-            return 0
+            return False
+
         else:
             eventid = input("Please insert the event ID: ")
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
@@ -22,8 +23,10 @@ def booking(service, username, email):
 
             if admin == email:
                 pprint(f'{username}, Unfortunately you cannot book your own event..')
+                return True
             elif len(event['attendees']) >= 2:
-                print(f"{username}, number of attendees has been reached, please check for the next slot.")
+                pprint(f"{username}, number of attendees has been reached, please check for the next slot.")
+                return True
             else:
                 event['attendees'] = [
                     {'email': admin},
@@ -32,9 +35,12 @@ def booking(service, username, email):
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
                 pprint(updated_event['updated'])
                 pprint(f"{event['summary']} is successfully booked..")
-            
+                return True
+
     except HttpError:
-        return "Unfortunately that is an invalid event ID.."
+        pprint("Unfortunately that is an invalid event ID..")
+        return False
+
 
 
 
