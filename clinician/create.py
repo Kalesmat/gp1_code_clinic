@@ -47,7 +47,7 @@ def create(service, user, email):
         while yes != 'y' or yes != 'n':
             yes = input("Would you like to create a new event(y/n)?: ")
             if yes.lower() == 'y':
-                    create(service, user, email)
+                create(service, user, email)
             elif yes.lower() == 'n':
                 print(f'Bye {user}')
                 return message2
@@ -125,10 +125,11 @@ def create(service, user, email):
         if confirm.lower() == 'y':
             event=do_create(service,Summary,Descript,startD,startT,endT,user,email)        
             pprint('{}: {}'.format(message, event.get('htmlLink')))        # print(event['id'])
-            return event['id']
+            message = event['id']
         else:
             message = "you have not created the event"
-            return message
+            print(message)
+        return message
 
 
 def do_create(service,Summary,Descript,startD,startT,endT,username,email):
@@ -171,3 +172,4 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
     
     event = service.events().insert(calendarId='primary', body=event).execute()
     return event
+
