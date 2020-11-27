@@ -31,6 +31,7 @@ def view(service, myemail):
 
                 admin = event['attendees'][0]['email']
                 if myemail == admin:
+                    
                     message = (
                         f"----------------\n{summary} created by {admin}\nstarts at {start} and ends at {end}\nId is: {id}")
 
@@ -42,7 +43,11 @@ def view(service, myemail):
         if n < 1:
             message = 'You have not volunteered'
             print(message)
+        elif n == 1:
+            print(f"----------------\nYou have {n} event")
+            message = "You have Volunteered"
         else:
+            print(f"----------------\nYou have {n} events")
             message = "You have Volunteered"
         page_token = events.get('nextPageToken')
         if not page_token:
