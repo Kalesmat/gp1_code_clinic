@@ -12,11 +12,11 @@ import sys
 import datetime
 
 class TestViewEvents(unittest.TestCase):
-    #test if the user has slots opened
+    #test if the user has slots opened ie..invalid email
     def test_did_not_volunteer(self):
         service = startup()
 
-        email = 'moolivi@student.wethinkcode.co.za'
+        email="mmm@student.wethinkcode.co.za"
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
@@ -27,8 +27,7 @@ class TestViewEvents(unittest.TestCase):
     # checks if user is able to view their events by creating an event and then testing for it
     def test_valid_user_event(self):
         service=startup()
-        user='moolivie'
-        email='moolivie@student.wethinkcode.co.za'
+        user,email=get_credentials()
         Date = datetime.datetime.now().date() + datetime.timedelta(days=5)
         summary = "Morglin Test Case"
         Descript = "Testing"
@@ -49,6 +48,8 @@ class TestViewEvents(unittest.TestCase):
        
 if __name__ == '__main__':
     unittest.main()
+
+
 
 
 
