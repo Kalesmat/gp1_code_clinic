@@ -153,9 +153,7 @@ class PatientTest(unittest.TestCase):
             new_string = StringIO()
             sys.stdout = new_string
             cancel = patient_cancels_booking.cancel_booking(service, username, email)
-            test_result = f"{username}, There are no recent bookings made."
-            self.assertFalse(cancel, test_result)
-            self.assertTrue(my_events is False)
+            self.assertFalse(cancel, my_events is False)
             sys.stdout = the_stdout
 
     def test_patient_cancels_booking_if_event_is_other_patients(self):

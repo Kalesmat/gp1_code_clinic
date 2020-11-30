@@ -6,8 +6,7 @@ from patient import patient_view_booking
 def cancel_booking(service, username, email):
     try:
         my_events = patient_view_booking.view_booking(service, email)
-        if my_events is None:
-            pprint(f"{username}, There are no recent bookings made.")
+        if not my_events:
             return False
         else:
             eventid = input("Please insert the event ID: ")
