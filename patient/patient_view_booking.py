@@ -1,18 +1,17 @@
+import datetime
+
 def view_booking(service, email):
     '''
     Patient will be able to view all their bookings
     PARAMS : the service instance
     '''
     n=0
+    now = datetime.datetime.utcnow()
+    now = now.isoformat() + 'Z'
     page_token = None
     while True:
-        events = service.events().list(calendarId='primary', pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary', timeMin=now,pageToken=page_token).execute()
 
-        # if events is None:
-        #     print("You have no events booked.")
-
-        # else:
-        #     print("These Are Your Booked Events:")
 
         for event in events['items']:
             try:
@@ -49,4 +48,8 @@ Id is: {id_user} """)
     if n < 1:
         print("You have no booked events")
         return False
+    if n == 1:
+        print(f"\nYou have {n} booked slot")
+    else:
+        print(f"\nYou have {n} booked slots")
     return(message_storage)
