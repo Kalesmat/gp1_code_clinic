@@ -14,7 +14,7 @@ def cancel_booking(service, email):
             pprint("There are no recent bookings made.")
             return False
         else:
-            eventid = input("Please insert the event ID: ")
+            eventid = input("Please insert the event ID: ").strip()
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
