@@ -1,4 +1,6 @@
 import datetime
+from datetime import timedelta
+from datetime import datetime as dt
 
 def view_booking(service, email):
     '''
@@ -22,11 +24,19 @@ def view_booking(service, email):
                 creator = event['attendees'][0]['email']
                 id_user = event['id']
 
-                #Unpacking Time Dictionaries
-                event_time_start = event['start']
-                event_time_end = event['end']
-                start = event_time_start['dateTime']
-                end = event_time_end['dateTime']
+                #Issa's code for making a suitable time output
+                start = event['start'].get('dateTime') #, event['start'].get('date') #.strip("T12:00:00+02:00")
+                start = start.split('T')
+                date = start[0]
+                time = start[1].split('+')
+                time = time[0]
+                time = dt.strptime(time, '%H:%M:%S')
+                end_t = time + timedelta(minutes=30)
+                time, end_t = str(time), str(end_t)
+                time, end_t = time.split(" "), end_t.split(" ")
+                time, end_t = time[1], end_t[1]
+
+
 
                 #Output of the Date
                 if len(event['attendees']) == 2:
@@ -36,7 +46,7 @@ def view_booking(service, email):
                         message_storage = (
 f"""----------------
 {summary} by {creator}
-starts at {start} and ends at {end}
+starts at {time} and ends at {end_t}
 Id is: {id_user} """)
                         print(message_storage)
             except KeyError:
