@@ -1,5 +1,5 @@
 import unittest
-from clinician import create
+from clinician import create, delete
 from io import StringIO
 import sys
 # from code_clinic import startup
@@ -46,10 +46,12 @@ class TestCase(unittest.TestCase):
             orig_stdout = sys.stdout
             new_string = StringIO()
             sys.stdout = new_string
-            create.create(service,username, email)
+            event_id = create.create(service,username, email)
             output = sys.stdout.getvalue().strip()
             self.assertTrue("Event Created" in output)
+            delete.do_delete(service, email, event_id)
             sys.stdout = orig_stdout
+
 
     def test_create_n(self):
         service = code_clinic.startup()
@@ -68,9 +70,10 @@ class TestCase(unittest.TestCase):
             orig_stdout = sys.stdout
             new_string = StringIO()
             sys.stdout = new_string
-            create.create(service,username, email)
+            event_id = create.create(service,username, email)
             output = sys.stdout.getvalue().strip()
             self.assertTrue("you have not created the event" in output)
+            delete.do_delete(service, email, event_id)
             sys.stdout = orig_stdout
 
     # def test_do_create(self):

@@ -9,7 +9,7 @@ def create(service, user, email):
     Day,Year,Month,hour,Min = 0,0,0,0,0
 
     while Day < 1 or Day > 31 or Month < 1 or Month > 12 or Year < 1:
-        Datei = input("Enter Date (Day/Month/Year): ") 
+        Datei = input("Enter Date (Day/Month/Year): ") .strip()
         if "/" in Datei:
             Date = Datei.split('/') 
             if len(Date) != 3 or not Date[0].isdigit() or not Date[1].isdigit() or not Date[2].isdigit():
@@ -39,7 +39,7 @@ def create(service, user, email):
         print("{} {}".format(user, message2))
         yes = ""
         while yes != 'y' or yes != 'n':
-            yes = input("Would you like to create a new event(y/n)?: ")
+            yes = input("Would you like to create a new event(y/n)?: ").strip()
             if yes.lower() == 'y':
                 create(service, user, email)
             elif yes.lower() == 'n':
@@ -49,7 +49,7 @@ def create(service, user, email):
                 print("Invalid input! Please enter y or n.")
 
     while hour<7 or hour>17 or Min<0 or Min>59 or (hour==17 and Min>30):
-        Timei = input("Enter Time (HH:MM): ")
+        Timei = input("Enter Time (HH:MM): ").strip()
         if ":" in Timei:
             Time = Timei.split(":")
             if len(Time) != 2 or not Time[0].isdigit() or not Time[1].isdigit():
@@ -85,7 +85,7 @@ def create(service, user, email):
         print("{} {}".format(user,message2))
         yes = ""
         while yes!='y' or yes!='n' :
-            yes = input("Would you like to create a new event(y/n)?: ")
+            yes = input("Would you like to create a new event(y/n)?: ").strip()
             if yes.lower() == 'y':
                 create(service,user,email)
             elif yes.lower() == 'n':
@@ -101,10 +101,10 @@ def create(service, user, email):
 
         Summary,Descript = "",""
         while Summary =="":
-            Summary = input("Name of your topic: ")
+            Summary = input("Name of your topic: ").strip()
             
         while Descript == "":
-            Descript = input("Describe your topic: ")
+            Descript = input("Describe your topic: ").strip()
 
         startD = str(Year)+"-"+str(Month)+"-"+str(Day)
         startT = str(hour)+":"+str(Min)
@@ -112,7 +112,7 @@ def create(service, user, email):
 
         confirm = ""
         while confirm.lower() != 'y' or confirm.lower() != 'n':
-            confirm = input("Confirm event?(y/n): ")
+            confirm = input("Confirm event?(y/n): ").strip()
             if confirm.lower() == 'y' or confirm.lower() == 'n':
                 break
         

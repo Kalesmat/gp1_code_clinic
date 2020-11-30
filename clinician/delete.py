@@ -11,7 +11,7 @@ def delete(service, email):
     view_events.view(service, email)
 
     while True:
-        event_id = input('\nPlease give event ID: ')
+        event_id = input('\nPlease give event ID: ').strip()
         if event_id:
             break
         else:

@@ -9,7 +9,7 @@ def cancel_booking(service, username, email):
         if not my_events:
             return False
         else:
-            eventid = input("Please insert the event ID: ")
+            eventid = input("Please insert the event ID: ").strip()
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
