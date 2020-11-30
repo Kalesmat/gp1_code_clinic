@@ -20,11 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_view_available.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test_view_booked.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clinician/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinician/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinician/delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinician/delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clinician/view_events.py" beforeDir="false" afterPath="$PROJECT_DIR$/clinician/view_events.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_clinic.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_clinic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient/patient_cancels_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_cancels_booking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient/patient_make_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_make_booking.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_view_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_view_booking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_view_open_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_view_open_booking.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/review.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_clinic.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_clinic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_clinician_create.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_clinician_create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_clinician_delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_clinician_delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_patient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_patient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_view.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/token.pickle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

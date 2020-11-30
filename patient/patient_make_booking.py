@@ -3,26 +3,40 @@ from googleapiclient.errors import HttpError
 from patient import patient_view_open_booking
 
 
-def booking(service):
+def booking(service, username, email):
     """
      Adds a booking to the google calendar
+     return: Error message if the ID is invalid.
     """
     try:
-        patient_view_open_booking.view_open_bookings(service)
-        eventid = input("Please insert the event ID: ")
-        event = service.events().get(calendarId='primary', eventId=eventid).execute()
+        events = patient_view_open_booking.view_open_bookings(service)
+        if not events:
+            pprint("Please try again later")
+            return False
 
-        event['status'] = 'confirmed'
-        admin = event['attendees'][0]['email']
-        event['attendees'] = [
-            {'email': admin},
-            {'email': 'patient.cc.team14@gmail.com'},
-        ]
+        else:
+            eventid = input("Please insert the event ID: ")
+            event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
-        updated_event = service.events().update(calendarId='primary', eventId=eventid,body=event, ).execute()
-        pprint(updated_event['updated'])
+            event['status'] = 'confirmed'
+            admin = event['attendees'][0]['email']
+
+            if admin == email:
+                pprint(f'{username}, Unfortunately you cannot book your own event..')
+                return True
+            elif len(event['attendees']) >= 2:
+                pprint(f"{username}, number of attendees has been reached, please check for the next slot.")
+                return True
+            else:
+                event['attendees'] = [
+                    {'email': admin},
+                    {'email': email},
+                ]
+                updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
+                pprint(updated_event['updated'])
+                pprint(f"{event['summary']} is successfully booked..")
+                return True
 
     except HttpError:
-        pprint("Invalid event ID..")
-
-
+        pprint("Unfortunately that is an invalid event ID..")
+        return False
