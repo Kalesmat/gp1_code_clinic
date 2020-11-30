@@ -131,7 +131,7 @@ def make_config():
 
     # Get credentials from user
     while True:
-        status = input('Are you a student [y/n]?: ')
+        status = input('Are you a student [y/n]?: ').strip()
         if status.lower() == 'n':
             mail = '@wethinkcode.co.za'
             break
@@ -140,7 +140,7 @@ def make_config():
             break
 
     while True:
-        username = input("Username?: ")
+        username = input("Username: ").strip()
         if '@' in username or '.' in username:
             print('Not a valid username')
         else:
