@@ -2,93 +2,7 @@ import datetime
 from pprint import pprint
 
 
-<<<<<<< HEAD
-def create(service):
-=======
 def create(service, user, email):
->>>>>>> 48e1e4b19cf04e2d8ea5955203cc0fca81eb5513
-    """
-    Function to create an event for a Clinician
-    """
-    message = "Event Created"
-    # print(message)
-<<<<<<< HEAD
-    """
-    Get the Day and Time
-    """
-    # today = date.today()
-    hour,Day,Year,Month = 0,0,0,0
-    while Year < 1:
-        Year = int(input("Enter Year: "))
-    while Month < 1 or Month > 12:
-        Month = int(input("Enter Month: "))
-    while Day < 1 or Day > 31:
-        Day = int(input("Enter Day: "))
-    while hour < 7 or hour > 17:
-        hour = int(input("Enter Hour(From (7-17)): "))
-    hour2 = hour
-    minutes = int(input("Enter Minutes(From (00-60)): "))
-    while minutes < 0 or minutes > 60 or (hour == 17 and minutes > 30):
-        minutes = int(input("Enter Minutes(From (00-60)): "))
-    minutes2 = minutes+30
-    if minutes >= 30:
-        minutes2 = 0
-        hour2 += 1
-        add = minutes - 30
-        minutes2 += add
-    my_date = datetime.datetime(Year, Month, Day, hour, minutes)#.isoformat()
-    # print(my_date)
-    # print(datetime.datetime.now())
-    if my_date < datetime.datetime.now():
-        print("Too Late, you can't create an event")
-    else:
-        # Format the date
-        """
-        Creating the event
-        """
-        Description = input("Describe your event: ")
-        Summary = input("Summary of your event: ")
-        event = {
-            'summary': '{}'.format(Summary),
-            #   'location': '800 Howard St., San Francisco, CA 94103',
-            'description': '{}.'.format(Description),
-            'transparency': 'opaque',
-            'start': {
-                'dateTime': '{}-{}-{}T{}:{}:00'.format(Year,Month,Day,hour,minutes),
-                'timeZone': 'GMT+02',
-            },
-            'end': {
-                'dateTime': '{}-{}-{}T{}:{}:00'.format(Year,Month,Day,hour2,minutes2),
-                'timeZone': 'GMT+02',
-            },
-            'recurrence': [
-                'RRULE:FREQ=DAILY;COUNT=1'
-            ],
-            'attendees': [
-                 {
-                    'displayName': 'Jonas',
-                    'email': 'codeclinic.team14@gmail.com',
-                    'optional': True,
-                    'organizer': True,
-                    'responseStatus': 'accepted'
-                }
-            ],
-            'anyoneCanAddSelf': True,
-            'status': 'Not confirmed',
-            'reminders': {
-                'useDefault': False,
-                'overrides': [
-                    {'method': 'email', 'minutes': 24 * 60},
-                    {'method': 'popup', 'minutes': 10},
-            ],
-            },
-        }
-        maxAttendees = 2
-        event = service.events().insert(calendarId='primary', maxAttendees=maxAttendees, body=event).execute()
-        pprint('Event created: {}'.format (event.get('htmlLink')))
-    return message
-=======
-    
     """
     Get the Day and Time
     """
@@ -247,10 +161,7 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
             ],
         },
     }
-    
-   
-    
+
     event = service.events().insert(calendarId='primary', body=event).execute()
     return event
 
->>>>>>> 48e1e4b19cf04e2d8ea5955203cc0fca81eb5513
