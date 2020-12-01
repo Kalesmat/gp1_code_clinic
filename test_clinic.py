@@ -8,7 +8,7 @@ import sys
 
 class MyTestCase(unittest.TestCase):
 
-    @patch('sys.stdin', StringIO('y\nDick@\n.com\nDick'))
+    @patch('sys.stdin', StringIO('y\nTOm@\n.com\nTom'))
     @patch('getpass.getpass')
     def test_make_config(self, getpass):
         getpass.return_value = 'Harry'
@@ -17,9 +17,9 @@ class MyTestCase(unittest.TestCase):
         config_object.read(".config.ini")
 
         userinfo = config_object["USERINFO"]
-        self.assertEqual(userinfo["email"], "Dick@student.wethinkcode.co.za")
+        self.assertEqual(userinfo["email"], "tom@student.wethinkcode.co.za")
         self.assertEqual(userinfo["password"], "Harry")
-        self.assertEqual(userinfo["username"], 'Dick')
+        self.assertEqual(userinfo["username"], 'tom')
 
 
     def test_run_clinic(self):
