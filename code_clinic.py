@@ -151,8 +151,8 @@ def make_config():
     # Create a userinfo section in the config
     password = getpass.getpass()
     con_obj["USERINFO"] = {
-        "username": username,
-        "email": email,
+        "username": username.lower(),
+        "email": email.lower(),
         "password": password
     }
 
