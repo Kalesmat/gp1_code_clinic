@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/patient_cancels_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_cancels_booking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_patient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_patient.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +61,7 @@
       <recent name="$PROJECT_DIR$/patient/patient_functions" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking_my_events_is_none">
+  <component name="RunManager" selected="Python tests.Unittests for test_patient.PatientTest">
     <configuration name="patient_make_booking" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="gp1_code_clinic" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,9 +141,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking_my_events_is_none" />
-        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking" />
         <item itemvalue="Python tests.Unittests for test_patient.PatientTest" />
+        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking" />
+        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking_my_events_is_none" />
         <item itemvalue="Python.patient_make_booking" />
         <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_make_booking" />
       </list>
@@ -172,6 +173,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="68" y="197" width="800" height="719" key="#Plugins" timestamp="1606803410264">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="68" y="197" width="800" height="719" key="#Plugins/0.27.1920.1053@0.27.1920.1053" timestamp="1606803410264" />
     <state x="801" y="159" width="740" height="589" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1605002166038">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -184,22 +189,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="589" y="315" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1605000853018" />
-    <state width="943" height="275" key="GridCell.Tab.0.bottom" timestamp="1606730769453">
+    <state width="943" height="275" key="GridCell.Tab.0.bottom" timestamp="1606743958177">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606730769453" />
-    <state width="943" height="275" key="GridCell.Tab.0.center" timestamp="1606730769452">
+    <state width="943" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958177" />
+    <state width="943" height="275" key="GridCell.Tab.0.center" timestamp="1606743958176">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606730769452" />
-    <state width="943" height="275" key="GridCell.Tab.0.left" timestamp="1606730769451">
+    <state width="943" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958176" />
+    <state width="943" height="275" key="GridCell.Tab.0.left" timestamp="1606743958176">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606730769451" />
-    <state width="943" height="275" key="GridCell.Tab.0.right" timestamp="1606730769452">
+    <state width="943" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958176" />
+    <state width="943" height="275" key="GridCell.Tab.0.right" timestamp="1606743958177">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606730769452" />
+    <state width="943" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958177" />
     <state x="100" y="127" width="1720" height="853" key="ShowDiffWithBranchDialog" timestamp="1605020991682">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

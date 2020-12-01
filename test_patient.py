@@ -138,7 +138,7 @@ class PatientTest(unittest.TestCase):
             new_string = StringIO()
             sys.stdout = new_string
             cancel = patient_cancels_booking.cancel_booking(service, username, email)
-            test_result = f"{username}, You have successfully cancelled slot."
+            test_result = f"{username}, You have successfully cancelled your booking."
             self.assertTrue(cancel, test_result)
             self.assertTrue(test_id, my_events is True)
             sys.stdout = the_stdout
