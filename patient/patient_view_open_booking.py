@@ -19,7 +19,8 @@ def view_open_bookings(service):
    if not events:
       print('No upcoming events found.')
       return False
-   i = 0   
+   i = 0 
+
    for event in events:
       start = event['start'].get('dateTime') #, event['start'].get('date') #.strip("T12:00:00+02:00")
       start = start.split('T')
@@ -32,8 +33,8 @@ def view_open_bookings(service):
       time, end_t = time.split(" "), end_t.split(" ")
       time, end_t = time[1], end_t[1]
       try:
-         id_ev = event['id'].split('_')
-         eventId = id_ev[0]
+         id_event = event['id'].split('_')
+         eventId = id_event[0]
          print(date, '', time,'-',end_t,"\n",event['summary'],'\n', eventId,'\n', event['attendees'][0]['email'],'\n','-'*100)
          i += 1
       except KeyError as keyerr:
