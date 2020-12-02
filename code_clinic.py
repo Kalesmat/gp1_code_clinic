@@ -130,14 +130,10 @@ def make_config():
     con_obj = ConfigParser()
 
     # Get credentials from user
-    while True:
-        status = input('Are you a student [y/n]?: ').strip()
-        if status.lower() == 'n':
-            mail = '@wethinkcode.co.za'
-            break
-        if status.lower() == 'y':
-            mail = '@student.wethinkcode.co.za'
-            break
+    mail = '@student.wethinkcode.co.za'
+
+    file = open('usernames', 'r')
+    user_file = file.readlines()
 
     while True:
         username = input("Username: ").strip()
