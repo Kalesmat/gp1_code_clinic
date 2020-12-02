@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient/patient_cancels_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_cancels_booking.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_patient.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_patient.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/token.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/token.pickle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,27 +62,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python tests.Unittests for test_patient.PatientTest">
-    <configuration name="patient_make_booking" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="gp1_code_clinic" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/patient" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/patient/patient_make_booking.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Unittests for test_patient.PatientTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="gp1_code_clinic" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,6 +87,20 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_patient.PatientTest.test_patient_cancels_booking&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_patient.PatientTest.test_patient_cancels_booking_invalid_empty" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="gp1_code_clinic" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_patient.PatientTest.test_patient_cancels_booking_invalid_empty&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -142,10 +135,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Unittests for test_patient.PatientTest" />
+        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking_invalid_empty" />
+        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_make_booking" />
         <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking" />
         <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_cancels_booking_my_events_is_none" />
-        <item itemvalue="Python.patient_make_booking" />
-        <item itemvalue="Python tests.Unittests for test_patient.PatientTest.test_patient_make_booking" />
       </list>
     </recent_temporary>
   </component>
@@ -189,22 +182,22 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="589" y="315" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1605000853018" />
-    <state width="943" height="275" key="GridCell.Tab.0.bottom" timestamp="1606743958177">
+    <state width="938" height="188" key="GridCell.Tab.0.bottom" timestamp="1606892032976">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958177" />
-    <state width="943" height="275" key="GridCell.Tab.0.center" timestamp="1606743958176">
+    <state width="938" height="188" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606892032976" />
+    <state width="938" height="188" key="GridCell.Tab.0.center" timestamp="1606892032975">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958176" />
-    <state width="943" height="275" key="GridCell.Tab.0.left" timestamp="1606743958176">
+    <state width="938" height="188" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606892032975" />
+    <state width="938" height="188" key="GridCell.Tab.0.left" timestamp="1606892032975">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958176" />
-    <state width="943" height="275" key="GridCell.Tab.0.right" timestamp="1606743958177">
+    <state width="938" height="188" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606892032975" />
+    <state width="938" height="188" key="GridCell.Tab.0.right" timestamp="1606892032976">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="943" height="275" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606743958177" />
+    <state width="938" height="188" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606892032976" />
     <state x="100" y="127" width="1720" height="853" key="ShowDiffWithBranchDialog" timestamp="1605020991682">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
