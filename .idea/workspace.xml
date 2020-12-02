@@ -19,14 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/test_patient.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient/patient_cancels_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_cancels_booking.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient/patient_make_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_make_booking.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient/patient_view_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_view_booking.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient/patient_view_open_booking.py" beforeDir="false" afterPath="$PROJECT_DIR$/patient/patient_view_open_booking.py" afterDir="false" />
-    </list>
+    <list default="true" id="f75c0a5a-529a-495d-b936-623c8287d5e9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
