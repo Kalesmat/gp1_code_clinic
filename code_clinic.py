@@ -67,11 +67,10 @@ def run_clinic():
     if len(sys.argv) < 2:
         print(f"Welcome {username}")
         parser.print_help()
-    
+        return True
     args = parser.parse_args() #Parsing argument received from the commandline
 
     '''Statements to handle args received from clinician'''
-
 
     if args.add_slot and os.path.exists('.config.ini'):
         print(f"Welcome {username}")
