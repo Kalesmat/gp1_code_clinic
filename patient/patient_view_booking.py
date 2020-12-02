@@ -2,13 +2,15 @@ import datetime
 from datetime import timedelta
 from datetime import datetime as dt
 import colours
+n=0
+
 
 def view_booking(service, email):
+    global n
     '''
     Patient will be able to view all their bookings
     PARAMS : the service instance
     '''
-    n=0
     now = datetime.datetime.utcnow()
     now = now.isoformat() + 'Z'
     page_token = None
@@ -66,7 +68,7 @@ Id is: {id_user} """)
         final_string = f"\nYou have {n} booked slot"
         print(final_string)
         return(final_string)
-        
+
     else:
         final_string = f"\nYou have {n} booked slots"
         print(final_string)
