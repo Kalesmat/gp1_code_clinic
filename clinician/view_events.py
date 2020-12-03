@@ -1,5 +1,4 @@
-from  colorama import Fore
-from colorama import Style
+import colours
 import datetime
 
 def view(service, myemail):
@@ -33,9 +32,10 @@ def view(service, myemail):
 
                 admin = event['attendees'][0]['email']
                 if myemail == admin:
-                    
+
+                    summary = colours.colour(summary, 'yellow')
                     message = (
-                    f"----------------\n{Fore.YELLOW}{summary}{Style.RESET_ALL} created by {admin}\nstarts at {start} and ends at {end}\nId is: {id}")
+                    f"----------------\n{summary} created by {admin}\nstarts at {start} and ends at {end}\nId is: {id}")
 
                     print(message)
                     n += 1

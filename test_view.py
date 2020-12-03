@@ -38,7 +38,7 @@ class TestViewEvents(unittest.TestCase):
         
         result = view_events.view(service, email)
 
-        self.assertEqual(result, "You have Volunteered")
+        self.assertEqual(result, "You have volunteered")
         id = event['id']
 
         deleting = delete.do_delete(service, email, id)
