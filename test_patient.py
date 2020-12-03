@@ -9,7 +9,7 @@ from patient import patient_make_booking, patient_cancels_booking, patient_view_
 
 # for booking
 
-summary = 'Testing for unittests.'
+summary = 'Testing for unittests Booking.'
 description = 'Test booking and cancelling with the unittest as summary'
 start_d = datetime.datetime.now().date() + datetime.timedelta(hours=24)
 start_t = '10:00'
