@@ -1,5 +1,6 @@
+from  colorama import Fore
+from colorama import Style
 import datetime
-
 
 def view(service, myemail):
     '''This function displays the events that have been booked.'''
@@ -16,9 +17,10 @@ def view(service, myemail):
         for event in events['items']:
             try:
 
-                summary = event['summary']
                 event_creator = event['creator']
+                summary = event['summary']
                 creator = event_creator['email']
+                
 
                 status = event['status']
                 id = event['id']
@@ -33,7 +35,7 @@ def view(service, myemail):
                 if myemail == admin:
                     
                     message = (
-                        f"----------------\n{summary} created by {admin}\nstarts at {start} and ends at {end}\nId is: {id}")
+                    f"----------------\n{Fore.YELLOW}{summary}{Style.RESET_ALL} created by {admin}\nstarts at {start} and ends at {end}\nId is: {id}")
 
                     print(message)
                     n += 1
@@ -45,13 +47,15 @@ def view(service, myemail):
             print(message)
         elif n == 1:
             print(f"----------------\nYou have {n} event")
-            message = "You have Volunteered"
+            message = "You have volunteered"
         else:
             print(f"----------------\nYou have {n} events")
-            message = "You have Volunteered"
+            message = "You have volunteered"
         page_token = events.get('nextPageToken')
         if not page_token:
             break
 
     return message
+
+
 
