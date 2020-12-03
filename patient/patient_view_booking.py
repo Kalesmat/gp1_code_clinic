@@ -1,13 +1,16 @@
 import datetime
 from datetime import timedelta
 from datetime import datetime as dt
+import colours
+n=0
+
 
 def view_booking(service, email):
+    global n
     '''
     Patient will be able to view all their bookings
     PARAMS : the service instance
     '''
-    n=0
     now = datetime.datetime.utcnow()
     now = now.isoformat() + 'Z'
     page_token = None
@@ -19,10 +22,12 @@ def view_booking(service, email):
             try:
             # Dictionary Unpacking with variables
                 summary = event['summary']
-
+                summary = colours.colour(summary,"green")
                 event_creator = event['creator']
                 creator = event['attendees'][0]['email']
+                creator = colours.colour(creator,"yellow")
                 id_user = event['id']
+                id_user = colours.colour(id_user,"cyan")
 
                 #Issa's code for making a suitable time output
                 start = event['start'].get('dateTime') #, event['start'].get('date') #.strip("T12:00:00+02:00")
@@ -56,10 +61,16 @@ Id is: {id_user} """)
         if not page_token:
             break
     if n < 1:
-        print("You have no booked events")
-        return False
+        final_string = "You have no booked slots"
+        print(final_string)
+        return(final_string)
     if n == 1:
-        print(f"\nYou have {n} booked slot")
+        final_string = f"\nYou have {n} booked slot"
+        print(final_string)
+        return(final_string)
+
     else:
-        print(f"\nYou have {n} booked slots")
-    return(message_storage)
+        final_string = f"\nYou have {n} booked slots"
+        print(final_string)
+        return(final_string)
+ 
