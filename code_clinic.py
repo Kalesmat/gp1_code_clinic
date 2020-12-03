@@ -95,7 +95,7 @@ def run_clinic():
         patient_view_booking.view_booking(service,email)
     elif args.cancel_booking and os.path.exists('.config.ini'):
         print(f"Welcome {username}")
-        patient_cancels_booking.cancel_booking(service, email)
+        patient_cancels_booking.cancel_booking(service, username, email)
     elif args.config:
         print("Welcome to Code Clinic")
         make_config()

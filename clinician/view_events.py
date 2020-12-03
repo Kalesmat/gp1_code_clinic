@@ -1,6 +1,7 @@
 import datetime
-
-
+from datetime import timedelta
+from datetime import datetime as dt
+import colours
 def view(service, myemail):
     '''This function displays the events that have been booked.'''
 
@@ -16,24 +17,36 @@ def view(service, myemail):
         for event in events['items']:
             try:
 
-                summary = event['summary']
                 event_creator = event['creator']
+                summary = event['summary']
                 creator = event_creator['email']
+                
 
                 status = event['status']
                 id = event['id']
 
-                #unpack time
-                event_time_start = event['start']
-                event_time_end = event['end']
-                start = event_time_start['dateTime']
-                end = event_time_end['dateTime']
+                #Issa's code for making a suitable time output
+                start = event['start'].get('dateTime') 
+                start = start.split('T')
+                date = start[0]
+                time = start[1].split('+')
+                time = time[0]
+                time = dt.strptime(time, '%H:%M:%S')
+                end_t = time + timedelta(minutes=30)
+                time, end_t = str(time), str(end_t)
+                time, end_t = time.split(" "), end_t.split(" ")
+                time, end_t = time[1], end_t[1]
+
+
 
                 admin = event['attendees'][0]['email']
                 if myemail == admin:
-                    
-                    message = (
-                        f"----------------\n{summary} created by {admin}\nstarts at {start} and ends at {end}\nId is: {id}")
+
+                    summary = colours.colour(summary, 'yellow')
+                    message = (f"""----------------
+{summary} by {creator}
+starts at {time} and ends at {end_t}
+Id is: {id} """)
 
                     print(message)
                     n += 1
@@ -45,13 +58,15 @@ def view(service, myemail):
             print(message)
         elif n == 1:
             print(f"----------------\nYou have {n} event")
-            message = "You have Volunteered"
+            message = "You have volunteered"
         else:
             print(f"----------------\nYou have {n} events")
-            message = "You have Volunteered"
+            message = "You have volunteered"
         page_token = events.get('nextPageToken')
         if not page_token:
             break
 
     return message
+
+
 

@@ -30,12 +30,12 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 
     def test_view_booked_succeeds(self):
-        import test_review
+        import test_view_booked
         test_result = run_unittests("test_view_booked")
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 
     def test_view_available_succeeds(self):
-        import test_review
+        import test_view_available
         test_result = run_unittests("test_view_available")
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 
