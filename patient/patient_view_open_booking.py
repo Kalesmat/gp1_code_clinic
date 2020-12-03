@@ -36,7 +36,7 @@ def view_open_bookings(service):
          id_event = event['id'].split('_')
          eventId = colour(id_event[0], 'blue')
          event_summary = colour(event['summary'], 'green')
-         print(date, '', time,'-',end_t,"\n",event_summary,'\n', eventId,'\n', event['attendees'][0]['email'],'\n','-'*100)
+         print(event_summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "ID:",eventId.strip(),'\n','-'*70)
          i += 1
       except KeyError as keyerr:
          print('no attendees on the event\n', '-'*20)
