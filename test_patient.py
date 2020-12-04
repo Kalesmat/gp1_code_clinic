@@ -3,7 +3,7 @@ from unittest.mock import patch
 from io import StringIO
 import sys
 import code_clinic
-from clinician import create
+from clinician import create, delete
 import datetime
 from patient import patient_make_booking, patient_cancels_booking, patient_view_booking, patient_view_open_booking
 
@@ -35,6 +35,7 @@ class PatientTest(unittest.TestCase):
             test_result = f"{summary} is successfully booked.."
             self.assertTrue(book, test_result)
             self.assertTrue(test_id, my_events is True)
+            delete.do_delete(service, admin, test_id)
             sys.stdout = the_stdout
 
     def test_patient_make_double_booking(self):
