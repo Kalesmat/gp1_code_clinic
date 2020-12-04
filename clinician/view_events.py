@@ -18,7 +18,7 @@ def view(service, myemail):
             try:
 
                 event_creator = event['creator']
-                summary = event['summary']
+                summary = event['summary'].strip()
                 creator = event_creator['email']
                 
 
@@ -45,8 +45,9 @@ def view(service, myemail):
                     summary = colours.colour(summary, 'yellow')
                     message = (f"""----------------
 {summary} by {creator}
-starts at {time} and ends at {end_t}
-Id is: {id} """)
+{date} starts at {time} and ends at {end_t}
+To delete run:
+code_clinic.py delete {id} """)
 
                     print(message)
                     n += 1

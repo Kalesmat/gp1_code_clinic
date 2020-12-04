@@ -3,13 +3,13 @@ from googleapiclient.errors import HttpError
 from patient import patient_view_booking
 
 
-def cancel_booking(service, username, email):
+def cancel_booking(service, username, email, uuid):
     try:
         my_events = patient_view_booking.view_booking(service, email)
         if not my_events:
             return False
         else:
-            eventid = input("Please insert the event ID: ").strip()
+            eventid = uuid#input("Please insert the event ID: ").strip()
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'

@@ -3,7 +3,7 @@ from googleapiclient.errors import HttpError
 from patient import patient_view_open_booking
 
 
-def booking(service, username, email):
+def booking(service, username, email, uuid):
     """
      Adds a booking to the google calendar
      return: Error message if the ID is invalid.
@@ -15,7 +15,7 @@ def booking(service, username, email):
             return False
 
         else:
-            eventid = input("Please insert the event ID: ").strip()
+            eventid = uuid #input("Please insert the event ID: ").strip()
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'

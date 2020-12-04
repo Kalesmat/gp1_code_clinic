@@ -52,7 +52,8 @@ def view_booking(service, email):
 f"""----------------
 {summary} by {creator}
 starts at {time} and ends at {end_t}
-Id is: {id_user} """)
+To cancel attendance run:
+code_clinic.py cancel {id_user} """)
                         print(message_storage)
             except KeyError:
                 break

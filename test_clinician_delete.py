@@ -21,14 +21,14 @@ class TestCase(unittest.TestCase):
         endT = '13:00'
         event = create.do_create(service,Summary,Description,startD,startT,endT,username,email)
         event_id = event['id']
-        with patch('sys.stdin', StringIO(f'{event_id}\n')):
-            orig_stdout = sys.stdout
-            new_string = StringIO()
-            sys.stdout = new_string
-            delete.delete(service, email)
-            output = sys.stdout.getvalue().strip()
-            self.assertTrue("Event Deleted" in output)
-            sys.stdout = orig_stdout
+        #with patch('sys.stdin', StringIO(f'{event_id}\n')):
+        orig_stdout = sys.stdout
+        new_string = StringIO()
+        sys.stdout = new_string
+        delete.delete(service, email,event_id)
+        output = sys.stdout.getvalue().strip()
+        self.assertTrue("Event Deleted" in output)
+        sys.stdout = orig_stdout
 
     def test_delete_false(self):
         service = code_clinic.startup()
@@ -42,24 +42,24 @@ class TestCase(unittest.TestCase):
         event = create.do_create(service,Summary,Description,startD,startT,endT,username,email)
         event_id = event['id']
         email2 = f'not{email}'
-        with patch('sys.stdin', StringIO(f'{event_id}\n')):
-            orig_stdout = sys.stdout
-            new_string = StringIO()
-            sys.stdout = new_string
-            delete.delete(service, email2)
-            output = sys.stdout.getvalue().strip()
-            self.assertTrue('Your are not allowed to delete this event' in output)
-            delete.do_delete(service, email, event_id)
-            sys.stdout = orig_stdout
+        #with patch('sys.stdin', StringIO(f'{event_id}\n')):
+        orig_stdout = sys.stdout
+        new_string = StringIO()
+        sys.stdout = new_string
+        delete.delete(service, email2,event_id)
+        output = sys.stdout.getvalue().strip()
+        self.assertTrue('Your are not allowed to delete this event' in output)
+        delete.do_delete(service, email, event_id)
+        sys.stdout = orig_stdout
 
-    @patch('sys.stdin', StringIO('Dick\n'))
+    #@patch('sys.stdin', StringIO('Dick\n'))
     def test_delete_invalid(self):
         service = code_clinic.startup()
         username, email = code_clinic.get_credentials()
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
-        delete.delete(service, email)
+        delete.delete(service, email,'Dick')
         output = sys.stdout.getvalue().strip()
         self.assertTrue('Invalid ID' in output)
         sys.stdout = orig_stdout

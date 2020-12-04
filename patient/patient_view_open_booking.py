@@ -2,6 +2,7 @@ import datetime
 from datetime import timedelta
 from datetime import datetime as dt
 from colours import colour
+
 def view_open_bookings(service):
    '''Function to get the next 7 days events'''
    # Call the Calendar API
@@ -22,7 +23,7 @@ def view_open_bookings(service):
    i = 0 
 
    for event in events:
-      start = event['start'].get('dateTime') #, event['start'].get('date') #.strip("T12:00:00+02:00")
+      start = event['start'].get('dateTime')
       start = start.split('T')
       date = start[0]
       time = start[1].split('+')
@@ -36,7 +37,7 @@ def view_open_bookings(service):
          id_event = event['id'].split('_')
          eventId = colour(id_event[0], 'blue')
          event_summary = colour(event['summary'], 'green')
-         print(event_summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "ID:",eventId.strip(),'\n','-'*70)
+         print(event_summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To book the session run:\n","code_clinic book",eventId.strip(),'\n','-'*70)
          i += 1
       except KeyError as keyerr:
          print('no attendees on the event\n', '-'*20)

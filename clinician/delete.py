@@ -2,16 +2,16 @@ from clinician import view_events
 from googleapiclient.errors import HttpError
 
 
-def delete(service, email):
+def delete(service, email, uuid):
     """
     Gets the eventID from the user and deletes the event from the calendar
     :param service: service instance of the google api
     :param email: email from config file
     """
-    view_events.view(service, email)
+    # view_events.view(service, email)
 
     while True:
-        event_id = input('\nPlease give event ID: ').strip()
+        event_id = uuid#input('\nPlease give event ID: ').strip()
         if event_id:
             break
         else:
