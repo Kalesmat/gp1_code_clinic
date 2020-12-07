@@ -1,10 +1,7 @@
-#!/usr/bin/python3
-
-import argparse
 from configparser import ConfigParser
 import getpass
-from patient import patient_cancels_booking,patient_make_booking,patient_view_booking,patient_view_open_booking
-from clinician import create, delete,view_events
+from patient import patient_cancels_booking, patient_make_booking, patient_view_booking, patient_view_open_booking
+from clinician import create, delete, view_events
 import pickle
 import os
 from googleapiclient.discovery import build
@@ -14,6 +11,7 @@ import sys
 from colours import colour
 
 SCOPES = ['https://www.googleapis.com/auth/calendar']
+
 
 def startup():
     """
@@ -65,16 +63,16 @@ def run_clinic():
     # parser.add_argument("-i","--view_booked", help="View booked slots.", action="store_true")
     # parser.add_argument("--view_available", help="View available slots.", action="store_true")
     # parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
-    option_req_args = ['book','delete','cancel']
+    option_req_args = ['book', 'delete', 'cancel']
     uuid = None
     option = None
-    #check if option was provided, if not default to help
+    # check if option was provided, if not default to help
     try:
         option = sys.argv[1]
     except IndexError as IndErr:
         pass
 
-    #Check if provided option requires the uuid, if so and not provided, exit with a message
+    # Check if provided option requires the uuid, if so and not provided, exit with a message
     if option in option_req_args:
         try:
             uuid = sys.argv[2]
@@ -87,8 +85,8 @@ def run_clinic():
         # parser.print_help()
         return True
     elif option == 'version':
-        version()    
-    # args = parser.parse_args() #Parsing argument received from the commandline
+        version()
+        # args = parser.parse_args() #Parsing argument received from the commandline
 
     '''Statements to handle args received from clinician'''
 
@@ -102,9 +100,9 @@ def run_clinic():
 
     elif option == 'view_created' and os.path.exists('.config.ini'):
         print(f"Welcome {username}")
-        view_events.view(service,email)
+        view_events.view(service, email)
 
-    #Statements to handle args received form the patient
+    # Statements to handle args received form the patient
 
     elif option == 'view_available' and os.path.exists('.config.ini'):
         print(f"Welcome {username}")
@@ -116,7 +114,7 @@ def run_clinic():
 
     elif option == 'view_booked' and os.path.exists('.config.ini'):
         print(f"Welcome {username}")
-        patient_view_booking.view_booking(service,email)
+        patient_view_booking.view_booking(service, email)
 
     elif option == 'cancel_booking' and uuid != None and os.path.exists('.config.ini'):
         print(f"Welcome {username}")
@@ -193,7 +191,7 @@ def help():
     if no options are provided or if help is called
     '''
     menu = '''*Volunteer and book slots for Code Clinic sessions.  
-    
+
     Available options:
 
     help                    Display the help menu.
@@ -206,13 +204,15 @@ def help():
     book <uuid>             Book an avalable slot as a patient.
     delete <uuid>           Delete a slot that you have volunteered for.
     cancel <uuid>           Cancel a slot that you have booked.'''
-    menu = colour(menu,'cyan')
+    menu = colour(menu, 'cyan')
     print(menu)
+
 
 def version():
     '''Display the current version'''
     prog_version = 'Code_Clinic version: 0.6'
     print(prog_version)
+
 
 if __name__ == '__main__':
     os.system('clear')

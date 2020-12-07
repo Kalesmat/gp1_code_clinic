@@ -40,11 +40,3 @@ def booking(service, username, email, uuid):
     except HttpError:
         pprint("Unfortunately that is an invalid event ID..")
         return False
-
-
-
-
-
-
-
-

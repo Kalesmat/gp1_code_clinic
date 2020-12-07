@@ -4,6 +4,7 @@ from patient import patient_view_booking
 
 
 def cancel_booking(service, username, email, uuid):
+
     try:
         my_events = patient_view_booking.view_booking(service, email)
         if not my_events:
@@ -34,3 +35,4 @@ def cancel_booking(service, username, email, uuid):
 
     except IndexError:
         return True
+
