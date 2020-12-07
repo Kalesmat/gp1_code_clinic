@@ -23,14 +23,14 @@ def cancel_booking(service, username, email, uuid):
                 ]
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event, ).execute()
                 pprint(updated_event['updated'])
-                pprint(f"{username},You have successfully cancelled your booking.")
+                pprint(f"{username}, You have successfully cancelled your booking.")
                 return True
             else:
                 pprint(f"{username}, You are not the attendee on this event.")
                 return False
 
     except HttpError:
-        print("Unfortunately that is an invalid event ID..")
+        print(f"{username}, Unfortunately that is an invalid event ID..")
         return False
 
     except IndexError:

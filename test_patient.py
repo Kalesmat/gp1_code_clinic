@@ -64,7 +64,7 @@ class PatientTest(unittest.TestCase):
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
         book = patient_make_booking.booking(service, username, email, "y0hI@mFak3eee33")
-        test_result = "Unfortunately that is an invalid event ID.."
+        test_result = f"{username}, Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
         sys.stdout = the_stdout
 
@@ -74,7 +74,7 @@ class PatientTest(unittest.TestCase):
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
         book = patient_make_booking.booking(service, username, email, 'None')
-        test_result = "Unfortunately that is an invalid event ID.."
+        test_result = f"{username}, Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
         sys.stdout = the_stdout
 
@@ -116,7 +116,7 @@ class PatientTest(unittest.TestCase):
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
         cancel = patient_cancels_booking.cancel_booking(service, username, email, "y0hI@mFak3eee33")
-        test_result = "Unfortunately that is an invalid event ID.."
+        test_result = f"{username }, Unfortunately that is an invalid event ID.."
         self.assertFalse(cancel, test_result)
         sys.stdout = the_stdout
 
@@ -126,7 +126,7 @@ class PatientTest(unittest.TestCase):
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
         cancel = patient_cancels_booking.cancel_booking(service, username, email, 'None')
-        test_result = "Unfortunately that is an invalid event ID.."
+        test_result = f"{username}, Unfortunately that is an invalid event ID.."
         self.assertFalse(cancel, test_result)
         sys.stdout = the_stdout
 

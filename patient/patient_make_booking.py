@@ -1,6 +1,7 @@
 from pprint import pprint
+import datetime
 from googleapiclient.errors import HttpError
-from patient import patient_view_open_booking
+from patient import patient_view_open_booking, patient_view_booking
 
 
 def booking(service, username, email, uuid):
@@ -11,11 +12,16 @@ def booking(service, username, email, uuid):
     try:
         events = patient_view_open_booking.view_open_bookings(service)
         if not events:
-            pprint("Please try again later")
             return False
 
+        # my_events = patient_view_booking.view_booking(service, email)
+        # for event in my_events:
+        #     if event['start'] is:
+        #         pprint(f"{username}, Please note that you will be in session.")
+        #         return False
+
         else:
-            eventid = uuid #input("Please insert the event ID: ").strip()
+            eventid = uuid
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
