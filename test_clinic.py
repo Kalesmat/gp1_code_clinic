@@ -4,11 +4,13 @@ from unittest.mock import patch
 from configparser import ConfigParser
 import code_clinic as cc
 import sys
+from os import system
+import contextlib
 
 
 class MyTestCase(unittest.TestCase):
 
-    @patch('sys.stdin', StringIO('y\nDick@\n.com\nDick'))
+    @patch('sys.stdin', StringIO('y\nTOm@\n.com\nTom'))
     @patch('getpass.getpass')
     def test_make_config(self, getpass):
         getpass.return_value = 'Harry'
@@ -17,39 +19,30 @@ class MyTestCase(unittest.TestCase):
         config_object.read(".config.ini")
 
         userinfo = config_object["USERINFO"]
-        self.assertEqual(userinfo["email"], "Dick@student.wethinkcode.co.za")
+        self.assertEqual(userinfo["email"], "tom@student.wethinkcode.co.za")
         self.assertEqual(userinfo["password"], "Harry")
-        self.assertEqual(userinfo["username"], 'Dick')
+        self.assertEqual(userinfo["username"], 'tom')
 
 
     def test_run_clinic(self):
         '''Testing the run clinic function'''
-        cc.sys.argv.append("-h") #appending the option to commandline
+        output = StringIO()
+        with contextlib.redirect_stdout(output):
+            system("python3 code_clinic.py")
+        self.assertTrue(output,"""*Volunteer and book slots for Code Clinic sessions.  
+    
+    Available options:
 
-        std_output = sys.stdout
-        output_value = StringIO()
-        sys.stdout = output_value
-
-        cc.run_clinic()
-        output = sys.stdout.getvalue().strip()
-
-        self.assertEqual(output,"""usage: Create and book slots for Code Clinics: -h or --help of list of options
-
-       [-h] [-c] [-v] [-a] [-b] [-d] [-s] [-i] [-w] [-q]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -c, --config          User configuration
-  -v, --version         Display program version
-  -a, --add_slot        Add slot to calender.
-  -b, --book            book avalable slot.
-  -d, --delete          Delete slot.
-  -s, --view_created    See slots created.
-  -i, --view_booked     View booked slots.
-  -w, --view_available  View available slots.
-  -q, --cancel_booking  Cancel booking.""")
-
-
+    help                    Display the help menu.
+    config                  Run user configuration.
+    version                 Display program version.
+    add_slot                Add slot to calender as a volunteer.
+    view_created            View volunteering slots that you have created.
+    view_available          View slots available to book as a patient.
+    view_booked             View slots you have booked as a patient.
+    book <uuid>             Book an avalable slot as a patient.
+    delete <uuid>           Delete a slot that you have volunteered for.
+    cancel <uuid>           Cancel a slot that you have booked.""" in output.getvalue())
 
 if __name__ == '__main__':
     unittest.main()

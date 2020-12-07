@@ -7,7 +7,7 @@ from code_clinic import startup
 
 class TestPatientAvailableView(unittest.TestCase):
 
-    @patch('sys.stdin', StringIO('07/12/2020\n09:30\nUnittest\nGoing through unittest basics\n'))
+    @patch('sys.stdin', StringIO('07/12/2020\n09:30\nUnittest\nGoing through unittest basics\ny\n'))
     def test_view_available(self):
 
         '''

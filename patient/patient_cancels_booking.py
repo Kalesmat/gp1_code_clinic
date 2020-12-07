@@ -3,13 +3,17 @@ from googleapiclient.errors import HttpError
 from patient import patient_view_booking
 
 
+<<<<<<< HEAD
 def cancel_booking(service, username, email):
+=======
+def cancel_booking(service, username, email, uuid):
+>>>>>>> 58296e68064f29cde631b48364b8382f56528979
     try:
         my_events = patient_view_booking.view_booking(service, email)
         if not my_events:
             return False
         else:
-            eventid = input("Please insert the event ID: ").strip()
+            eventid = uuid#input("Please insert the event ID: ").strip()
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
@@ -22,7 +26,11 @@ def cancel_booking(service, username, email):
                 ]
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event, ).execute()
                 pprint(updated_event['updated'])
+<<<<<<< HEAD
                 pprint(f"{username},You have successfully cancelled your booking.")  # will ask Lesedi to include username because I want to be uniform
+=======
+                pprint(f"{username},You have successfully cancelled your booking.")
+>>>>>>> 58296e68064f29cde631b48364b8382f56528979
                 return True
             else:
                 pprint(f"{username}, You are not the attendee on this event.")
@@ -34,4 +42,7 @@ def cancel_booking(service, username, email):
 
     except IndexError:
         return True
+<<<<<<< HEAD
 
+=======
+>>>>>>> 58296e68064f29cde631b48364b8382f56528979
