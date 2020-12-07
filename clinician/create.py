@@ -117,9 +117,9 @@ def create(service, user, email):
                 break
         
         if confirm.lower() == 'y':
-            event=do_create(service,Summary,Descript,startD,startT,endT,user,email)        
-            pprint('{}: {}'.format(message, event.get('htmlLink')))        # print(event['id'])
+            event=do_create(service,Summary,Descript,startD,startT,endT,user,email)
             message = event['id']
+            pprint('{}: {}'.format(message, event.get('htmlLink')))        # print(event['id'])
         else:
             message = "you have not created the event"
             print(message)
