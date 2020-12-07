@@ -216,7 +216,7 @@ def createdE(service, myemail,my_date,endT):
 
                 
                 if myemail == admin:
-                    if (my_date>=Sta and my_date<=tim):                        
+                    if (my_date>Sta and my_date<tim):                        
                         n += 1                   
                         
             except KeyError:
