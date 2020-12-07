@@ -22,7 +22,7 @@ def cancel_booking(service, username, email, uuid):
                 ]
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event, ).execute()
                 pprint(updated_event['updated'])
-                pprint(f"{username},You have successfully cancelled your booking.")  # will ask Lesedi to include username because I want to be uniform
+                pprint(f"{username},You have successfully cancelled your booking.")
                 return True
             else:
                 pprint(f"{username}, You are not the attendee on this event.")
