@@ -7,6 +7,7 @@ from clinician import create, delete
 import datetime
 from patient import patient_make_booking, patient_cancels_booking, patient_view_booking, patient_view_open_booking
 
+
 # for booking
 
 summary = 'Testing for unittests Booking.'
@@ -26,12 +27,11 @@ my_events = patient_view_booking.view_booking(service, admin)
 
 class PatientTest(unittest.TestCase):
     def test_patient_make_booking(self):
-        #with patch('sys.stdin', StringIO(f'{test_id}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        book = patient_make_booking.booking(service, username, email,test_id)
+        book = patient_make_booking.booking(service, username, email, test_id)
         test_result = f"{summary} is successfully booked.."
         self.assertTrue(book, test_result)
         self.assertTrue(test_id, my_events is True)
@@ -39,40 +39,36 @@ class PatientTest(unittest.TestCase):
         sys.stdout = the_stdout
 
     def test_patient_make_double_booking(self):
-        #with patch('sys.stdin', StringIO(f'{test_id}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        book = patient_make_booking.booking(service, username, email,test_id)
+        book = patient_make_booking.booking(service, username, email, test_id)
         test_result = f"{username}, number of attendees has been reached, please check for the next slot."
         self.assertTrue(book, test_result)
         sys.stdout = the_stdout
 
     def test_patient_make_booking_if_is_volunteer(self):
-        #with patch('sys.stdin', StringIO(f'{test_id}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Fake Creator", "fake.creator@gmail.com"
-        book = patient_make_booking.booking(service, username, email,test_id)
+        book = patient_make_booking.booking(service, username, email, test_id)
         test_result = f'{username}, Unfortunately you cannot book your own event..'
         self.assertTrue(book, test_result)
         sys.stdout = the_stdout
 
     def test_patient_make_booking_invalid_eventid(self):
-        #with patch('sys.stdin', StringIO('y0hI@mFak3eee33\n')):
-            the_stdout = sys.stdout
-            new_string = StringIO()
-            sys.stdout = new_string
-            username, email = "Booker", "fake.booking@gmail.com"
-            book = patient_make_booking.booking(service, username, email,"y0hI@mFak3eee33")
-            test_result = "Unfortunately that is an invalid event ID.."
-            self.assertFalse(book, test_result)
-            sys.stdout = the_stdout
+        the_stdout = sys.stdout
+        new_string = StringIO()
+        sys.stdout = new_string
+        username, email = "Booker", "fake.booking@gmail.com"
+        book = patient_make_booking.booking(service, username, email, "y0hI@mFak3eee33")
+        test_result = "Unfortunately that is an invalid event ID.."
+        self.assertFalse(book, test_result)
+        sys.stdout = the_stdout
 
     def test_patient_make_booking_invalid_empty(self):
-        #with patch('sys.stdin', StringIO(f'{None}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
@@ -83,42 +79,38 @@ class PatientTest(unittest.TestCase):
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking(self):
-        #with patch('sys.stdin', StringIO(f'{test_id}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        cancel = patient_cancels_booking.cancel_booking(service, username, email,test_id)
+        cancel = patient_cancels_booking.cancel_booking(service, username, email, test_id)
         test_result = f"{username}, You have successfully cancelled your booking."
         self.assertTrue(cancel, test_result)
         self.assertTrue(test_id, my_events is True)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_my_events_is_none(self):
-        with patch('sys.stdin', StringIO(f'{my_events}\n')):
-            the_stdout = sys.stdout
-            new_string = StringIO()
-            sys.stdout = new_string
-            username, email = "Booker", "fake.booking@gmail.com"
-            cancel = patient_cancels_booking.cancel_booking(service, username, email,my_events)
-            self.assertFalse(cancel, my_events is False)
-            sys.stdout = the_stdout
-
-    def test_patient_cancels_booking_if_event_is_other_patients(self):
-        events = patient_view_open_booking.view_open_bookings(service)
-        #with patch('sys.stdin', StringIO(f'{events}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        cancel = patient_cancels_booking.cancel_booking(service, username, email,events)
+        cancel = patient_cancels_booking.cancel_booking(service, username, email, my_events)
+        self.assertFalse(cancel, my_events is False)
+        sys.stdout = the_stdout
+
+    def test_patient_cancels_booking_if_event_is_other_patients(self):
+        events = patient_view_open_booking.view_open_bookings(service)
+        the_stdout = sys.stdout
+        new_string = StringIO()
+        sys.stdout = new_string
+        username, email = "Booker", "fake.booking@gmail.com"
+        cancel = patient_cancels_booking.cancel_booking(service, username, email, events)
         test_result = f"{username}, You are not the attendee on this event."
         self.assertFalse(cancel, test_result)
         self.assertFalse(events is False)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_invalid_eventid(self):
-        #with patch('sys.stdin', StringIO('y0hI@mFak3eee33\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
@@ -129,7 +121,6 @@ class PatientTest(unittest.TestCase):
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_invalid_empty(self):
-        #with patch('sys.stdin', StringIO(f'{None}\n')):
         the_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string

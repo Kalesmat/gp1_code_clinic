@@ -4,12 +4,6 @@ from pprint import pprint
 
 def create(service, user, email):
     """
-    Function to create an event for a Clinician
-    """
-    message = "Event Created"
-    # print(message)
-    
-    """
     Get the Day and Time
     """
     Day,Year,Month,hour,Min = 0,0,0,0,0
@@ -167,9 +161,7 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
             ],
         },
     }
-    
-   
-    
+
     event = service.events().insert(calendarId='primary', body=event).execute()
     return event
 

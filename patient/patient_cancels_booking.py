@@ -4,12 +4,13 @@ from patient import patient_view_booking
 
 
 def cancel_booking(service, username, email, uuid):
+
     try:
         my_events = patient_view_booking.view_booking(service, email)
         if not my_events:
             return False
         else:
-            eventid = uuid#input("Please insert the event ID: ").strip()
+            eventid = uuid
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
@@ -34,3 +35,4 @@ def cancel_booking(service, username, email, uuid):
 
     except IndexError:
         return True
+
