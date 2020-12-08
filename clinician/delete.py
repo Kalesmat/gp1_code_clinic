@@ -10,14 +10,13 @@ def delete(service, email, uuid):
     """
     # view_events.view(service, email)
 
-    while True:
-        event_id = uuid
-        if event_id:
-            break
-        else:
-            print('No event ID was inputted please input an event ID')
+    event_id = uuid
+    if event_id:
+        do_delete(service, email, event_id)
+    else:
+        print('No event ID was inputted please input an event ID')
 
-    do_delete(service, email, event_id)
+
 
 
 def do_delete(service, email, id):
