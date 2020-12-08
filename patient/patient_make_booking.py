@@ -10,7 +10,7 @@ def booking(service, username, email, uuid):
     """
     Books an available slot created  by a clinician
     :param service: Instance that allows that patient to book a slot
-    :param username: User credentials to interact with the user 
+    :param username: User credentials to interact with the user
     :param email: User credentials helps with checks
     :param uuid: Event code that we use when we book a session
     :return: B
@@ -47,14 +47,14 @@ def booking(service, username, email, uuid):
 
 
 def booked(service, email, eventid):
-   """
-   
-   :param service: Instance that allows that patient to book a slot
-   :param email: User credentials helps with checks
-   :param eventid: Event code that we use when we book a session
-   :return: Boolean
-   """
-    n=0
+    """
+
+    :param service: Instance that allows that patient to book a slot
+    :param email: User credentials helps with checks
+    :param eventid: Event code that we use when we book a session
+    :return: Boolean
+    """
+    n = 0
     now = datetime.datetime.utcnow()
     now = now.isoformat() + 'Z'
     page_token = None
