@@ -48,7 +48,7 @@ def booking(service, username, email, uuid):
 
 def booked(service, email, eventid):
     """
-
+    Prevents patient from double booking themselves
     :param service: Instance that allows that patient to book a slot
     :param email: User credentials helps with checks
     :param eventid: Event code that we use when we book a session
@@ -76,10 +76,11 @@ def booked(service, email, eventid):
 
                 time, end_t, start_c = time.split(" "), end_t.split(" "), start_c.split(" ")
                 time, end_t, start_c = time[1], end_t[1], start_c[1]
-                busytime=time
+                busy_time = time
                 admin = event['attendees'][0]["email"]
                 summary = event['summary']
                 patient_email=""
+
                 if len(event['attendees']) == 2:
                     patient_email = event['attendees'][1]["email"]
 
@@ -95,7 +96,7 @@ def booked(service, email, eventid):
 
                 event2T = str(event2T).split('T')
 
-                date2=event2T[0]
+                date2 = event2T[0]
                 event2T = str(event2T[1]).split('+')
                 time = event2T[0]
 
@@ -108,12 +109,20 @@ def booked(service, email, eventid):
                 Sta2 = datetime.datetime(int(Dat[0]), int(Dat[1]), int(Dat[2]), int(Sta2[0]), int(Sta2[1]))
 
                 if email == patient_email:
+                    clinician = admin.rstrip('@student.wethinkcode.co.za')
                     if (tim2 >= Sta and tim2 <= tim):
-                        print("Failed to book because:")
-                        print(f" - You will be busy with {admin} on {summary}")
-                        print(f" - From {busytime} until {end_t}")
+                        print(f"Failed to book because:\n- You will be consulted by {clinician} on {summary}"
+                              f"\n- From {busy_time} until {end_t}")
                         n += 1
                         return True
+
+                elif email == admin:
+                    if (tim2 >= Sta and tim2 <= tim):
+                        print(f"Failed to book because:\n- You are a clinician on {summary}"
+                              f"\n- From {busy_time} until {end_t}")
+                        n += 1
+                        return True
+
             except KeyError:
                 break
 
@@ -121,4 +130,4 @@ def booked(service, email, eventid):
         if not page_token:
             break
 
-    return False
+    return Fals
