@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 from io import StringIO
 import sys
 import code_clinic
@@ -76,6 +75,16 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, 'None')
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
+        sys.stdout = the_stdout
+
+    def test_patient_booked(self):
+        the_stdout = sys.stdout
+        new_string = StringIO()
+        sys.stdout = new_string
+        username, email = "Booker", "fake.booking@gmail.com"
+        booked = patient_make_booking.booked(service, email, test_id)
+        test_result = f"{username}, There is a session booked for this time."
+        self.assertTrue(booked, test_result)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking(self):
