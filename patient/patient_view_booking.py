@@ -53,7 +53,7 @@ f"""----------------
 {summary} by {creator}
 starts at {time} and ends at {end_t}
 To cancel attendance run:
-code_clinic.py cancel {id_user} """)
+code_clinic.py cancel{id_user} """)
                         print(message_storage)
             except KeyError:
                 break
