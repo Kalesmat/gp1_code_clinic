@@ -52,18 +52,8 @@ def run_clinic():
     if os.path.exists('.config.ini'):
         username, email, name = get_credentials()
 
-    # parser = argparse.ArgumentParser("Create and book slots for Code Clinics: -h or --help of list of options\n")
-
-    # parser.add_argument("-c","--config", help="User configuration", action="store_true")
-    # parser.add_argument("-v","--version", help="Display program version", action="version", version='version 0.01')
-    # parser.add_argument("-a","--add_slot", help="Add slot to calender.", action="store_true")
-    # parser.add_argument("-b","--book", help="book avalable slot.", action="store_true")
-    # parser.add_argument("-d","--delete", help="Delete slot.", action="store_true")
-    # parser.add_argument("-s","--view_created", help="See slots created.", action="store_true")
-    # parser.add_argument("-i","--view_booked", help="View booked slots.", action="store_true")
-    # parser.add_argument("--view_available", help="View available slots.", action="store_true")
-    # parser.add_argument("-q","--cancel_booking", help="Cancel booking.", action="store_true")
     option_req_args = ['book', 'delete', 'cancel']
+    valid_option = ['add','view created', 'view_available', 'view_booked', 'config', 'version']
     uuid = None
     option = None
     # check if option was provided, if not default to help
@@ -84,13 +74,15 @@ def run_clinic():
         help()
         # parser.print_help()
         return True
+    elif not (option in option_req_args and option in valid_option):
+        print("An Invalid option was provided, redirected to \'help\'")
+        help()
     elif option == 'version':
         version()
-        # args = parser.parse_args() #Parsing argument received from the commandline
 
     '''Statements to handle args received from clinician'''
 
-    if option == 'add_slot' and os.path.exists('.config.ini'):
+    if option == 'add' and os.path.exists('.config.ini'):
         print(f"Welcome {name}")
         create.create(service, username, email)
 
