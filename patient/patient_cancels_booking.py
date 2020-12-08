@@ -4,12 +4,13 @@ from patient import patient_view_booking
 
 
 def cancel_booking(service, username, email, uuid):
+
     try:
         my_events = patient_view_booking.view_booking(service, email)
         if not my_events:
             return False
         else:
-            eventid = uuid#input("Please insert the event ID: ").strip()
+            eventid = uuid
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
@@ -22,7 +23,7 @@ def cancel_booking(service, username, email, uuid):
                 ]
                 updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event, ).execute()
                 pprint(updated_event['updated'])
-                pprint(f"{username},You have successfully cancelled your booking.")  # will ask Lesedi to include username because I want to be uniform
+                pprint(f"{username},You have successfully cancelled your booking.")
                 return True
             else:
                 pprint(f"{username}, You are not the attendee on this event.")
@@ -34,3 +35,4 @@ def cancel_booking(service, username, email, uuid):
 
     except IndexError:
         return True
+

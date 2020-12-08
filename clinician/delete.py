@@ -11,7 +11,7 @@ def delete(service, email, uuid):
     # view_events.view(service, email)
 
     while True:
-        event_id = uuid#input('\nPlease give event ID: ').strip()
+        event_id = uuid
         if event_id:
             break
         else:
@@ -33,10 +33,9 @@ def do_delete(service, email, id):
         creator = event['attendees']
         to_delete = False
         for i in creator:
-            print(i['email'], email)
             if i['email'] == email:
                 to_delete = True
-        if to_delete:
+        if to_delete and len(creator) < 2:
             delete_event = service.events().delete(calendarId='primary', eventId=id).execute()
             message = 'Event Deleted'
         else:

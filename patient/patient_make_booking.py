@@ -15,7 +15,7 @@ def booking(service, username, email, uuid):
             return False
 
         else:
-            eventid = uuid #input("Please insert the event ID: ").strip()
+            eventid = uuid
             event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
             event['status'] = 'confirmed'
@@ -40,11 +40,3 @@ def booking(service, username, email, uuid):
     except HttpError:
         pprint("Unfortunately that is an invalid event ID..")
         return False
-
-
-
-
-
-
-
-
