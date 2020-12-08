@@ -116,8 +116,8 @@ def run_clinic():
         print(f"Welcome {name}")
         patient_view_booking.view_booking(service,email)
 
-    elif option == 'cancel_booking' and uuid != None and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+    elif option == 'cancel' and uuid != None and os.path.exists('.config.ini'):
+        print(f"Welcome {username}")
         patient_cancels_booking.cancel_booking(service, username, email, uuid)
 
     elif option == 'config':

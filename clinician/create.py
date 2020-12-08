@@ -1,4 +1,6 @@
 import datetime
+from datetime import timedelta
+from datetime import datetime as dt
 from pprint import pprint
 
 
@@ -94,6 +96,21 @@ def create(service, user, email):
             else:
                 print("Invalid input! Please enter y or n.")
     else:
+        startD = str(Year)+"-"+str(Month)+"-"+str(Day)
+        startT = str(hour)+":"+str(Min)
+        endT = str(hour2)+":"+str(min2)
+
+        """
+        Checking if you have created Event Before
+            - 30 minutes before start Time
+            - During Available Event
+            - Before the End Time
+        """
+        
+        if createdE(service,email,my_date,endT):
+            message = "You will be busy during that time"
+            print(message)
+            return message
     
         """
         Creating the event
@@ -106,9 +123,7 @@ def create(service, user, email):
         while Descript == "":
             Descript = input("Describe your topic: ").strip()
 
-        startD = str(Year)+"-"+str(Month)+"-"+str(Day)
-        startT = str(hour)+":"+str(Min)
-        endT = str(hour2)+":"+str(min2)
+        
 
         confirm = ""
         while confirm.lower() != 'y' or confirm.lower() != 'n':
@@ -117,9 +132,10 @@ def create(service, user, email):
                 break
         
         if confirm.lower() == 'y':
-            event=do_create(service,Summary,Descript,startD,startT,endT,user,email)
-            message = event['id']
+            event=do_create(service,Summary,Descript,startD,startT,endT,user,email) 
+            message = event['id']       
             pprint('{}: {}'.format(message, event.get('htmlLink')))        # print(event['id'])
+            
         else:
             message = "you have not created the event"
             print(message)
@@ -165,3 +181,49 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
     event = service.events().insert(calendarId='primary', body=event).execute()
     return event
 
+
+def createdE(service, myemail,my_date,endT):
+    page_token = None
+    now = datetime.datetime.now().isoformat() + 'Z'
+    n = 0
+    
+    while True:
+
+        events = service.events().list(calendarId='primary', timeMin=now,
+                                       pageToken=page_token).execute()
+
+        for event in events['items']:
+            try:                
+                start = event['start'].get('dateTime')                 
+                start = start.split('T')                
+                date = start[0]
+                time = start[1].split('+')
+                time = time[0]
+                time = dt.strptime(time, '%H:%M:%S')
+                end_t = time + timedelta(minutes=30) 
+                start_c = time + timedelta(minutes=-30)               
+                time, end_t,start_c = str(time), str(end_t), str(start_c)
+                time, end_t,start_c = time.split(" "), end_t.split(" "), start_c.split(" ")
+                time, end_t,start_c = time[1], end_t[1], start_c[1]
+
+                admin = event['attendees'][0]['email']
+
+                Dat=date.split('-')
+                Tim=end_t.split(':')
+                tim=datetime.datetime(int(Dat[0]),int(Dat[1]),int(Dat[2]),int(Tim[0]),int(Tim[1]))
+                Sta=start_c.split(':')
+                Sta=datetime.datetime(int(Dat[0]),int(Dat[1]),int(Dat[2]),int(Sta[0]),int(Sta[1]))
+
+                
+                if myemail == admin:
+                    if (my_date>Sta and my_date<tim):                        
+                        n += 1                   
+                        
+            except KeyError:
+
+                break
+        if n < 1:
+            return False
+        
+        else:
+            return True
