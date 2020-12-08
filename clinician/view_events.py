@@ -44,7 +44,7 @@ def view(service, myemail):
 
                     summary = colours.colour(summary, 'yellow')
                     message = (f"""----------------
-{summary} by {creator}
+{summary} by {myemail}
 {date} starts at {time} and ends at {end_t}
 To delete run:
 code_clinic.py delete {id} """)
