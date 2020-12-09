@@ -76,6 +76,7 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, 'None')
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
+        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_booked(self):
