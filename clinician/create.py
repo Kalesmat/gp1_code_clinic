@@ -97,7 +97,7 @@ def create(service, user, email):
         
         if createdE(service,email,my_date):
             message = "You will be busy during that time"
-            # print(message)
+            
             return message
 
     
@@ -133,6 +133,9 @@ def create(service, user, email):
 
 def do_create(service,Summary,Descript,startD,startT,endT,username,email):
 
+    """
+    Function to create the event and return event id
+    """
     event = {
         'summary': 'Code Clinic: {}'.format(Summary),
         'description': '{}.'.format(Descript),
@@ -172,9 +175,17 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
 
 
 def createdE(service, myemail,my_date):
+    """
+    Checking if you have created Event Before
+        - 30 minutes before start Time
+        - During Available Event
+        - Before the End Time
+        - And you are not a patient during that time
+        - Return True else return False
+    """
     page_token = None
     now = datetime.datetime.now().isoformat() + 'Z'
-    n = 0
+    
     
     while True:
 
