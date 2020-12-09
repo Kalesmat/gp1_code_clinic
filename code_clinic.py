@@ -53,7 +53,7 @@ def run_clinic():
         username, email, name = get_credentials()
 
     option_req_args = ['book', 'delete', 'cancel']
-    valid_option = ['add','view created', 'view_available', 'view_booked', 'config', 'version']
+    valid_option = ['add','view_created', 'view_available', 'view_booked', 'config', 'version']
     uuid = None
     option = None
     # check if option was provided, if not default to help
@@ -70,7 +70,7 @@ def run_clinic():
             print("This option requires a <uuid>")
 
     if option == 'help' or option == None:
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         help()
         # parser.print_help()
         return True
@@ -83,33 +83,33 @@ def run_clinic():
     '''Statements to handle args received from clinician'''
 
     if option == 'add' and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         create.create(service, username, email)
 
     elif option == 'delete' and uuid != None and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         delete.delete(service, email, uuid)
 
     elif option == 'view_created' and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         view_events.view(service,email)
 
     # Statements to handle args received form the patient
 
     elif option == 'view_available' and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         patient_view_open_booking.view_open_bookings(service)
 
     elif option == 'book' and uuid != None and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         patient_make_booking.booking(service, username, email, uuid)
 
     elif option == 'view_booked' and os.path.exists('.config.ini'):
-        print(f"Welcome {name}")
+        print(f"Welcome {name}\n")
         patient_view_booking.view_booking(service,email)
 
     elif option == 'cancel' and uuid != None and os.path.exists('.config.ini'):
-        print(f"Welcome {username}")
+        print(f"Welcome {name}\n")
         patient_cancels_booking.cancel_booking(service, username, email, uuid)
 
     elif option == 'config':
@@ -119,7 +119,7 @@ def run_clinic():
     elif not os.path.exists('.config.ini'):
         print("\n")
         print('No config file please add a config file')
-        print('Please run:\n> python3 code_clinic.py --config')
+        print('Please run:\n> python3 code_clinic.py config')
 
 
 def get_credentials():

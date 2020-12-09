@@ -37,10 +37,10 @@ def view_open_bookings(service):
          id_event = event['id'].split('_')
          eventId = colour(id_event[0], 'blue')
          event_summary = colour(event['summary'], 'green')
-         print(event_summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To book the session run:\n","code_clinic.py book",eventId.strip(),'\n','-'*70)
+         print(event_summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To book the session run:\n",f"python3 code_clinic.py book{eventId}",'\n','-'*70)
          i += 1
       except KeyError as keyerr:
-         print('no attendees on the event\n', '-'*20)
-   print("There are {} slots available".format(i))
+         pass
+   print("\nThere are {} slots available\n".format(i))
    return True
 

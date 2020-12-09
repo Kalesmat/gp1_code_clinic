@@ -48,13 +48,13 @@ def view_booking(service, email):
                     patient_email = event['attendees'][1]["email"]
                     if patient_email == email:
                         n+=1
-                        message_storage = (
-f"""----------------
-{summary} by {creator}
-starts at {time} and ends at {end_t}
-To cancel attendance run:
-code_clinic.py cancel{id_user} """)
-                        print(message_storage)
+#                         message_storage = (
+# f"""----------------\n{summary} by {creator}
+# starts on {date} at {time} and ends at {end_t}
+# To cancel attendance run:
+# python3 code_clinic.py cancel{id_user} """)
+                        # print(message_storage)
+                        print(summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To cancel the session run:\n",f"python3 code_clinic.py cancel{id_user}",'\n','-'*70)
             except KeyError:
                 break
 
@@ -62,16 +62,16 @@ code_clinic.py cancel{id_user} """)
         if not page_token:
             break
     if n < 1:
-        final_string = "You have no booked slots"
+        final_string = "You have no booked slots\n"
         print(final_string)
         return(final_string)
     if n == 1:
-        final_string = f"\nYou have {n} booked slot"
+        final_string = f"\nYou have {n} booked slot\n"
         print(final_string)
         return(final_string)
 
     else:
-        final_string = f"\nYou have {n} booked slots"
+        final_string = f"\nYou have {n} booked slots\n"
         print(final_string)
         return(final_string)
  

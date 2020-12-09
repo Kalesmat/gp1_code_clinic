@@ -14,12 +14,15 @@ def create(service, user, email):
         Datei = input("Enter Date (Day/Month/Year): ") .strip()
         if "/" in Datei:
             Date = Datei.split('/') 
-            if len(Date) != 3 or not Date[0].isdigit() or not Date[1].isdigit() or not Date[2].isdigit():
+            if len(Date) != 3 or not Date[0].isdigit() or not Date[1].isdigit()\
+                or not Date[2].isdigit():
                 print("Date should be in this format Day/Month/Year")
+
                 continue
         
         else:
             print("Date should be in this format Day/Month/Year")
+
             continue
         Day = int(Date[0])
         Month = int(Date[1])
@@ -41,6 +44,7 @@ def create(service, user, email):
         print("{} {}".format(user, message2))
         
         print(f'Bye {user}')
+
         return message2
         
 
@@ -50,9 +54,11 @@ def create(service, user, email):
             Time = Timei.split(":")
             if len(Time) != 2 or not Time[0].isdigit() or not Time[1].isdigit():
                 print("Time should be in this format HH:MM")
+
                 continue
         else:
             print("Time should be in this format HH:MM")
+
             continue
         hour = int(Time[0])
         Min = int(Time[1])  
@@ -81,6 +87,7 @@ def create(service, user, email):
         print("{} {}".format(user,message2))
         
         print(f'Bye {user}')
+
         return message2
             
     else:
@@ -118,16 +125,18 @@ def create(service, user, email):
         while confirm.lower() != 'y' or confirm.lower() != 'n':
             confirm = input("Confirm event?(y/n): ").strip()
             if confirm.lower() == 'y' or confirm.lower() == 'n':
+
                 break
         
         if confirm.lower() == 'y':
             event=do_create(service,Summary,Descript,startD,startT,endT,user,email) 
             message = "Event Created"      
-            pprint('{}: {}'.format(message, event.get('htmlLink')))        # print(event['id'])
+            print('{}\n -Calender Link: {}'.format(message, event.get('htmlLink'))) 
             
         else:
             message = "you have not created the event"
             print(message)
+
         return message
 
 
@@ -171,6 +180,7 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
     }
 
     event = service.events().insert(calendarId='primary', body=event).execute()
+
     return event
 
 
@@ -185,7 +195,6 @@ def createdE(service, myemail,my_date):
     """
     page_token = None
     now = datetime.datetime.now().isoformat() + 'Z'
-    
     
     while True:
 
@@ -219,27 +228,27 @@ def createdE(service, myemail,my_date):
                 if myemail == admin:
                     if (my_date>Sta and my_date<tim):                        
                         print("Failed to Create a Slot because:")
-                        print(f" - You will be busy on {summary}")
+                        print(f" - You will be busy with {summary}")
                                                 
                         return True 
 
                 if len(event['attendees']) == 2:
                     admin = event['attendees'][0]["email"]
                     patient_email = event['attendees'][1]["email"]
-                    
-                    if myemail == patient_email:                        
+                    if myemail == patient_email:                    
                         if (my_date>Sta and my_date<tim):                        
                             print("Failed to Create a slot because:")
                             print(f" - You will be busy with {admin} on {summary}")
-                            # print(f" - From {Sta2h[1]}:{Sta2m} until {tim2}")
                             
                             return True
                        
             except KeyError:
+
                 break
 
             page_token = events.get('nextPageToken')
         if not page_token:
+
             break
            
     return False

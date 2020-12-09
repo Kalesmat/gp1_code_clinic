@@ -26,7 +26,7 @@ def booking(service, username, email, uuid):
             pprint(f'{username}, Unfortunately you cannot book your own event..')
             return True
         elif len(event['attendees']) >= 2:
-            pprint(f"{username}, number of attendees has been reached, please check for the next slot.")
+            print(f"{username}, number of attendees has been reached, please check for the next slot.")
             return True
         else:
             if booked(service, email, eventid):
@@ -37,7 +37,7 @@ def booking(service, username, email, uuid):
                 {'email': email},
             ]
             updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
-            pprint(updated_event['updated'])
+            # pprint(updated_event['updated'])
             pprint(f"{event['summary']} is successfully booked..")
             return True
 
@@ -110,7 +110,7 @@ def booked(service, email, eventid):
 
                 if email == patient_email:
                     clinician = admin.rstrip('@student.wethinkcode.co.za')
-                    if (tim2 >= Sta and tim2 <= tim):
+                    if (tim2 > Sta and tim2 < tim):
                         print(f"Failed to book because:\n- You will be consulted by {clinician} on {summary}"
                               f"\n- From {busy_time} until {end_t}")
                         n += 1
@@ -130,4 +130,4 @@ def booked(service, email, eventid):
         if not page_token:
             break
 
-    return Fals
+    return False

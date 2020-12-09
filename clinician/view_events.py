@@ -43,13 +43,15 @@ def view(service, myemail):
                 if myemail == admin:
 
                     summary = colours.colour(summary, 'yellow')
-                    message = (f"""----------------
-{summary} by {myemail}
-{date} starts at {time} and ends at {end_t}
-To delete run:
-code_clinic.py delete {id} """)
+#                     message = (f"""----------------
+# {summary} by {myemail}
+# {date} starts at {time} and ends at {end_t}
+# To delete run:
+# python3 code_clinic.py delete {id} """)
 
-                    print(message)
+#                     print(message)
+                    print(summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To delete the session run:\n",f"python3 code_clinic.py delete {id}",'\n','-'*70)
+
                     n += 1
             except KeyError:
 
@@ -58,10 +60,10 @@ code_clinic.py delete {id} """)
             message = 'You have not volunteered'
             print(message)
         elif n == 1:
-            print(f"----------------\nYou have {n} event")
+            print(f"\nYou have {n} event\n")
             message = "You have volunteered"
         else:
-            print(f"----------------\nYou have {n} events")
+            print(f"\nYou have {n} events\n")
             message = "You have volunteered"
         page_token = events.get('nextPageToken')
         if not page_token:
