@@ -1,13 +1,9 @@
-from pprint import pprint
 from googleapiclient.errors import HttpError
-from patient import patient_view_booking
 
 
 def cancel_booking(service, username, email, uuid):
 
-    try:
-        
-        
+    try:      
         eventid = uuid
         event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
