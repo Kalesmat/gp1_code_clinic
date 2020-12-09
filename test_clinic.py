@@ -10,20 +10,6 @@ import contextlib
 
 class MyTestCase(unittest.TestCase):
 
-    @patch('sys.stdin', StringIO('y\nTOm@\n.com\nTom'))
-    @patch('getpass.getpass')
-    def test_make_config(self, getpass):
-        getpass.return_value = 'Harry'
-        cc.make_config()
-        config_object = ConfigParser()
-        config_object.read(".config.ini")
-
-        userinfo = config_object["USERINFO"]
-        self.assertEqual(userinfo["email"], "tom@student.wethinkcode.co.za")
-        self.assertEqual(userinfo["password"], "Harry")
-        self.assertEqual(userinfo["username"], 'tom')
-
-
     def test_run_clinic(self):
         '''Testing the run clinic function'''
         output = StringIO()

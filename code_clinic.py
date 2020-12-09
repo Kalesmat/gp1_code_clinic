@@ -151,30 +151,31 @@ def make_config():
 
     # Get credentials from user
     mail = '@student.wethinkcode.co.za'
-    username = 'username'
     users = get_users()
-    while username not in users:
-        username = input("Username: ")
-    email = username + mail
+    username = input("Username: ")
+    if username in users:
+        email = username + mail
 
-    service = request()
-    mail = get_email(service)
-    if email == mail:
-        # Create a userinfo section in the config
-        name = get_user_details(username)
-        con_obj["USERINFO"] = {
-            "username": username,
-            "email": email,
-            "name": name
-        }
+        service = request()
+        mail = get_email(service)
+        if email == mail:
+            # Create a userinfo section in the config
+            name = get_user_details(username)
+            con_obj["USERINFO"] = {
+                "username": username,
+                "email": email,
+                "name": name
+            }
 
-        # Write the section to config.ini file
-        with open(".config.ini", "w") as con:
-            con_obj.write(con)
-        print('Config file create')
+            # Write the section to config.ini file
+            with open(".config.ini", "w") as con:
+                con_obj.write(con)
+            print('Config file create')
+        else:
+            print('You have given the wrong email')
+            os.remove('token2.pickle')
     else:
-        print('You have given the wrong email')
-        os.remove('token2.pickle')
+        print("This username is not valid")
 
 
 def request():
