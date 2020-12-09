@@ -39,16 +39,10 @@ def create(service, user, email):
     if my_date < datetime.datetime.today():
         message2 = "event cannot be created , day has passed."
         print("{} {}".format(user, message2))
-        yes = ""
-        while yes != 'y' or yes != 'n':
-            yes = input("Would you like to create a new event(y/n)?: ").strip()
-            if yes.lower() == 'y':
-                create(service, user, email)
-            elif yes.lower() == 'n':
-                print(f'Bye {user}')
-                return message2
-            else:
-                print("Invalid input! Please enter y or n.")
+        
+        print(f'Bye {user}')
+        return message2
+        
 
     while hour<7 or hour>17 or Min<0 or Min>59 or (hour==17 and Min>30):
         Timei = input("Enter Time (HH:MM): ").strip()
@@ -85,16 +79,10 @@ def create(service, user, email):
     if my_date < datetime.datetime.now():
         message2 = "event cannot be created , time has passed."
         print("{} {}".format(user,message2))
-        yes = ""
-        while yes!='y' or yes!='n' :
-            yes = input("Would you like to create a new event(y/n)?: ").strip()
-            if yes.lower() == 'y':
-                create(service,user,email)
-            elif yes.lower() == 'n':
-                print(f'Bye {user}')
-                return message2
-            else:
-                print("Invalid input! Please enter y or n.")
+        
+        print(f'Bye {user}')
+        return message2
+            
     else:
         startD = str(Year)+"-"+str(Month)+"-"+str(Day)
         startT = str(hour)+":"+str(Min)
@@ -107,10 +95,11 @@ def create(service, user, email):
             - Before the End Time
         """
         
-        if createdE(service,email,my_date,endT):
+        if createdE(service,email,my_date):
             message = "You will be busy during that time"
-            print(message)
+            # print(message)
             return message
+
     
         """
         Creating the event
@@ -133,7 +122,7 @@ def create(service, user, email):
         
         if confirm.lower() == 'y':
             event=do_create(service,Summary,Descript,startD,startT,endT,user,email) 
-            message = event['id']       
+            message = "Event Created"      
             pprint('{}: {}'.format(message, event.get('htmlLink')))        # print(event['id'])
             
         else:
@@ -182,7 +171,7 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
     return event
 
 
-def createdE(service, myemail,my_date,endT):
+def createdE(service, myemail,my_date):
     page_token = None
     now = datetime.datetime.now().isoformat() + 'Z'
     n = 0
@@ -207,6 +196,7 @@ def createdE(service, myemail,my_date,endT):
                 time, end_t,start_c = time[1], end_t[1], start_c[1]
 
                 admin = event['attendees'][0]['email']
+                summary = event['summary']
 
                 Dat=date.split('-')
                 Tim=end_t.split(':')
@@ -217,13 +207,30 @@ def createdE(service, myemail,my_date,endT):
                 
                 if myemail == admin:
                     if (my_date>Sta and my_date<tim):                        
-                        n += 1                   
-                        
-            except KeyError:
+                        print("Failed to Create a Slot because:")
+                        print(f" - You will be busy on {summary}")
+                                                
+                        return True 
 
+                if len(event['attendees']) == 2:
+                    admin = event['attendees'][0]["email"]
+                    patient_email = event['attendees'][1]["email"]
+                    
+                    if myemail == patient_email:                        
+                        if (my_date>Sta and my_date<tim):                        
+                            print("Failed to Create a slot because:")
+                            print(f" - You will be busy with {admin} on {summary}")
+                            # print(f" - From {Sta2h[1]}:{Sta2m} until {tim2}")
+                            
+                            return True
+                       
+            except KeyError:
                 break
-        if n < 1:
-            return False
-        
-        else:
-            return True
+
+            page_token = events.get('nextPageToken')
+        if not page_token:
+            break
+           
+    return False
+
+

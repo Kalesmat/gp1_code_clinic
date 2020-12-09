@@ -12,7 +12,7 @@ class TestCase(unittest.TestCase):
 
     def test_delete_true(self):
         service = code_clinic.startup()
-        username, email = code_clinic.get_credentials()
+        username, email, name = code_clinic.get_credentials()
 
         Summary = 'KLM'
         Description = 'klmno'
@@ -32,7 +32,7 @@ class TestCase(unittest.TestCase):
 
     def test_delete_false(self):
         service = code_clinic.startup()
-        username, email = code_clinic.get_credentials()
+        username, email, name = code_clinic.get_credentials()
 
         Summary = 'KLM'
         Description = 'klmno'
@@ -55,7 +55,7 @@ class TestCase(unittest.TestCase):
     #@patch('sys.stdin', StringIO('Dick\n'))
     def test_delete_invalid(self):
         service = code_clinic.startup()
-        username, email = code_clinic.get_credentials()
+        username, email, name = code_clinic.get_credentials()
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
