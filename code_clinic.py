@@ -74,7 +74,7 @@ def run_clinic():
         help()
         # parser.print_help()
         return True
-    elif not (option in option_req_args and option in valid_option):
+    elif not option in option_req_args and not option in valid_option:
         print("An Invalid option was provided, redirected to \'help\'")
         help()
     elif option == 'version':

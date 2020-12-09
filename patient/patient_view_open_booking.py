@@ -41,6 +41,6 @@ def view_open_bookings(service):
          i += 1
       except KeyError as keyerr:
          print('no attendees on the event\n', '-'*20)
-   print("There are {} slots available".format(i))   
+   print("There are {} slots available".format(i))
    return True
 
