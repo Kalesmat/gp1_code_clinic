@@ -1,9 +1,7 @@
-from pprint import pprint
 from googleapiclient.errors import HttpError
 import datetime
 from datetime import timedelta
 from datetime import datetime as dt
-import colours
 
 
 def booking(service, username, email, uuid):
@@ -13,7 +11,7 @@ def booking(service, username, email, uuid):
     :param username: User credentials to interact with the user
     :param email: User credentials helps with checks
     :param uuid: Event code that we use when we book a session
-    :return: B
+    :return: Bool
     """
     try:
         eventid = uuid
@@ -23,7 +21,7 @@ def booking(service, username, email, uuid):
         admin = event['attendees'][0]['email']
 
         if admin == email:
-            pprint(f'{username}, Unfortunately you cannot book your own event..')
+            print(f'{username}, Unfortunately you cannot book your own event..')
             return True
         elif len(event['attendees']) >= 2:
             print(f"{username}, number of attendees has been reached, please check for the next slot.")
@@ -37,12 +35,11 @@ def booking(service, username, email, uuid):
                 {'email': email},
             ]
             updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
-            # pprint(updated_event['updated'])
-            pprint(f"{event['summary']} is successfully booked..")
+            print(f"{event['summary']} is successfully booked..")
             return True
 
     except HttpError:
-        pprint("Unfortunately that is an invalid event ID..")
+        print("Unfortunately that is an invalid event ID..")
         return False
 
 
@@ -131,3 +128,4 @@ def booked(service, email, eventid):
             break
 
     return False
+
