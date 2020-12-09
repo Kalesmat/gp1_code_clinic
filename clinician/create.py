@@ -179,7 +179,7 @@ def do_create(service,Summary,Descript,startD,startT,endT,username,email):
         },
     }
 
-    event = service.events().insert(calendarId='primary', body=event).execute()
+    event = service.events().insert(calendarId='primary', body=event,sendUpdates='all').execute()
 
     return event
 
