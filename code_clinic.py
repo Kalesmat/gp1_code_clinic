@@ -264,7 +264,7 @@ def help():
     help                    Display the help menu.
     config                  Run user configuration.
     version                 Display program version.
-    add_slot                Add slot to calender as a volunteer.
+    add                     Add slot to calender as a volunteer.
     view_created            View volunteering slots that you have created.
     view_available          View slots available to book as a patient.
     view_booked             View slots you have booked as a patient.
