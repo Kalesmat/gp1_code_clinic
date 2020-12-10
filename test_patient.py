@@ -32,7 +32,7 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, test_id)
         test_result = f"{summary} is successfully booked.."
         self.assertTrue(book, test_result)
-        delete.do_delete(service, admin, test_id)
+        service.events().delete(calendarId='primary', eventId=test_id).execute()
         sys.stdout = the_stdout
 
     def test_patient_make_double_booking(self):
@@ -43,7 +43,6 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, test_id)
         test_result = f"{username}, number of attendees has been reached, please check for the next slot."
         self.assertTrue(book, test_result)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_make_booking_if_is_volunteer(self):
@@ -54,7 +53,6 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, test_id)
         test_result = f'{username}, Unfortunately you cannot book your own event..'
         self.assertTrue(book, test_result)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_make_booking_invalid_eventid(self):
@@ -65,7 +63,6 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, "y0hI@mFak3eee33")
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_make_booking_empty(self):
@@ -86,8 +83,7 @@ class PatientTest(unittest.TestCase):
         booked = patient_make_booking.booked(service, email, test_id)
         test_result = f"Failed to book because:\n- You will be consulted by {admin} on {summary}" \
                       f"\n- From {start_t} until {end_t}"
-        self.assertTrue(booked, test_result is True)
-        delete.do_delete(service, admin, test_id)
+        self.assertFalse(booked, test_result)
         sys.stdout = the_stdout
 
     def test_clinician_with_a_slot_same_as_patient_booked(self):
@@ -100,8 +96,7 @@ class PatientTest(unittest.TestCase):
         test_result = f"Failed to book because:\n- You are a clinician on {summary}" \
                       f"\n- From {start_t} until {end_t}"
         self.assertTrue(created, booked)
-        self.assertTrue(booked, test_result is True)
-        delete.do_delete(service, admin, test_id)
+        self.assertFalse(booked, test_result)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking(self):
@@ -112,7 +107,7 @@ class PatientTest(unittest.TestCase):
         cancel = patient_cancels_booking.cancel_booking(service, username, email, test_id)
         test_result = f"{username}, You have successfully cancelled your booking."
         self.assertTrue(cancel, test_result)
-        delete.do_delete(service, admin, test_id)
+        service.events().delete(calendarId='primary', eventId=test_id).execute()
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_my_events_is_none(self):
@@ -123,7 +118,6 @@ class PatientTest(unittest.TestCase):
         my_events = patient_view_booking.view_booking(service, admin)
         cancel = patient_cancels_booking.cancel_booking(service, username, email, my_events)
         self.assertFalse(cancel, my_events is False)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_if_event_is_other_patients(self):
@@ -135,8 +129,6 @@ class PatientTest(unittest.TestCase):
         cancel = patient_cancels_booking.cancel_booking(service, username, email, events)
         test_result = f"{username}, You are not the attendee on this event."
         self.assertFalse(cancel, test_result)
-        self.assertFalse(events is False)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_invalid_eventid(self):
@@ -147,7 +139,6 @@ class PatientTest(unittest.TestCase):
         cancel = patient_cancels_booking.cancel_booking(service, username, email, "y0hI@mFak3eee33")
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(cancel, test_result)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_cancels_booking_invalid_empty(self):
@@ -158,7 +149,6 @@ class PatientTest(unittest.TestCase):
         cancel = patient_cancels_booking.cancel_booking(service, username, email, 'None')
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(cancel, test_result)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
 
