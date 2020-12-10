@@ -2,6 +2,14 @@ from googleapiclient.errors import HttpError
 
 
 def cancel_booking(service, username, email, uuid):
+    """
+    Cancels an booked slots
+    :param service: Instance that allows that patient to book a slot
+    :param username: User credentials to interact with the user
+    :param email: User credentials helps with checks
+    :param uuid: Event code that we use when we book a session
+    :return: Bool
+    """
 
     try:
         event_id = uuid
