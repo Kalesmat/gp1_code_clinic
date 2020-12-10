@@ -3,7 +3,7 @@ from googleapiclient.errors import HttpError
 
 def cancel_booking(service, username, email, uuid):
 
-    try:      
+    try:
         eventid = uuid
         event = service.events().get(calendarId='primary', eventId=eventid).execute()
 
@@ -15,8 +15,9 @@ def cancel_booking(service, username, email, uuid):
             event['attendees'] = [
                 {'email': admin},
             ]
-            updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event, ).execute()
-            
+            sendNotifications = True
+            updated_event = service.events().update(calendarId='primary', eventId=eventid,
+                                                    body=event, sendUpdates='all').execute()
             print(f"{username},You have successfully cancelled your booking.")
             return True
         else:
