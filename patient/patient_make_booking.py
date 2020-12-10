@@ -11,11 +11,11 @@ def booking(service, username, email, uuid):
     :param username: User credentials to interact with the user
     :param email: User credentials helps with checks
     :param uuid: Event code that we use when we book a session
-    :return: B
+    :return: Bool
     """
     try:
-        eventid = uuid
-        event = service.events().get(calendarId='primary', eventId=eventid).execute()
+        event_id = uuid
+        event = service.events().get(calendarId='primary', eventId=event_id).execute()
 
         event['status'] = 'confirmed'
         admin = event['attendees'][0]['email']
@@ -27,7 +27,7 @@ def booking(service, username, email, uuid):
             print(f"{username}, number of attendees has been reached, please check for the next slot.")
             return True
         else:
-            if booked(service, email, eventid):
+            if booked(service, email, event_id):
                 return True
 
             event['attendees'] = [
@@ -35,7 +35,7 @@ def booking(service, username, email, uuid):
                 {'email': email},
             ]
             sendNotifications = True
-            updated_event = service.events().update(calendarId='primary', eventId=eventid,
+            updated_event = service.events().update(calendarId='primary', eventId=event_id,
                                                     body=event, sendUpdates='all').execute()
             print(f"{event['summary']} is successfully booked..")
             return True
@@ -45,12 +45,12 @@ def booking(service, username, email, uuid):
         return False
 
 
-def booked(service, email, eventid):
+def booked(service, email, event_id):
     """
     Prevents patient from double booking themselves
     :param service: Instance that allows that patient to book a slot
     :param email: User credentials helps with checks
-    :param eventid: Event code that we use when we book a session
+    :param event_id: Event code that we use when we book a session
     :return: Boolean
     """
     n = 0
@@ -78,45 +78,49 @@ def booked(service, email, eventid):
                 busy_time = time
                 admin = event['attendees'][0]["email"]
                 summary = event['summary']
-                patient_email=""
+                patient_email = ""
 
                 if len(event['attendees']) == 2:
                     patient_email = event['attendees'][1]["email"]
 
-                Dat = date.split('-')
-                Tim = end_t.split(':')
-                tim = datetime.datetime(int(Dat[0]), int(Dat[1]), int(Dat[2]), int(Tim[0]), int(Tim[1]))
-                Sta = start_c.split(':')
-                Sta = datetime.datetime(int(Dat[0]), int(Dat[1]), int(Dat[2]), int(Sta[0]), int(Sta[1]))
+                d_date = date.split('-')
+                t_time = end_t.split(':')
+                t_time = datetime.datetime(int(d_date[0]), int(d_date[1]), int(d_date[2]),
+                                           int(t_time[0]), int(t_time[1]))
+                s_start = start_c.split(':')
+                s_start = datetime.datetime(int(d_date[0]), int(d_date[1]), int(d_date[2]),
+                                            int(s_start[0]), int(s_start[1]))
 
-                event = service.events().get(calendarId='primary', eventId=eventid).execute()
+                event = service.events().get(calendarId='primary', eventId=event_id).execute()
 
-                event2T = event['start']['dateTime']
+                event_2_time = event['start']['dateTime']
 
-                event2T = str(event2T).split('T')
+                event_2_time = str(event_2_time).split('T')
 
-                date2 = event2T[0]
-                event2T = str(event2T[1]).split('+')
-                time = event2T[0]
+                date_two = event_2_time[0]
+                event_2_time = str(event_2_time[1]).split('+')
+                time = event_2_time[0]
 
-                Dat = date.split('-')
+                d_date = date.split('-')
 
-                Timl = time.split(':')
-                tim2 = datetime.datetime(int(Dat[0]), int(Dat[1]), int(Dat[2]), int(Timl[0]), int(Timl[1]))
+                time_l = time.split(':')
+                time_two = datetime.datetime(int(d_date[0]), int(d_date[1]), int(d_date[2]),
+                                             int(time_l[0]), int(time_l[1]))
 
-                Sta2 = start_c.split(':')
-                Sta2 = datetime.datetime(int(Dat[0]), int(Dat[1]), int(Dat[2]), int(Sta2[0]), int(Sta2[1]))
+                start_two = start_c.split(':')
+                start_two = datetime.datetime(int(d_date[0]), int(d_date[1]), int(d_date[2]),
+                                              int(start_two[0]), int(start_two[1]))
 
                 if email == patient_email:
                     clinician = admin.rstrip('@student.wethinkcode.co.za')
-                    if (tim2 > Sta and tim2 < tim):
+                    if s_start < time_two < t_time:
                         print(f"Failed to book because:\n- You will be consulted by {clinician} on {summary}"
                               f"\n- From {busy_time} until {end_t}")
                         n += 1
                         return True
 
                 elif email == admin:
-                    if (tim2 >= Sta and tim2 <= tim):
+                    if s_start <= time_two <= t_time:
                         print(f"Failed to book because:\n- You are a clinician on {summary}"
                               f"\n- From {busy_time} until {end_t}")
                         n += 1
@@ -130,3 +134,4 @@ def booked(service, email, eventid):
             break
 
     return False
+
