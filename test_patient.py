@@ -2,7 +2,7 @@ import unittest
 from io import StringIO
 import sys
 import code_clinic
-from clinician import create, delete
+from clinician import create
 import datetime
 from patient import patient_make_booking, patient_cancels_booking, patient_view_booking, patient_view_open_booking
 
