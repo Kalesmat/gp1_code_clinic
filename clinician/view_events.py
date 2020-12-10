@@ -25,7 +25,7 @@ def view(service, myemail):
                 status = event['status']
                 id = event['id']
 
-                #Issa's code for making a suitable time output
+            
                 start = event['start'].get('dateTime') 
                 start = start.split('T')
                 date = start[0]
@@ -37,20 +37,13 @@ def view(service, myemail):
                 time, end_t = time.split(" "), end_t.split(" ")
                 time, end_t = time[1], end_t[1]
 
-
-
                 admin = event['attendees'][0]['email']
                 if myemail == admin:
 
                     summary = colours.colour(summary, 'yellow')
-#                     message = (f"""----------------
-# {summary} by {myemail}
-# {date} starts at {time} and ends at {end_t}
-# To delete run:
-# python3 code_clinic.py delete {id} """)
-
-#                     print(message)
-                    print(summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To delete the session run:\n",f"python3 code_clinic.py delete {id}",'\n','-'*70)
+                    print(summary.strip(),'by', event['attendees'][0]['email'],\
+                        "\n",date,'',time,'-',end_t,'\n',"To delete the session\
+run:\n",f"python3 code_clinic.py delete {id}",'\n','-'*70)
 
                     n += 1
             except KeyError:
@@ -70,6 +63,7 @@ def view(service, myemail):
             break
 
     return message
+
 
 
 
