@@ -76,7 +76,6 @@ class PatientTest(unittest.TestCase):
         book = patient_make_booking.booking(service, username, email, 'None')
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
-        delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
     def test_patient_booked(self):
@@ -87,7 +86,7 @@ class PatientTest(unittest.TestCase):
         booked = patient_make_booking.booked(service, email, test_id)
         test_result = f"Failed to book because:\n- You will be consulted by {admin} on {summary}" \
                       f"\n- From {start_t} until {end_t}"
-        self.assertTrue(booked, test_result)
+        self.assertTrue(booked, test_result is True)
         delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
@@ -100,8 +99,8 @@ class PatientTest(unittest.TestCase):
         booked = patient_make_booking.booked(service, email, test_id)
         test_result = f"Failed to book because:\n- You are a clinician on {summary}" \
                       f"\n- From {start_t} until {end_t}"
-        self.assertTrue(booked, test_result)
         self.assertTrue(created, booked)
+        self.assertTrue(booked, test_result is True)
         delete.do_delete(service, admin, test_id)
         sys.stdout = the_stdout
 
