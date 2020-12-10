@@ -12,7 +12,7 @@ import sys
 import datetime
 
 class TestViewEvents(unittest.TestCase):
-    #test if the user has slots opened ie..invalid email
+    '''test if the user has slots opened ie..invalid email'''
     def test_did_not_volunteer(self):
         service = startup()
 
@@ -24,17 +24,21 @@ class TestViewEvents(unittest.TestCase):
        
         self.assertEqual(result, 'You have not volunteered')
         sys.stdout = orig_stdout
-    # checks if user is able to view their events by creating an event and then testing for it
+
+    ''' checks if user is able to view their events by 
+        creating an event and then testing for it'''
+
     def test_valid_user_event(self):
         service=startup()
-        user,email=get_credentials()
-        Date = datetime.datetime.now().date() + datetime.timedelta(days=5)
+        user,email ,name=get_credentials()
+        date = datetime.datetime.now().date() + datetime.timedelta(days=5)
         summary = "Morglin Test Case"
-        Descript = "Testing"
+        descript = "Testing"
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
-        event=create.do_create(service,summary,Descript,Date,"12:00","12:30",user,email)
+        event=create.do_create(service,summary,descript,date,"12:00","12:30"\
+            ,user,email)
         
         result = view_events.view(service, email)
 
@@ -48,6 +52,9 @@ class TestViewEvents(unittest.TestCase):
        
 if __name__ == '__main__':
     unittest.main()
+
+
+
 
 
 
