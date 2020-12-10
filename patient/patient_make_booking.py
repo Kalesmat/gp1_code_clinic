@@ -11,7 +11,7 @@ def booking(service, username, email, uuid):
     :param username: User credentials to interact with the user
     :param email: User credentials helps with checks
     :param uuid: Event code that we use when we book a session
-    :return: Bool
+    :return: B
     """
     try:
         eventid = uuid
@@ -34,7 +34,9 @@ def booking(service, username, email, uuid):
                 {'email': admin},
                 {'email': email},
             ]
-            updated_event = service.events().update(calendarId='primary', eventId=eventid, body=event).execute()
+            sendNotifications = True
+            updated_event = service.events().update(calendarId='primary', eventId=eventid,
+                                                    body=event, sendUpdates='all').execute()
             print(f"{event['summary']} is successfully booked..")
             return True
 
@@ -56,7 +58,7 @@ def booked(service, email, eventid):
     now = now.isoformat() + 'Z'
     page_token = None
     while True:
-        events = service.events().list(calendarId='primary', timeMin=now,pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary', timeMin=now, pageToken=page_token).execute()
 
         for event in events['items']:
             try:
@@ -128,4 +130,3 @@ def booked(service, email, eventid):
             break
 
     return False
-
