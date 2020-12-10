@@ -2,7 +2,6 @@ import unittest
 from clinician import create, delete
 from io import StringIO
 import sys
-# from code_clinic import startup
 import code_clinic
 import os
 import sys
@@ -17,15 +16,10 @@ class TestCase(unittest.TestCase):
         Test Create function if the date is older than now
         """
         service = code_clinic.startup()
-        username, email, name = code_clinic.get_credentials()
-
-        Summary = 'Test_create'
-        Descript = 'Test function create'
-        # startD = datetime.datetime.now().date() + datetime.timedelta(days=5)
-        startT = '12:30'        
+        username, email, name = code_clinic.get_credentials()        
         
-        TestD="01/01/01"
-        with patch('sys.stdin', StringIO(f'{TestD}\n')):
+        testdate="01/01/01"
+        with patch('sys.stdin', StringIO(f'{testdate}\n')):
             orig_stdout = sys.stdout
             new_string = StringIO()
             sys.stdout = new_string
@@ -41,14 +35,16 @@ class TestCase(unittest.TestCase):
         """
         service = code_clinic.startup()
         username, email, name = code_clinic.get_credentials()
-
-        Summary = 'Test_create'
-        Descript = 'Test function create'
-        startD = datetime.datetime.now().date() + datetime.timedelta(days=5)
-        startT = '12:30'        
         
-        TestD=str(startD.day)+"/"+str(startD.month)+"/"+str(startD.year)
-        with patch('sys.stdin', StringIO(f'{TestD}\n{startT}\n{Summary}\n{Descript}\ny\n')):
+        summary = 'Test_create'
+        descript = 'Test function create'
+        startdate = datetime.datetime.now().date() + datetime.timedelta(days=5)
+        starttime = '12:30'        
+        
+        testdate=str(startdate.day)+"/"+str(startdate.month)+"/"+\
+            str(startdate.year)
+        with patch('sys.stdin', StringIO(f'{testdate}\n{starttime}\n\
+            {summary}\n{descript}\ny\n')):
             orig_stdout = sys.stdout
             new_string = StringIO()
             sys.stdout = new_string
@@ -66,14 +62,16 @@ class TestCase(unittest.TestCase):
         service = code_clinic.startup()
         username, email, name= code_clinic.get_credentials()
 
-        Summary = 'Test_create'
-        Descript = 'Test function create'
-        startD = datetime.datetime.now().date() + datetime.timedelta(days=5)
-        startT = '12:30'
-        endT = '13:00'        
+        summary = 'Test_create'
+        descript = 'Test function create'
+        startdate = datetime.datetime.now().date() + datetime.timedelta(days=5)
+        starttime = '12:30'
+                
         
-        TestD=str(startD.day)+"/"+str(startD.month)+"/"+str(startD.year)
-        with patch('sys.stdin', StringIO(f'{TestD}\n{startT}\n{Summary}\n{Descript}\nn\n')):
+        testdate=str(startdate.day)+"/"+str(startdate.month)+"/"+\
+            str(startdate.year)
+        with patch('sys.stdin', StringIO(f'{testdate}\n{starttime}\n{summary}\
+            \n{descript}\nn\n')):
             orig_stdout = sys.stdout
             new_string = StringIO()
             sys.stdout = new_string
