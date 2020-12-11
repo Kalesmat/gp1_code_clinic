@@ -1,9 +1,5 @@
 import unittest
 from io import StringIO
-from unittest.mock import patch
-from configparser import ConfigParser
-import code_clinic as cc
-import sys
 from os import system
 import contextlib
 

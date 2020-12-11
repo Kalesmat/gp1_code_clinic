@@ -24,7 +24,8 @@ def booking(service, username, email, uuid):
             print(f'{username}, Unfortunately you cannot book your own event..')
             return True
         elif len(event['attendees']) >= 2:
-            print(f"{username}, number of attendees has been reached, please check for the next slot.")
+            print(f"{username}, number of attendees has been reached, "
+                  f"please check for the next slot.")
             return True
         else:
             if booked(service, email, event_id):
@@ -58,7 +59,8 @@ def booked(service, email, event_id):
     now = now.isoformat() + 'Z'
     page_token = None
     while True:
-        events = service.events().list(calendarId='primary', timeMin=now, pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary', timeMin=now
+                                       , pageToken=page_token).execute()
 
         for event in events['items']:
             try:

@@ -1,6 +1,5 @@
 from configparser import ConfigParser
-import getpass
-from patient import patient_cancels_booking, patient_make_booking, patient_view_booking, patient_view_open_booking
+from patient import cancel_booking, make_booking, view_booking, view_available
 from clinician import create, delete, view_events
 import pickle
 import os
@@ -45,12 +44,12 @@ def run_clinic():
     '''Function to run Code Clinic and parse through commands from user'''
 
     service = startup()
-
+    home = os.path.expanduser("~")
     username, email, name = '', '', ''
     username = username.upper()
 
-    if os.path.exists('.config.ini'):
-        username, email, name = get_credentials()
+    if os.path.exists(f"{home}/.config.ini"):
+        username, email, name = get_credentials(home)
 
     option_req_args = ['book', 'delete', 'cancel']
     valid_option = ['add','view_created', 'view_available', 'view_booked', 'config', 'version']
@@ -82,83 +81,84 @@ def run_clinic():
 
     '''Statements to handle args received from clinician'''
 
-    if option == 'add' and os.path.exists('.config.ini'):
+    if option == 'add' and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
-        create.create(service, username, email)
+        create.create(service, name, email)
 
-    elif option == 'delete' and uuid != None and os.path.exists('.config.ini'):
+    elif option == 'delete' and uuid != None and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
         delete.delete(service, email, uuid)
 
-    elif option == 'view_created' and os.path.exists('.config.ini'):
+    elif option == 'view_created' and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
         view_events.view(service,email)
 
     # Statements to handle args received from the patient
 
-    elif option == 'view_available' and os.path.exists('.config.ini'):
+    elif option == 'view_available' and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
-        #If specific amount of days is provided as an argument then only those amount of days will be displayed, else default is 7 days
+        #If specific amount of days is provided as an argument then only those amount
+        # of days will be displayed, else default is 7 days
         try:
             days_to_display = int(sys.argv[2])
-            patient_view_open_booking.view_open_bookings(service, days_to_display)
+            view_available.view_open_bookings(service, days_to_display)
         except IndexError as IndErr:
             days_to_display = 7
-            patient_view_open_booking.view_open_bookings(service, days_to_display)
+            view_available.view_open_bookings(service, days_to_display)
         except ValueError as ValErr:
             days_to_display = 7
-            patient_view_open_booking.view_open_bookings(service, days_to_display)            
-    elif option == 'book' and uuid != None and os.path.exists('.config.ini'):
+            view_available.view_open_bookings(service, days_to_display)
+    elif option == 'book' and uuid != None and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
-        patient_make_booking.booking(service, username, email, uuid)
+        make_booking.booking(service, username, email, uuid)
 
-    elif option == 'view_booked' and os.path.exists('.config.ini'):
+    elif option == 'view_booked' and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
-        patient_view_booking.view_booking(service,email)
+        view_booking.view_booking(service,email)
 
-    elif option == 'cancel' and uuid != None and os.path.exists('.config.ini'):
+    elif option == 'cancel' and uuid != None and os.path.exists(f"{home}/.config.ini"):
         print(f"Welcome {name}\n")
-        patient_cancels_booking.cancel_booking(service, username, email, uuid)
+        cancel_booking.cancel_booking(service, username, email, uuid)
 
     elif option == 'config':
         print("Welcome to Code Clinic")
-        make_config()
+        make_config(home)
 
-    elif not os.path.exists('.config.ini'):
+    elif not os.path.exists(f"{home}/.config.ini"):
         print("\n")
         print('No config file please add a config file')
         print('Please run:\n> python3 code_clinic.py config')
 
 
-def get_credentials():
+def get_credentials(home):
     """
     Returns the user credentials from the config file
     :return: username and email
     """
     try:
         con_obj = ConfigParser()
-        con_obj.read('.config.ini')
+        con_obj.read(f"{home}/.config.ini")
         credentials = con_obj['USERINFO']
-        return credentials['username'], credentials['email'], credentials['name']
+        return credentials["username"], credentials["email"], credentials["name"]
     except KeyError:
-        print('Redo config')
+        print("Redo config")
         return '', '', ''
 
 
-def make_config():
+def make_config(home):
     """
     Takes email and password from user and creates a config file for that user
     :return:
     """
 
-    if os.path.exists('token2.pickle'):
-        os.remove('token2.pickle')
+    if os.path.exists("token2.pickle"):
+        os.remove("token2.pickle")
 
     # Get configparser object
     con_obj = ConfigParser()
 
     # Get credentials from user
-    mail = '@student.wethinkcode.co.za'
+    mail = "@student.wethinkcode.co.za"
     users = get_users()
     username = input("Username: ")
     if username in users:
@@ -176,12 +176,12 @@ def make_config():
             }
 
             # Write the section to config.ini file
-            with open(".config.ini", "w") as con:
+            with open(f"{home}/.config.ini", "w") as con:
                 con_obj.write(con)
-            print('Config file create')
+            print("Config file create")
         else:
-            print('You have given the wrong email')
-            os.remove('token2.pickle')
+            print("You have given the wrong email")
+            os.remove("token2.pickle")
     else:
         print("This username is not valid")
 
@@ -193,8 +193,8 @@ def request():
     :return: service instance of google api
     """
     creds = None
-    if os.path.exists('token2.pickle'):
-        with open('token2.pickle', 'rb') as token:
+    if os.path.exists("token2.pickle"):
+        with open("token2.pickle", "rb") as token:
             creds = pickle.load(token)
 
     if not creds or not creds.valid:
@@ -202,13 +202,14 @@ def request():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'client_id.json', SCOPES)
-            creds = flow.run_local_server(port=0, prompt="consent", authorization_prompt_message="")
+                "client_id.json", SCOPES)
+            creds = flow.run_local_server(port=0, prompt="consent"
+                                          , authorization_prompt_message="")
 
-        with open('token2.pickle', 'wb') as token:
+        with open("token2.pickle", "wb") as token:
             pickle.dump(creds, token)
 
-    service = build('calendar', 'v3', credentials=creds)
+    service = build("calendar", "v3", credentials=creds)
     return service
 
 
@@ -219,7 +220,7 @@ def get_users():
     """
 
     try:
-        file = open('usernames', 'r')
+        file = open("usernames", "r")
         user_file = file.readlines()
         users = []
         for i in user_file:
@@ -238,7 +239,7 @@ def get_user_details(username):
     """
 
     try:
-        file = open('usernames', 'r')
+        file = open("usernames", "r")
         user_file = file.readlines()
         name = ''
         for i in user_file:
@@ -257,8 +258,8 @@ def get_email(service):
     :return: email of the primary calendar
     """
 
-    calendar_list_entry = service.calendarList().get(calendarId='primary').execute()
-    return calendar_list_entry['summary']
+    calendar_list_entry = service.calendarList().get(calendarId="primary").execute()
+    return calendar_list_entry["summary"]
 
 
 def help():

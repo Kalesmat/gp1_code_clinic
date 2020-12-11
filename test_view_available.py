@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 from io import StringIO
 from clinician import create
-from patient import patient_view_open_booking
+from patient import view_available
 from code_clinic import startup
 import sys
 
@@ -21,7 +21,7 @@ class TestPatientAvailableView(unittest.TestCase):
         username, email = 'ikalonji', 'ikalonji@student.wethinkcode.co.za'
         create.create(service, username, email)
         days_to_display = 7
-        events = patient_view_open_booking.view_open_bookings(service, days_to_display)
+        events = view_available.view_open_bookings(service, days_to_display)
         self.assertTrue(events==True, 'Not true')
         sys.stdout = orig_stdout
 

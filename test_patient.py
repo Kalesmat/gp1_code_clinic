@@ -4,7 +4,7 @@ import sys
 import code_clinic
 from clinician import create
 import datetime
-from patient import patient_make_booking, patient_cancels_booking, patient_view_booking, patient_view_open_booking
+from patient import make_booking, cancel_booking, view_booking, view_available
 
 
 # for booking
@@ -19,7 +19,8 @@ end_t = '10:30'
 
 service = code_clinic.startup()
 creator, admin = "Fake Creator", "fake.creator@gmail.com"
-create_slot = create.do_create(service, summary, description, start_d, start_t, end_t, creator, admin)
+create_slot = create.do_create(service, summary, description, start_d
+                               , start_t, end_t, creator, admin)
 test_id = create_slot['id']
 
 
@@ -29,7 +30,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        book = patient_make_booking.booking(service, username, email, test_id)
+        book = make_booking.booking(service, username, email, test_id)
         test_result = f"{summary} is successfully booked.."
         self.assertTrue(book, test_result)
         service.events().delete(calendarId='primary', eventId=test_id).execute()
@@ -40,8 +41,9 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        book = patient_make_booking.booking(service, username, email, test_id)
-        test_result = f"{username}, number of attendees has been reached, please check for the next slot."
+        book = make_booking.booking(service, username, email, test_id)
+        test_result = f"{username}, number of attendees has been reached" \
+                      f", please check for the next slot."
         self.assertTrue(book, test_result)
         sys.stdout = the_stdout
 
@@ -50,7 +52,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Fake Creator", "fake.creator@gmail.com"
-        book = patient_make_booking.booking(service, username, email, test_id)
+        book = make_booking.booking(service, username, email, test_id)
         test_result = f'{username}, Unfortunately you cannot book your own event..'
         self.assertTrue(book, test_result)
         sys.stdout = the_stdout
@@ -60,7 +62,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        book = patient_make_booking.booking(service, username, email, "y0hI@mFak3eee33")
+        book = make_booking.booking(service, username, email, "y0hI@mFak3eee33")
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
         sys.stdout = the_stdout
@@ -70,7 +72,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        book = patient_make_booking.booking(service, username, email, 'None')
+        book = make_booking.booking(service, username, email, 'None')
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(book, test_result)
         sys.stdout = the_stdout
@@ -80,7 +82,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        booked = patient_make_booking.booked(service, email, test_id)
+        booked = make_booking.booked(service, email, test_id)
         test_result = f"Failed to book because:\n- You will be consulted by {admin} on {summary}" \
                       f"\n- From {start_t} until {end_t}"
         self.assertFalse(booked, test_result)
@@ -92,7 +94,7 @@ class PatientTest(unittest.TestCase):
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
         created = create_slot
-        booked = patient_make_booking.booked(service, email, test_id)
+        booked = make_booking.booked(service, email, test_id)
         test_result = f"Failed to book because:\n- You are a clinician on {summary}" \
                       f"\n- From {start_t} until {end_t}"
         self.assertTrue(created, booked)
@@ -104,7 +106,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        cancel = patient_cancels_booking.cancel_booking(service, username, email, test_id)
+        cancel = cancel_booking.cancel_booking(service, username, email, test_id)
         test_result = f"{username}, You have successfully cancelled your booking."
         self.assertTrue(cancel, test_result)
         service.events().delete(calendarId='primary', eventId=test_id).execute()
@@ -115,8 +117,8 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        my_events = patient_view_booking.view_booking(service, admin)
-        cancel = patient_cancels_booking.cancel_booking(service, username, email, my_events)
+        my_events = view_booking.view_booking(service, admin)
+        cancel = cancel_booking.cancel_booking(service, username, email, my_events)
         self.assertFalse(cancel, my_events is False)
         sys.stdout = the_stdout
 
@@ -126,8 +128,8 @@ class PatientTest(unittest.TestCase):
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
         days_to_display = 7
-        events = patient_view_open_booking.view_open_bookings(service,days_to_display)
-        cancel = patient_cancels_booking.cancel_booking(service, username, email, events)
+        events = view_available.view_open_bookings(service,days_to_display)
+        cancel = cancel_booking.cancel_booking(service, username, email, events)
         test_result = f"{username}, You are not the attendee on this event."
         self.assertFalse(cancel, test_result)
         sys.stdout = the_stdout
@@ -137,7 +139,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        cancel = patient_cancels_booking.cancel_booking(service, username, email, "y0hI@mFak3eee33")
+        cancel = cancel_booking.cancel_booking(service, username, email, "y0hI@mFak3eee33")
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(cancel, test_result)
         sys.stdout = the_stdout
@@ -147,7 +149,7 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        cancel = patient_cancels_booking.cancel_booking(service, username, email, 'None')
+        cancel = cancel_booking.cancel_booking(service, username, email, 'None')
         test_result = "Unfortunately that is an invalid event ID.."
         self.assertFalse(cancel, test_result)
         sys.stdout = the_stdout

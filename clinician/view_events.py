@@ -42,7 +42,7 @@ def view(service, myemail):
 
                     summary = colours.colour(summary, 'yellow')
                     print(summary.strip(),'by', event['attendees'][0]['email'],\
-                        "\n",date,'',time,'-',end_t,'\n',"To delete the session\
+                        "\n",date,'',time,'-',end_t,'\n',"To delete the session \
 run:\n",f"python3 code_clinic.py delete {id}",'\n','-'*70)
 
                     n += 1

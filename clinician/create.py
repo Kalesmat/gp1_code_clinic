@@ -131,12 +131,12 @@ def create(service, user, email):
         if confirm.lower() == 'y':
             event=do_create(service,summary,description,startday,starttime,\
                 endtime,user,email) 
-            message = "Event Created successfully"      
+            message = "Event created successfully"
             print('{}\n - Calender Link: {}'.format(message,\
                 event.get('htmlLink'))) 
             
         else:
-            message = "you have not created the event"
+            message = "Event not created"
             print(message)
 
         return message

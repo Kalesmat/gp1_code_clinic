@@ -15,7 +15,8 @@ def view_booking(service, email):
     now = now.isoformat() + 'Z'
     page_token = None
     while True:
-        events = service.events().list(calendarId='primary', timeMin=now,pageToken=page_token).execute()
+        events = service.events().list(calendarId='primary',
+                                       timeMin=now,pageToken=page_token).execute()
 
 
         for event in events['items']:
@@ -46,7 +47,9 @@ def view_booking(service, email):
                     patient_email = event['attendees'][1]["email"]
                     if patient_email == email:
                         n+=1
-                        print(summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time,'-',end_t,'\n', "To cancel the session run:\n",f"python3 code_clinic.py cancel{id_user}",'\n','-'*70)
+                        print(summary.strip(), 'by', event['attendees'][0]['email'],"\n", date, '', time
+                              ,'-',end_t,'\n', "To cancel the session run:\n"
+                              ,f"python3 code_clinic.py cancel{id_user}",'\n','-'*70)
             except KeyError:
                 break
 

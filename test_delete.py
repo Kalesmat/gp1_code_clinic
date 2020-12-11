@@ -5,7 +5,6 @@ import sys
 import code_clinic
 from clinician import create
 import datetime
-from unittest.mock import patch
 
 
 class TestCase(unittest.TestCase):
@@ -19,7 +18,8 @@ class TestCase(unittest.TestCase):
         startD = datetime.datetime.now().date() + datetime.timedelta(days=5)
         startT = '12:30'
         endT = '13:00'
-        event = create.do_create(service,Summary,Description,startD,startT,endT,username,email)
+        event = create.do_create(service,Summary,Description,startD
+                                 ,startT,endT,username,email)
         event_id = event['id']
         orig_stdout = sys.stdout
         new_string = StringIO()
@@ -28,7 +28,6 @@ class TestCase(unittest.TestCase):
         output = sys.stdout.getvalue().strip()
         self.assertTrue("Event Deleted" in output)
         sys.stdout = orig_stdout
-
 
     def test_delete_false(self):
         service = code_clinic.startup()
@@ -39,7 +38,8 @@ class TestCase(unittest.TestCase):
         startD = datetime.datetime.now().date() + datetime.timedelta(days=7)
         startT = '13:30'
         endT = '14:00'
-        event = create.do_create(service,Summary,Description,startD,startT,endT,username,email)
+        event = create.do_create(service,Summary,Description,startD
+                                 ,startT,endT,username,email)
         event_id = event['id']
         email2 = f'not{email}'
         orig_stdout = sys.stdout
@@ -51,14 +51,13 @@ class TestCase(unittest.TestCase):
         delete.do_delete(service, email, event_id)
         sys.stdout = orig_stdout
 
-
     def test_delete_invalid(self):
         service = code_clinic.startup()
         username, email, name = code_clinic.get_credentials()
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
-        delete.delete(service, email,'Dick')
+        delete.delete(service, email,'tom')
         output = sys.stdout.getvalue().strip()
         self.assertTrue('Invalid ID' in output)
         sys.stdout = orig_stdout

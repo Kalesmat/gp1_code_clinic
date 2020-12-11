@@ -1,9 +1,7 @@
 import unittest
 from clinician import create, delete
 from io import StringIO
-import sys
 import code_clinic
-import os
 import sys
 from unittest.mock import patch
 import datetime
@@ -50,7 +48,7 @@ class TestCase(unittest.TestCase):
             sys.stdout = new_string
             event_id = create.create(service,username, email)
             output = sys.stdout.getvalue().strip()
-            self.assertTrue("Event Created",output)
+            self.assertTrue("Event created",output)
             delete.do_delete(service, email, event_id)
             sys.stdout = orig_stdout
 
@@ -77,7 +75,7 @@ class TestCase(unittest.TestCase):
             sys.stdout = new_string
             event_id = create.create(service,username, email)
             output = sys.stdout.getvalue().strip()
-            self.assertTrue("you have not created the event",output)
+            self.assertTrue("Event not created",output)
             delete.do_delete(service, email, event_id)
             sys.stdout = orig_stdout
 

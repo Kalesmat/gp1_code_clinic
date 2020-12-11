@@ -1,7 +1,4 @@
 import unittest
-from clinician import create
-from io import StringIO
-import sys
 from code_clinic import startup
 from code_clinic import get_credentials
 from clinician import view_events
