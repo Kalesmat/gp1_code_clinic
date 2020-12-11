@@ -274,7 +274,8 @@ def help():
     version                 Display program version.
     add                     Add slot to calender as a volunteer.
     view_created            View volunteering slots that you have created.
-    view_available          View slots available to book as a patient. You can optionally provide the amount of days to view. Default is 7 days.
+    view_available          View slots available to book as a patient. You can optionally provide
+                            the amount of days to view. Default is 7 days.
     view_booked             View slots you have booked as a patient.
     book <uuid>             Book an avalable slot as a patient.
     delete <uuid>           Delete a slot that you have volunteered for.
@@ -285,7 +286,7 @@ def help():
 
 def version():
     '''Display the current version'''
-    prog_version = 'Code_Clinic version: 0.6'
+    prog_version = 'Code_Clinic version: 1.0'
     print(prog_version)
 
 
