@@ -41,8 +41,7 @@ class test_booked(unittest.TestCase):
         self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 20 booked slots\n")
         patient.n = 0 
         sys.stdout = sys.__stdout__
-
-    service.events().delete(calendarId='primary', eventId=test_id).execute()    
+   
 
 if __name__ == "__main__":
     unittest.main()
