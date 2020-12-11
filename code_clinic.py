@@ -56,6 +56,7 @@ def run_clinic():
     valid_option = ['add','view_created', 'view_available', 'view_booked', 'config', 'version']
     uuid = None
     option = None
+
     # check if option was provided, if not default to help
     try:
         option = sys.argv[1]
@@ -72,7 +73,6 @@ def run_clinic():
     if option == 'help' or option == None:
         print(f"Welcome {name}\n")
         help()
-        # parser.print_help()
         return True
     elif not option in option_req_args and not option in valid_option:
         print("An Invalid option was provided, redirected to \'help\'")
@@ -94,12 +94,20 @@ def run_clinic():
         print(f"Welcome {name}\n")
         view_events.view(service,email)
 
-    # Statements to handle args received form the patient
+    # Statements to handle args received from the patient
 
     elif option == 'view_available' and os.path.exists('.config.ini'):
         print(f"Welcome {name}\n")
-        patient_view_open_booking.view_open_bookings(service)
-
+        #If specific amount of days is provided as an argument then only those amount of days will be displayed, else default is 7 days
+        try:
+            days_to_display = int(sys.argv[2])
+            patient_view_open_booking.view_open_bookings(service, days_to_display)
+        except IndexError as IndErr:
+            days_to_display = 7
+            patient_view_open_booking.view_open_bookings(service, days_to_display)
+        except ValueError as ValErr:
+            days_to_display = 7
+            patient_view_open_booking.view_open_bookings(service, days_to_display)            
     elif option == 'book' and uuid != None and os.path.exists('.config.ini'):
         print(f"Welcome {name}\n")
         patient_make_booking.booking(service, username, email, uuid)
@@ -266,7 +274,7 @@ def help():
     version                 Display program version.
     add                     Add slot to calender as a volunteer.
     view_created            View volunteering slots that you have created.
-    view_available          View slots available to book as a patient.
+    view_available          View slots available to book as a patient. You can optionally provide the amount of days to view. Default is 7 days.
     view_booked             View slots you have booked as a patient.
     book <uuid>             Book an avalable slot as a patient.
     delete <uuid>           Delete a slot that you have volunteered for.

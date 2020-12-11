@@ -3,12 +3,12 @@ from datetime import timedelta
 from datetime import datetime as dt
 from colours import colour
 
-def view_open_bookings(service):
+def view_open_bookings(service, days_to_display):
    '''Function to get the next 7 days events'''
    # Call the Calendar API
  
    now = datetime.datetime.utcnow()
-   end_time = now + timedelta(days=7)
+   end_time = now + timedelta(days=days_to_display)
    end_time = end_time.isoformat() + 'Z' # 'Z' indicates UTC time
    now = now.isoformat() + 'Z' # 'Z' indicates UTC time
    events_result = service.events().list(

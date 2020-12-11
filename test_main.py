@@ -10,12 +10,12 @@ class MyTestCase(unittest.TestCase):
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 
     def test_clinician_create_succeeds(self):
-        import test_clinician_create
+        import test_create
         test_result = run_unittests("test_clinician_create")
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 
     def test_clinician_delete_succeeds(self):
-        import test_clinician_delete
+        import test_delete
         test_result = run_unittests("test_clinician_delete")
         self.assertTrue(test_result.wasSuccessful(), "unit tests should succeed")
 

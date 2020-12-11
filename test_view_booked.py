@@ -41,6 +41,8 @@ class test_booked(unittest.TestCase):
         patient.n = 0 
         sys.stdout = sys.__stdout__
 
+    service.events().delete(calendarId='primary', eventId=test_id).execute()    
+
 if __name__ == "__main__":
     unittest.main()
 

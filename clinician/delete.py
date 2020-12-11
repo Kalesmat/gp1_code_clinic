@@ -8,7 +8,6 @@ def delete(service, email, uuid):
     :param service: service instance of the google api
     :param email: email from config file
     """
-    # view_events.view(service, email)
 
     event_id = uuid
     if event_id:

@@ -21,7 +21,6 @@ class TestCase(unittest.TestCase):
         endT = '13:00'
         event = create.do_create(service,Summary,Description,startD,startT,endT,username,email)
         event_id = event['id']
-        #with patch('sys.stdin', StringIO(f'{event_id}\n')):
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
@@ -29,6 +28,7 @@ class TestCase(unittest.TestCase):
         output = sys.stdout.getvalue().strip()
         self.assertTrue("Event Deleted" in output)
         sys.stdout = orig_stdout
+
 
     def test_delete_false(self):
         service = code_clinic.startup()
@@ -42,7 +42,6 @@ class TestCase(unittest.TestCase):
         event = create.do_create(service,Summary,Description,startD,startT,endT,username,email)
         event_id = event['id']
         email2 = f'not{email}'
-        #with patch('sys.stdin', StringIO(f'{event_id}\n')):
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
@@ -52,7 +51,7 @@ class TestCase(unittest.TestCase):
         delete.do_delete(service, email, event_id)
         sys.stdout = orig_stdout
 
-    #@patch('sys.stdin', StringIO('Dick\n'))
+
     def test_delete_invalid(self):
         service = code_clinic.startup()
         username, email, name = code_clinic.get_credentials()

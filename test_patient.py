@@ -125,7 +125,8 @@ class PatientTest(unittest.TestCase):
         new_string = StringIO()
         sys.stdout = new_string
         username, email = "Booker", "fake.booking@gmail.com"
-        events = patient_view_open_booking.view_open_bookings(service)
+        days_to_display = 7
+        events = patient_view_open_booking.view_open_bookings(service,days_to_display)
         cancel = patient_cancels_booking.cancel_booking(service, username, email, events)
         test_result = f"{username}, You are not the attendee on this event."
         self.assertFalse(cancel, test_result)

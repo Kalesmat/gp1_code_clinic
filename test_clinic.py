@@ -12,9 +12,12 @@ class MyTestCase(unittest.TestCase):
 
     def test_run_clinic(self):
         '''Testing the run clinic function'''
+        
         output = StringIO()
         with contextlib.redirect_stdout(output):
+            
             system("python3 code_clinic.py")
+            print("hello")
         self.assertTrue(output,"""*Volunteer and book slots for Code Clinic sessions.  
     
     Available options:
