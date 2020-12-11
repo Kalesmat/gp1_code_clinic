@@ -10,10 +10,11 @@ class test_booked(unittest.TestCase):
 
 
     def test_no_slots_booked(self):
+        patient.n = 0
         suppress_text = io.StringIO()
         sys.stdout = suppress_text 
    
-        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "You have no booked slots")
+        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "You have no booked slots\n")
         sys.stdout = sys.__stdout__
 
 
@@ -21,7 +22,7 @@ class test_booked(unittest.TestCase):
         suppress_text = io.StringIO()
         sys.stdout = suppress_text 
         patient.n = 1
-        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 1 booked slot")
+        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 1 booked slot\n")
         patient.n = 0
         sys.stdout = sys.__stdout__
 
@@ -29,7 +30,7 @@ class test_booked(unittest.TestCase):
         suppress_text = io.StringIO()
         sys.stdout = suppress_text 
         patient.n = 2
-        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 2 booked slots")
+        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 2 booked slots\n")
         patient.n = 0 
         sys.stdout = sys.__stdout__
     
@@ -37,7 +38,7 @@ class test_booked(unittest.TestCase):
         suppress_text = io.StringIO()
         sys.stdout = suppress_text 
         patient.n = 20
-        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 20 booked slots")
+        self.assertEqual(patient.view_booking(service,"ltemplem@student.wethinkcode.co.za"), "\nYou have 20 booked slots\n")
         patient.n = 0 
         sys.stdout = sys.__stdout__
 
