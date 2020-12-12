@@ -5,7 +5,7 @@ import code_clinic
 import sys
 from unittest.mock import patch
 import datetime
-
+import os
 
 class TestCase(unittest.TestCase):
 
@@ -14,7 +14,8 @@ class TestCase(unittest.TestCase):
         Test Create function if the date is older than now
         """
         service = code_clinic.startup()
-        username, email, name = code_clinic.get_credentials()        
+        home = os.path.expanduser("~")
+        username, email, name = code_clinic.get_credentials(home)        
         
         testdate="01/01/01"
         with patch('sys.stdin', StringIO(f'{testdate}\n')):
@@ -32,7 +33,8 @@ class TestCase(unittest.TestCase):
         Test Create function for confirming the creation of an event for y
         """
         service = code_clinic.startup()
-        username, email, name = code_clinic.get_credentials()
+        home = os.path.expanduser("~")
+        username, email, name = code_clinic.get_credentials(home)
         
         summary = 'Test_create'
         descript = 'Test function create'
@@ -58,7 +60,8 @@ class TestCase(unittest.TestCase):
         Test Create function for confirming the creation of an event for n
         """
         service = code_clinic.startup()
-        username, email, name= code_clinic.get_credentials()
+        home = os.path.expanduser("~")
+        username, email, name= code_clinic.get_credentials(home)
 
         summary = 'Test_create'
         descript = 'Test function create'

@@ -7,6 +7,7 @@ from clinician import delete
 from io import StringIO
 import sys
 import datetime
+import os
 
 class TestViewEvents(unittest.TestCase):
     '''test if the user has slots opened ie..invalid email'''
@@ -27,7 +28,8 @@ class TestViewEvents(unittest.TestCase):
 
     def test_valid_user_event(self):
         service=startup()
-        user,email ,name=get_credentials()
+        home =os.path.expanduser("~")
+        user,email ,name=get_credentials(home)
         date = datetime.datetime.now().date() + datetime.timedelta(days=5)
         summary = "Morglin Test Case"
         descript = "Testing"

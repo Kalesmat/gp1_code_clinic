@@ -5,13 +5,15 @@ import sys
 import code_clinic
 from clinician import create
 import datetime
-
+import os
 
 class TestCase(unittest.TestCase):
 
+
     def test_delete_true(self):
         service = code_clinic.startup()
-        username, email, name = code_clinic.get_credentials()
+        home = os.path.expanduser("~")
+        username, email, name = code_clinic.get_credentials(home)
 
         Summary = 'KLM'
         Description = 'klmno'
@@ -31,7 +33,8 @@ class TestCase(unittest.TestCase):
 
     def test_delete_false(self):
         service = code_clinic.startup()
-        username, email, name = code_clinic.get_credentials()
+        home = os.path.expanduser("~")
+        username, email, name = code_clinic.get_credentials(home)
 
         Summary = 'KLM'
         Description = 'klmno'
@@ -53,7 +56,8 @@ class TestCase(unittest.TestCase):
 
     def test_delete_invalid(self):
         service = code_clinic.startup()
-        username, email, name = code_clinic.get_credentials()
+        home = os.path.expanduser("~")
+        username, email, name = code_clinic.get_credentials(home)
         orig_stdout = sys.stdout
         new_string = StringIO()
         sys.stdout = new_string
